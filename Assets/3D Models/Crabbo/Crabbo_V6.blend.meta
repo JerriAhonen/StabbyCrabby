@@ -112,11 +112,15 @@ ModelImporter:
     7400000: Default Take
     7400002: Attack_1
     7400004: Attack_2
-    7400006: Idle_var_1
-    7400008: Idle_var_2
-    7400010: Idle_var_3
-    7400012: Walk_F_B
-    7400014: Walk_L_R
+    7400006: Attack_3
+    7400008: Idle_var_1
+    7400010: Idle_var_2
+    7400012: Idle_var_3
+    7400014: Stab_1
+    7400016: Walk_B
+    7400018: Walk_F
+    7400020: Walk_L
+    7400022: Walk_R
     9500000: //RootNode
     13700000: Crab
     2186277476908879412: ImportLogs
@@ -152,7 +156,7 @@ ModelImporter:
       name: Default Take
       takeName: Default Take
       firstFrame: 0
-      lastFrame: 14
+      lastFrame: 15
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -207,6 +211,34 @@ ModelImporter:
     - serializedVersion: 16
       name: Attack_2
       takeName: Attack_2
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Attack_3
+      takeName: Attack_3
       firstFrame: 0
       lastFrame: 15
       wrapMode: 0
@@ -317,8 +349,36 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Walk_F_B
-      takeName: Walk_F_B
+      name: Stab_1
+      takeName: Stab_1
+      firstFrame: 0
+      lastFrame: 16
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk_B
+      takeName: Walk_B
       firstFrame: 0
       lastFrame: 15
       wrapMode: 0
@@ -345,8 +405,64 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Walk_L_R
-      takeName: Walk_L_R
+      name: Walk_F
+      takeName: Walk_F
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk_L
+      takeName: Walk_L
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk_R
+      takeName: Walk_R
       firstFrame: 0
       lastFrame: 15
       wrapMode: 0

@@ -67,8 +67,12 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetButtonDown("Fire1"))
         {
             anim.SetTrigger("Attack");
+            anim.SetFloat("ComboPoints", 1);
         }
-
-
+        if (Input.GetButtonDown("Fire2"))
+        {
+            anim.SetTrigger("Attack");
+            anim.SetFloat("ComboPoints", 2);
+        }
     }
 }
