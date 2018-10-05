@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
 
+    public bool spawn;
+
     [SerializeField] private int _poolSize;
 
     [SerializeField] private GameObject _enemy;
@@ -19,7 +21,7 @@ public class EnemySpawner : MonoBehaviour {
     }
 
     private GameObject AddEnemy() {
-        GameObject enemy = Instantiate(_enemy);
+        GameObject enemy = Instantiate(_enemy, transform.position, Quaternion.identity);
 
         enemy.SetActive(false);
         
@@ -34,7 +36,11 @@ public class EnemySpawner : MonoBehaviour {
         }
     }
 
-    public void SpawnWave() {
-        ActivateEnemy(8);
+    private void Update() {
+        if (spawn) {
+            spawn = false;
+
+            ActivateEnemy(_poolSize);
+        }
     }
 }
