@@ -29,7 +29,9 @@ public class EnemySpawner : MonoBehaviour {
     }
 
     private void ActivateEnemy(int number) {
-
+        for (int i = 0; i < number; i++) {
+            _enemyPool[i].SetActive(true);
+        }
     }
 
     public void SpawnWave() {
