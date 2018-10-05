@@ -5,9 +5,14 @@ public class PlayerMovement : MonoBehaviour {
     public InputReader inputReader;
 
     public float movementSpeed = 5.0f;
+    public float movementSpeedMult;
     public float rotationSpeed = 10.0f;
-    
+    Vector3 movementVector;
+    private Animator anim;
+
 	void Start () {
+
+        anim = GetComponentInChildren<Animator>();
         inputReader = InputReader.Instance;
 	}
 	
@@ -16,19 +21,24 @@ public class PlayerMovement : MonoBehaviour {
         Rotate();
 	}
 
+    void LateUpdate ()
+    {
+        Animate();
+    }
+
     void Move()
     {
-        Vector3 movementVector = inputReader.MovementVector;
+        movementVector = inputReader.MovementVector;
         if (Mathf.Abs( movementVector.x ) > Mathf.Abs( movementVector.z ))
         {
-            movementSpeed = 15f;
+            movementSpeedMult = 3f;
         }
         else
         {
-            movementSpeed = 5;
+            movementSpeedMult = 1f;
         }
 
-        transform.Translate(inputReader.MovementVector * movementSpeed * Time.deltaTime);
+        transform.Translate(inputReader.MovementVector * movementSpeed * movementSpeedMult * Time.deltaTime);
     }
 
     void Rotate()
@@ -46,5 +56,19 @@ public class PlayerMovement : MonoBehaviour {
         {
             // Do not rotate player
         }
+    }
+
+    void Animate()
+    {
+
+        anim.SetFloat("VelX", Input.GetAxis("Horizontal"));
+        anim.SetFloat("VelY", Input.GetAxis("Vertical"));
+        
+        if (Input.GetButtonDown("Fire1"))
+        {
+            anim.SetTrigger("Attack");
+        }
+
+
     }
 }

@@ -81,7 +81,7 @@ public class InputReader : MonoBehaviour {
 
         if (_movementVector != Vector3.zero)
         {
-            _movementVector = _movementVector.normalized;
+            _movementVector = Vector3.ClampMagnitude(_movementVector, 1);
             _isMoving = true;
         }
         else
