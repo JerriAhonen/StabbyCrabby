@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a628f438412bc447a182cd8c65c377f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputReader: {fileID: 0}
-  noOfClicks: 0
+  fireRate: 1
+  comboParams: []
 --- !u!1001 &97179798
 Prefab:
   m_ObjectHideFlags: 0

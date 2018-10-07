@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCombo : MonoBehaviour
 {
 
-    public float fireRate = 1;
+    public float fireRate = 0.5f;
 
     public string[] comboParams;
     private int comboIndex = 0;
@@ -14,7 +14,7 @@ public class PlayerCombo : MonoBehaviour
     void Awake()
     {
         if (comboParams == null || (comboParams != null && comboParams.Length == 0))
-            comboParams = new string[] { "Attack 1", "Attack 2", "Attack 3" };
+            comboParams = new string[] { "Attack 1", "Attack 2" };
 
         animator = GetComponent<Animator>();
     }
@@ -26,10 +26,10 @@ public class PlayerCombo : MonoBehaviour
             animator.SetTrigger(comboParams[comboIndex]);
 
             // If combo must not loop
-            comboIndex++;
+           // comboIndex++;
 
             // If combo can loop
-            // comboIndex = (comboIndex + 1) % comboParams.Length ;
+             comboIndex = (comboIndex + 1) % comboParams.Length;
 
             resetTimer = 0f;
         }
@@ -37,6 +37,7 @@ public class PlayerCombo : MonoBehaviour
         if (comboIndex > 0)
         {
             resetTimer += Time.deltaTime;
+            Debug.Log(fireRate);
             if (resetTimer > fireRate)
             {
                 animator.SetTrigger("Reset");
