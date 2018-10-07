@@ -7,6 +7,9 @@ public class PlayerMovement : MonoBehaviour {
     public float movementSpeed = 5.0f;
     public float movementSpeedMult;
     public float rotationSpeed = 10.0f;
+
+    // Animation variables
+    
     Vector3 movementVector;
     private Animator anim;
 
@@ -14,12 +17,16 @@ public class PlayerMovement : MonoBehaviour {
 
         anim = GetComponentInChildren<Animator>();
         inputReader = InputReader.Instance;
+
+       
 	}
 	
 	void Update () {
         Move();
         Rotate();
-	}
+        
+
+    }
 
     void LateUpdate ()
     {
@@ -57,22 +64,15 @@ public class PlayerMovement : MonoBehaviour {
             // Do not rotate player
         }
     }
-
+    
     void Animate()
     {
 
         anim.SetFloat("VelX", Input.GetAxis("Horizontal"));
         anim.SetFloat("VelY", Input.GetAxis("Vertical"));
-        
-        if (Input.GetButtonDown("Fire1"))
-        {
-            anim.SetTrigger("Attack");
-            anim.SetFloat("ComboPoints", 1);
-        }
-        if (Input.GetButtonDown("Fire2"))
-        {
-            anim.SetTrigger("Attack");
-            anim.SetFloat("ComboPoints", 2);
-        }
+
+       
     }
+    
 }
+

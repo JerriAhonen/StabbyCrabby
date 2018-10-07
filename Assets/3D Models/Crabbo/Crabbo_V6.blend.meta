@@ -139,7 +139,8 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: Event ComboCheck has a time (0.843803) outside the clip's
+      valid range (0.000000..0.625000). It will never be fired
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -240,7 +241,7 @@ ModelImporter:
       name: Attack_3
       takeName: Attack_3
       firstFrame: 0
-      lastFrame: 15
+      lastFrame: 22
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

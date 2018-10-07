@@ -5,8 +5,8 @@ AvatarMask:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Attack Mask
-  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Name: Walk Mask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
   m_Elements:
   - m_Path: 
     m_Weight: 1
@@ -26,6 +26,8 @@ AvatarMask:
     m_Weight: 1
   - m_Path: Armature/PARENT/Body/Big-C-Start/Big-C-Middle/Big-C-End/Big-C-IK/Big-C-Bot
     m_Weight: 1
+  - m_Path: Armature/PARENT/Body/Big-C-Start/Big-C-Middle/Big-C-End/Big-C-IK/Big-C-Bot/Knife
+    m_Weight: 0
   - m_Path: Armature/PARENT/Body/Big-C-Start/Big-C-Middle/Big-C-End/Big-C-Top
     m_Weight: 1
   - m_Path: Armature/PARENT/Body/Eye_L
@@ -33,41 +35,41 @@ AvatarMask:
   - m_Path: Armature/PARENT/Body/Eye_R
     m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-1_L
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-1_L/Knee-1_L
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-1_L/Knee-1_L/Leg-1_L
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-1_R
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-1_R/Knee-1_R
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-1_R/Knee-1_R/Leg-1_R
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-2_L
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-2_L/Knee-2_L
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-2_L/Knee-2_L/Leg-2_L
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-2_R
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-2_R/Knee-2_R
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-2_R/Knee-2_R/Leg-2_R
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-3_L
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-3_L/Knee-3_L
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-3_L/Knee-3_L/Leg-3_L
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-3_R
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-3_R/Knee-3_R
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Hip-3_R/Knee-3_R/Leg-3_R
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Body/Small-C-Start
     m_Weight: 1
   - m_Path: Armature/PARENT/Body/Small-C-Start/Small-C-Middle
@@ -81,30 +83,28 @@ AvatarMask:
   - m_Path: Armature/PARENT/Body/Small-C-Start/Small-C-Middle/Small-C-End/Small-C-Top
     m_Weight: 1
   - m_Path: Armature/PARENT/Pole_1
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Pole_2
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Pole_3
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Pole_4
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Pole_5
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/PARENT/Pole_6
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/Target_1
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/Target_2
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/Target_3
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/Target_4
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/Target_5
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Armature/Target_6
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Crab
-    m_Weight: 0
-  - m_Path: Knife
-    m_Weight: 0
+    m_Weight: 1
