@@ -105,6 +105,6 @@ AvatarMask:
   - m_Path: Armature/Target_6
     m_Weight: 0
   - m_Path: Crab
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Knife
     m_Weight: 1

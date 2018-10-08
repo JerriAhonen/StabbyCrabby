@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCombo : MonoBehaviour
 {
 
-    public float fireRate = 0.5f;
+    public float fireRate;
 
     public string[] comboParams;
     private int comboIndex = 0;
@@ -26,18 +26,18 @@ public class PlayerCombo : MonoBehaviour
             animator.SetTrigger(comboParams[comboIndex]);
 
             // If combo must not loop
-           // comboIndex++;
+            //comboIndex++;
 
             // If combo can loop
              comboIndex = (comboIndex + 1) % comboParams.Length;
-
+            
             resetTimer = 0f;
         }
         // Reset combo if the user has not clicked quickly enough
         if (comboIndex > 0)
         {
             resetTimer += Time.deltaTime;
-            Debug.Log(fireRate);
+            Debug.Log("reset timer:" + resetTimer);
             if (resetTimer > fireRate)
             {
                 animator.SetTrigger("Reset");
