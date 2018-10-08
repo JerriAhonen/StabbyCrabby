@@ -108,6 +108,13 @@ ModelImporter:
     2100004: Material_002__Lightmap
     2100006: Material_005
     2100008: Material_004
+    2100010: Material_007
+    2100012: Material_006
+    2100014: unnamed
+    2100016: Material_003
+    2100018: Material_002
+    2100020: Material_001
+    2100022: Material
     4300000: Crab
     7400000: Default Take
     7400002: Attack_1
@@ -183,7 +190,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Attack_1
       takeName: Attack_1
-      firstFrame: 0
+      firstFrame: 1
       lastFrame: 15
       wrapMode: 0
       orientationOffsetY: 0
@@ -204,114 +211,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Armature
-        weight: 1
-      - path: Armature/PARENT
-        weight: 1
-      - path: Armature/PARENT/Body
-        weight: 1
-      - path: Armature/PARENT/Body/Big-C-Start
-        weight: 1
-      - path: Armature/PARENT/Body/Big-C-Start/Big-C-Middle
-        weight: 1
-      - path: Armature/PARENT/Body/Big-C-Start/Big-C-Middle/Big-C-End
-        weight: 1
-      - path: Armature/PARENT/Body/Big-C-Start/Big-C-Middle/Big-C-End/Big-C-IK
-        weight: 1
-      - path: Armature/PARENT/Body/Big-C-Start/Big-C-Middle/Big-C-End/Big-C-IK/Big-C-Bot
-        weight: 1
-      - path: Armature/PARENT/Body/Big-C-Start/Big-C-Middle/Big-C-End/Big-C-IK/Big-C-Bot/Knife
-        weight: 1
-      - path: Armature/PARENT/Body/Big-C-Start/Big-C-Middle/Big-C-End/Big-C-Top
-        weight: 1
-      - path: Armature/PARENT/Body/Eye_L
-        weight: 1
-      - path: Armature/PARENT/Body/Eye_R
-        weight: 1
-      - path: Armature/PARENT/Body/Hip-1_L
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-1_L/Knee-1_L
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-1_L/Knee-1_L/Leg-1_L
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-1_R
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-1_R/Knee-1_R
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-1_R/Knee-1_R/Leg-1_R
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-2_L
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-2_L/Knee-2_L
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-2_L/Knee-2_L/Leg-2_L
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-2_R
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-2_R/Knee-2_R
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-2_R/Knee-2_R/Leg-2_R
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-3_L
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-3_L/Knee-3_L
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-3_L/Knee-3_L/Leg-3_L
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-3_R
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-3_R/Knee-3_R
-        weight: 0
-      - path: Armature/PARENT/Body/Hip-3_R/Knee-3_R/Leg-3_R
-        weight: 0
-      - path: Armature/PARENT/Body/Small-C-Start
-        weight: 1
-      - path: Armature/PARENT/Body/Small-C-Start/Small-C-Middle
-        weight: 1
-      - path: Armature/PARENT/Body/Small-C-Start/Small-C-Middle/Small-C-End
-        weight: 1
-      - path: Armature/PARENT/Body/Small-C-Start/Small-C-Middle/Small-C-End/Small-C-IK
-        weight: 1
-      - path: Armature/PARENT/Body/Small-C-Start/Small-C-Middle/Small-C-End/Small-C-IK/Small-C-Lower
-        weight: 1
-      - path: Armature/PARENT/Body/Small-C-Start/Small-C-Middle/Small-C-End/Small-C-Top
-        weight: 1
-      - path: Armature/PARENT/Pole_1
-        weight: 0
-      - path: Armature/PARENT/Pole_2
-        weight: 0
-      - path: Armature/PARENT/Pole_3
-        weight: 0
-      - path: Armature/PARENT/Pole_4
-        weight: 0
-      - path: Armature/PARENT/Pole_5
-        weight: 0
-      - path: Armature/PARENT/Pole_6
-        weight: 0
-      - path: Armature/Target_1
-        weight: 0
-      - path: Armature/Target_2
-        weight: 0
-      - path: Armature/Target_3
-        weight: 0
-      - path: Armature/Target_4
-        weight: 0
-      - path: Armature/Target_5
-        weight: 0
-      - path: Armature/Target_6
-        weight: 0
-      - path: Crab
-        weight: 1
-      maskType: 0
+      transformMask: []
+      maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Attack_2
       takeName: Attack_2
-      firstFrame: 0
+      firstFrame: 1
       lastFrame: 15
       wrapMode: 0
       orientationOffsetY: 0
