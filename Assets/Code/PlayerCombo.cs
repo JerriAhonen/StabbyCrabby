@@ -6,10 +6,10 @@ public class PlayerCombo : MonoBehaviour
 {
 
     public float fireRate;
-    string[] comboParams;
-    int comboIndex = 0;
+    public string[] comboParams;
+    public int comboIndex = 0;
     Animator animator;
-    float resetTimer;
+    public float resetTimer;
 
     void Awake()
     {
@@ -20,36 +20,36 @@ public class PlayerCombo : MonoBehaviour
     }
     void Update()
     {
-        // Reset combo if the user has not clicked quickly enough
+        
+        if (Input.GetButtonDown("Fire1") && comboIndex < comboParams.Length)
+        {
+            
+            animator.SetTrigger(comboParams[comboIndex]);
+           
+            // If combo must not loop
+            //comboIndex++;
+
+            // If combo can loop
+            comboIndex = (comboIndex + 1) % comboParams.Length;
+           
+            resetTimer = 0f;
+        }
+        /*if(comboIndex == 0 && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
+        {
+            animator.SetTrigger("Attack 2");
+        }*/
+       
+            // Reset combo if the user has not clicked quickly enough
         if (comboIndex > 0)
         {
             resetTimer += Time.deltaTime;
-           
+            
             if (resetTimer > fireRate)
             {
                 animator.SetTrigger("Reset");
                 comboIndex = 0;
             }
         }
-        if (Input.GetButtonDown("Fire1") && comboIndex < comboParams.Length)
-        {
-            
-           
-            
-            animator.SetTrigger(comboParams[comboIndex]);
-            
-            // If combo must not loop
-            //comboIndex++;
-
-            // If combo can loop
-            comboIndex = (comboIndex + 1) % comboParams.Length;
-            if(comboIndex >= 1)
-            {
-                comboIndex = 1;
-            }
-            resetTimer = 0f;
-        }
-        
     }
  
 }
