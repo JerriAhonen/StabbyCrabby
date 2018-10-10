@@ -11,6 +11,8 @@ public class PlayerCombo : MonoBehaviour
     Animator animator;
     public float resetTimer;
 
+    public UIControl uiControl;
+
     void Awake()
     {
         if (comboParams == null || (comboParams != null && comboParams.Length == 0))
@@ -21,7 +23,7 @@ public class PlayerCombo : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetButtonDown("Fire1") && comboIndex < comboParams.Length)
+        if (Input.GetButtonDown("Fire1") && comboIndex < comboParams.Length && uiControl.canAttack)
         {
             
             animator.SetTrigger(comboParams[comboIndex]);
