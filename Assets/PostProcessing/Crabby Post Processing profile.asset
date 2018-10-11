@@ -121,10 +121,10 @@ MonoBehaviour:
         neutralWhiteClip: 10
       basic:
         postExposure: 1.1
-        temperature: 39
+        temperature: 18
         tint: -4
         hueShift: 1
-        saturation: 0.57
+        saturation: 1.16
         contrast: 1.2
       channelMixer:
         red: {x: 1.76, y: 0, z: 0}
@@ -138,9 +138,9 @@ MonoBehaviour:
           power: {r: 1, g: 1, b: 1, a: 0}
           offset: {r: 1, g: 1, b: 1, a: 0}
         linear:
-          lift: {r: 1, g: 0.8512842, b: 0.938015, a: 0}
-          gamma: {r: 1, g: 0.7246136, b: 0.6184094, a: 0}
-          gain: {r: 1, g: 0.9347795, b: 0.94839877, a: 0}
+          lift: {r: 0.92198956, g: 1, b: 0.9332484, a: 0}
+          gamma: {r: 0.851285, g: 0.9132689, b: 1, a: 0}
+          gain: {r: 0.9048462, g: 0.936872, b: 1, a: 0}
       curves:
         master:
           curve:
