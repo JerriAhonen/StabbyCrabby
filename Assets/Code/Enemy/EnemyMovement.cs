@@ -14,7 +14,7 @@ public class EnemyMovement : MonoBehaviour {
     [SerializeField] private float _backwardsMultiplier;
 
     private void Awake() {
-        _player = GameObject.Find("Player");
+        _player = GameObject.Find("PLAYER");
 
         _enemy = GetComponent<NavMeshAgent>();
         _enemyObstacle = GetComponent<NavMeshObstacle>();

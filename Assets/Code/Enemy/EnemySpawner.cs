@@ -41,7 +41,15 @@ public class EnemySpawner : MonoBehaviour {
     }
 
     private void ActivateWave(int wave) {
-        int lastIndex = _enemyPool.LastIndexOf(_enemy[wave]);
+        int lastIndex;
+
+        if (wave == 0) {
+            lastIndex = wave;
+        } else {
+            lastIndex = _enemyPool.LastIndexOf(_enemy[wave]);
+        }
+        
+        Debug.Log("lastIndex was " + lastIndex);
 
         for (int i = lastIndex; i < (lastIndex + _enemiesInWave[wave]); i++) {
                 _enemyPool[i].SetActive(true);
