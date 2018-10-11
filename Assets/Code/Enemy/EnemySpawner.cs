@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour {
 
     public bool spawn;
 
-    public int enemyType;
+    private int enemyType;
 
     [SerializeField] private int _poolSize = 500;
 
@@ -17,6 +17,7 @@ public class EnemySpawner : MonoBehaviour {
     private List<GameObject> _enemyPool;
 
     private int _waveCount = -1;
+    private int _waveStartIndex = 0;
 
     private void Awake() {
         _enemyPool = new List<GameObject>(_poolSize);
@@ -41,17 +42,13 @@ public class EnemySpawner : MonoBehaviour {
     }
 
     private void ActivateWave(int wave) {
-        int lastIndex;
-
         if (wave == 0) {
-            lastIndex = wave;
+            _waveStartIndex = 0;
         } else {
-            lastIndex = _enemyPool.LastIndexOf(_enemy[wave]);
+            _waveStartIndex = _waveStartIndex + _enemiesInWave[wave - 1];
         }
         
-        Debug.Log("lastIndex was " + lastIndex);
-
-        for (int i = lastIndex; i < (lastIndex + _enemiesInWave[wave]); i++) {
+        for (int i = _waveStartIndex; i < (_waveStartIndex + _enemiesInWave[wave]); i++) {
                 _enemyPool[i].SetActive(true);
         }
     }
