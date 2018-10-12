@@ -201,6 +201,14 @@ Prefab:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 1b5eaaa2ac24bc245868e995abb32388, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 1b5eaaa2ac24bc245868e995abb32388, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b5eaaa2ac24bc245868e995abb32388, type: 3}
   m_IsPrefabAsset: 0
@@ -276,7 +284,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1917674295897896, guid: 19aece3c194551b4d9d898eca4295385, type: 2}
       propertyPath: m_Name
-      value: can (1)
+      value: Can (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4572087223603682, guid: 19aece3c194551b4d9d898eca4295385, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -306,8 +314,8 @@ GameObject:
   - component: {fileID: 157809857}
   - component: {fileID: 157809858}
   - component: {fileID: 157809859}
-  - component: {fileID: 157809861}
   - component: {fileID: 157809860}
+  - component: {fileID: 157809861}
   m_Layer: 10
   m_Name: PLAYER
   m_TagString: Player
@@ -412,8 +420,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &157809861
-CapsuleCollider:
+--- !u!65 &157809861
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -421,10 +429,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.06
-  m_Height: 2.24
-  m_Direction: 2
-  m_Center: {x: 0, y: 0.43, z: 0.38}
+  serializedVersion: 2
+  m_Size: {x: 2.12, y: 0.55, z: 1}
+  m_Center: {x: 0, y: 0.43, z: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,7 +442,7 @@ GameObject:
   - component: {fileID: 170076735}
   - component: {fileID: 170076734}
   m_Layer: 0
-  m_Name: Main Light
+  m_Name: MainLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -500,7 +507,7 @@ GameObject:
   m_Component:
   - component: {fileID: 211034182}
   m_Layer: 0
-  m_Name: Fill Area
+  m_Name: FillArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -691,7 +698,7 @@ GameObject:
   - component: {fileID: 294063625}
   - component: {fileID: 294063624}
   m_Layer: 0
-  m_Name: Game canvas
+  m_Name: GameCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1157,7 +1164,7 @@ GameObject:
   - component: {fileID: 534669906}
   - component: {fileID: 534669907}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MainCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1321,7 +1328,7 @@ GameObject:
   - component: {fileID: 629355277}
   - component: {fileID: 629355278}
   m_Layer: 0
-  m_Name: Stamina Slider
+  m_Name: StaminaSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1425,7 +1432,7 @@ GameObject:
   - component: {fileID: 686205059}
   - component: {fileID: 686205058}
   m_Layer: 0
-  m_Name: Points Text
+  m_Name: PointsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1627,7 +1634,7 @@ Prefab:
       objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 100020, guid: 594862aabf9068b4cbacc4deba761e99, type: 3}
       propertyPath: m_Name
-      value: toasterBoi (2)
+      value: ToasterBoi (2)
       objectReference: {fileID: 0}
     - target: {fileID: 400020, guid: 594862aabf9068b4cbacc4deba761e99, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -1739,7 +1746,7 @@ Prefab:
       objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 100020, guid: 594862aabf9068b4cbacc4deba761e99, type: 3}
       propertyPath: m_Name
-      value: toasterBoi (1)
+      value: ToasterBoi (1)
       objectReference: {fileID: 0}
     - target: {fileID: 400020, guid: 594862aabf9068b4cbacc4deba761e99, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2007,7 +2014,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawn: 1
-  enemyType: 0
   _poolSize: 100
   _enemiesInWave: 0f00000019000000
   _enemy:
@@ -2024,7 +2030,7 @@ GameObject:
   - component: {fileID: 1409609179}
   - component: {fileID: 1409609178}
   m_Layer: 0
-  m_Name: Combo Text
+  m_Name: ComboText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2179,7 +2185,7 @@ GameObject:
   - component: {fileID: 1412966309}
   - component: {fileID: 1412966310}
   m_Layer: 0
-  m_Name: Special Move Slider
+  m_Name: SpecialMoveSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2344,7 +2350,7 @@ Prefab:
       objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 100020, guid: 594862aabf9068b4cbacc4deba761e99, type: 3}
       propertyPath: m_Name
-      value: toasterBoi (3)
+      value: ToasterBoi (3)
       objectReference: {fileID: 0}
     - target: {fileID: 400020, guid: 594862aabf9068b4cbacc4deba761e99, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2558,6 +2564,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 685712c8de063b24088998cb2512e87b, type: 3}
+      propertyPath: m_Name
+      value: Fridge
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 685712c8de063b24088998cb2512e87b, type: 3}
   m_IsPrefabAsset: 0
@@ -2577,7 +2587,7 @@ GameObject:
   - component: {fileID: 1626903396}
   - component: {fileID: 1626903395}
   m_Layer: 0
-  m_Name: TextMeshPro Text
+  m_Name: TextMeshProText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2846,7 +2856,7 @@ GameObject:
   - component: {fileID: 1706344765}
   - component: {fileID: 1706344766}
   m_Layer: 0
-  m_Name: Camera Base
+  m_Name: CameraBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2940,6 +2950,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[5]
       value: 
       objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 100020, guid: 594862aabf9068b4cbacc4deba761e99, type: 3}
+      propertyPath: m_Name
+      value: ToasterBoi
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 594862aabf9068b4cbacc4deba761e99, type: 3}
   m_IsPrefabAsset: 0
@@ -3295,7 +3309,7 @@ GameObject:
   - component: {fileID: 2007321775}
   - component: {fileID: 2007321774}
   m_Layer: 0
-  m_Name: Timer Text
+  m_Name: TimerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3486,7 +3500,7 @@ GameObject:
   - component: {fileID: 2145744117}
   - component: {fileID: 2145744116}
   m_Layer: 0
-  m_Name: Fill Light
+  m_Name: FillLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
