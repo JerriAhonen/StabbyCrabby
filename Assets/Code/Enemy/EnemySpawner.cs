@@ -8,11 +8,13 @@ public class EnemySpawner : MonoBehaviour {
 
     private int enemyType;
 
-    [SerializeField] private int _poolSize = 500;
+    [SerializeField] private int _poolSize;
 
     [SerializeField] private int[] _enemiesInWave;
 
-    [SerializeField] private GameObject[] _enemy;
+    [SerializeField] private GameObject[] _enemyTypes;
+
+    [SerializeField] private Transform[] _spawnLocations;
 
     private List<GameObject> _enemyPool;
 
@@ -22,17 +24,17 @@ public class EnemySpawner : MonoBehaviour {
     private void Awake() {
         _enemyPool = new List<GameObject>(_poolSize);
 
-        for (int wave = 0; wave < _enemy.Length; wave++) {
+        for (int wave = 0; wave < _enemyTypes.Length; wave++) {
             for(int numberOfEnemies = 0; numberOfEnemies < _enemiesInWave[wave]; numberOfEnemies++) {
-                AddEnemy(_enemy[wave], wave);
+                AddEnemy(_enemyTypes[wave], wave);
             }
         }        
     }
 
-    private GameObject AddEnemy(GameObject enemyToAdd, int waveNumber) {
-        GameObject enemy = Instantiate(enemyToAdd, transform.position, Quaternion.identity);
+    private GameObject AddEnemy(GameObject enemyToAdd, int wave) {
+        GameObject enemy = Instantiate(enemyToAdd, _spawnLocations[wave].position, Quaternion.identity);
 
-        enemy.GetComponent<Enemy>().enemyType = (Enemy.EnemyType) waveNumber;
+        enemy.GetComponent<Enemy>().enemyType = (Enemy.EnemyType) wave;
 
         enemy.SetActive(false);
         
