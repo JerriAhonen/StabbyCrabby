@@ -10,9 +10,6 @@ public class EnemyMovement : MonoBehaviour {
     private NavMeshAgent _enemy;
     private NavMeshObstacle _enemyObstacle;
 
-    [SerializeField] private float _dodgingDistance;
-    [SerializeField] private float _backwardsMultiplier;
-
     private void Awake() {
         _player = GameObject.Find("PLAYER");
 
@@ -28,20 +25,13 @@ public class EnemyMovement : MonoBehaviour {
         float distanceToPlayer = Vector3.Distance(_player.transform.position, transform.position);
 
         if (distanceToPlayer < _enemy.stoppingDistance) {
-            if (distanceToPlayer < _dodgingDistance) {
-                _enemy.enabled = true;
-                _enemyObstacle.enabled = false;
-
-                _enemy.SetDestination((_player.transform.position - transform.position) * -_backwardsMultiplier);
-            } else {
-                _enemy.enabled = false;
-                _enemyObstacle.enabled = true;
-            }
+            _enemy.enabled = false;
+            _enemyObstacle.enabled = true;
         } else {
             _enemy.enabled = true;
             _enemyObstacle.enabled = false;
 
-            _enemy.SetDestination(_player.transform.position);
+            _enemy.destination = _player.transform.position;    // KEKSI JOKU TAPA ETTEI PÄIVITÄ JOKA FRAMELLA
         }
-	}
+    }
 }
