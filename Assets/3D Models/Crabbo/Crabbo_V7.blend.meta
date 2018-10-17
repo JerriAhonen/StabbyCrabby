@@ -53,6 +53,10 @@ ModelImporter:
     100094: Target_4
     100096: Target_5
     100098: Target_6
+    100100: Crab_001
+    100102: Crab_002
+    100104: Crab_003
+    100106: Crab_004
     400000: Armature
     400002: Big-C-Bot
     400004: Big-C-End
@@ -103,6 +107,10 @@ ModelImporter:
     400094: Target_4
     400096: Target_5
     400098: Target_6
+    400100: Crab_001
+    400102: Crab_002
+    400104: Crab_003
+    400106: Crab_004
     2100000: Material_001__Lightmap
     2100002: Material_003__Lightmap
     2100004: Material_002__Lightmap
@@ -116,6 +124,10 @@ ModelImporter:
     2100020: Material_001
     2100022: Material
     4300000: Crab
+    4300002: Crab_001
+    4300004: Crab_004
+    4300006: Crab_003
+    4300008: Crab_002
     7400000: Default Take
     7400002: Attack_1
     7400004: Attack_2
@@ -130,6 +142,10 @@ ModelImporter:
     7400022: Walk_R
     9500000: //RootNode
     13700000: Crab
+    13700002: Crab_001
+    13700004: Crab_002
+    13700006: Crab_003
+    13700008: Crab_004
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -366,8 +382,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
