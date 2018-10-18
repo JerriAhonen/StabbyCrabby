@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Obstacle
   - Ground
+  - PlayerHitCollider
   layers:
   - Default
   - TransparentFX

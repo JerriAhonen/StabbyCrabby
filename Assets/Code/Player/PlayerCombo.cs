@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class PlayerCombo : MonoBehaviour
 {
-
     public float fireRate;
     public string[] comboParams;
     public int comboIndex = 0;
+
     Animator animator;
     public float resetTimer;
 
     public UIControl uiControl;
 
     void Awake()
-    {
+    {                                           // onko && tarpeellinen?
         if (comboParams == null || (comboParams != null && comboParams.Length == 0))
             comboParams = new string[] { "Attack 1", "Attack 2" };
+    }
 
+    void Start()
+    {
         animator = GetComponent<Animator>();
     }
+
     void Update()
     {
         
