@@ -8,7 +8,10 @@ public class UIControl: MonoBehaviour {
 
     public Slider staminaSlider;
     public Slider specialMoveSlider;
-    public InputReader inputReader;
+
+    private InputReader inputReader;
+    private PlayerCombat playerCombat;
+
     public TMP_Text timerText;
     public TMP_Text comboText;
     public TMP_Text pointsText;
@@ -20,10 +23,7 @@ public class UIControl: MonoBehaviour {
     public int staminaRegainMult;
 
     public int maxSpecial;
-
-    public bool canAttack;
-    public bool specialMoveIsActive;
-
+    
     float timer;
     int combo;
     int points;
@@ -33,6 +33,7 @@ public class UIControl: MonoBehaviour {
 	void Start () {
 
         inputReader = InputReader.Instance;
+        playerCombat = PlayerCombat.Instance;
         
         staminaSlider.maxValue = maxStamina;
         staminaSlider.value = maxStamina;
@@ -40,8 +41,6 @@ public class UIControl: MonoBehaviour {
         specialMoveSlider.value = 0;
         staminaFallRate = 1;
         staminaRegainRate = 1;
-        canAttack = true;
-        specialMoveIsActive = false;
         timer = 0f;
         combo = 1;
         points = 0;
@@ -61,6 +60,10 @@ public class UIControl: MonoBehaviour {
     // Displays current stamina and toggles if the player can attack or not.
     void Stamina()
     {
+        if (staminaSlider.value == maxStamina)
+            staminaSlider.gameObject.SetActive(false);
+        else
+            staminaSlider.gameObject.SetActive(true);
         
         if (Input.GetButtonDown("Fire1"))
         {
@@ -80,12 +83,12 @@ public class UIControl: MonoBehaviour {
         else if (staminaSlider.value <= 0)
         {
             staminaSlider.value = 0;
-            canAttack = false;
+            playerCombat.canAttack = false;
         }
 
         else if (staminaSlider.value >= 1)
         {
-            canAttack = true;
+            playerCombat.canAttack = true;
         }
 
     }
@@ -135,11 +138,11 @@ public class UIControl: MonoBehaviour {
     {
         if (specialMoveSlider.value == maxSpecial)
         {
-            specialMoveIsActive = true;
+            playerCombat.specialMoveIsActive = true;
         }
         else
         {
-            specialMoveIsActive = false;
+            playerCombat.specialMoveIsActive = false;
         }
 
         // Change this to if getting points.

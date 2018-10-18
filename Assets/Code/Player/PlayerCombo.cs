@@ -13,6 +13,8 @@ public class PlayerCombo : MonoBehaviour
 
     public UIControl uiControl;
 
+    private PlayerCombat playerCombat;
+
     void Awake()
     {                                           // onko && tarpeellinen?
         if (comboParams == null || (comboParams != null && comboParams.Length == 0))
@@ -21,13 +23,14 @@ public class PlayerCombo : MonoBehaviour
 
     void Start()
     {
+        playerCombat = PlayerCombat.Instance;
         animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         
-        if (Input.GetButtonDown("Fire1") && comboIndex < comboParams.Length && uiControl.canAttack)
+        if (Input.GetButtonDown("Fire1") && comboIndex < comboParams.Length && playerCombat.canAttack)
         {
             
             animator.SetTrigger(comboParams[comboIndex]);

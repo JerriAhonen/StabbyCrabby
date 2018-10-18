@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour {
 
+    public static PlayerCombat Instance { get; set; }
+
     private InputReader _inputReader;
     
     public GameObject meleeHitColliderObject;
@@ -11,7 +13,14 @@ public class PlayerCombat : MonoBehaviour {
     public float meleeHitRadius = 1.0f;
     public float knifeDamageAmount = 100.0f;
 
-    // Use this for initialization
+    public bool canAttack;
+    public bool specialMoveIsActive;
+
+    void Awake()
+    {
+        Instance = this;    
+    }
+
     void Start () {
         _inputReader = InputReader.Instance;
         meleeHitColliderObject = GameObject.FindGameObjectWithTag("PlayerHitCollider");
