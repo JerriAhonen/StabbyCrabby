@@ -7,7 +7,7 @@ public class PlayerCombo : MonoBehaviour
     public float fireRate;
     public string[] comboParams;
     public int comboIndex = 0;
-
+    private InputReader _inputReader;
     Animator animator;
     public float resetTimer;
 
@@ -25,12 +25,13 @@ public class PlayerCombo : MonoBehaviour
     {
         playerCombat = PlayerCombat.Instance;
         animator = GetComponent<Animator>();
+        _inputReader = InputReader.Instance;
     }
 
     void Update()
     {
         
-        if (Input.GetButtonDown("Fire1") && comboIndex < comboParams.Length && playerCombat.canAttack)
+        if (_inputReader.Stab && comboIndex < comboParams.Length && playerCombat.canAttack)
         {
             
             animator.SetTrigger(comboParams[comboIndex]);

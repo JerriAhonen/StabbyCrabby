@@ -13,7 +13,7 @@ public class PlayerCombat : MonoBehaviour {
     public float meleeHitRadius = 1.0f;
     public float knifeDamageAmount = 100.0f;
 
-    public bool canAttack;
+    public bool canAttack = true;
     public bool specialMoveIsActive;
 
     void Awake()

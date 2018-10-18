@@ -40,7 +40,6 @@ public class UIControl: MonoBehaviour {
         specialMoveSlider.maxValue = maxSpecial;
         specialMoveSlider.value = 0;
         staminaFallRate = 1;
-        staminaRegainRate = 1;
         timer = 0f;
         combo = 1;
         points = 0;
@@ -67,7 +66,7 @@ public class UIControl: MonoBehaviour {
         
         if (Input.GetButtonDown("Fire1"))
         {
-            staminaSlider.value -= 1;
+            staminaSlider.value -= staminaFallRate;
         }
 
         else
