@@ -19,7 +19,10 @@ public class PlayerCombat : MonoBehaviour {
 
     void Awake()
     {
-        Instance = this;    
+        if (Instance == null)
+            Instance = this;
+        else if (Instance != this)
+            Destroy(gameObject);
     }
 
     void Start () {
