@@ -16,7 +16,7 @@ public class PlayerCombo : MonoBehaviour
     private PlayerCombat playerCombat;
 
     void Awake()
-    {                                           // onko && tarpeellinen?
+    {
         if (comboParams == null || (comboParams != null && comboParams.Length == 0))
             comboParams = new string[] { "Attack 1", "Attack 2" };
     }
