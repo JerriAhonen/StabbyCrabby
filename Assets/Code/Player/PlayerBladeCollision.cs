@@ -28,6 +28,7 @@ public class PlayerBladeCollision : MonoBehaviour {
         {
             _isStabbing = false;
         }
+
         // Particle code for slash effect. Not sure if right place to put this.
         if (_pc.canAttack && _inputReader.Stab)
         {

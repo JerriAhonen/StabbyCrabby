@@ -26,12 +26,12 @@ public class InputReader : MonoBehaviour {
     // PLAYER MOVEMENT INPUT
 
     private float _movementInputX;
+    public float MovementInputX { get { return _movementInputX; } }
     private float _movementInputZ;
-    private Vector3 _movementVector;
-    public Vector3 MovementVector { get { return _movementVector; } }
+    public float MovementInputZ { get { return _movementInputZ; } }
 
-    private bool _isMoving;
-    public bool IsMoving { get { return _isMoving; } }
+    private bool _jump;
+    public bool Jump { get { return _jump; } }
 
     // COMBAT INPUT
 
@@ -42,13 +42,7 @@ public class InputReader : MonoBehaviour {
     {
         Instance = this;
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
+    
 	void Update () {
 
         #region CameraInput
@@ -74,20 +68,8 @@ public class InputReader : MonoBehaviour {
 
         _movementInputX = Input.GetAxis("Horizontal");
         _movementInputZ = Input.GetAxis("Vertical");
-
-        _movementVector.x = _movementInputX;
-        _movementVector.y = 0;
-        _movementVector.z = _movementInputZ;
-
-        if (_movementVector != Vector3.zero)
-        {
-            _movementVector = Vector3.ClampMagnitude(_movementVector, 1);
-            _isMoving = true;
-        }
-        else
-        {
-            _isMoving = false;
-        }
+        _jump = Input.GetButtonDown("Jump");
+        
         #endregion
 
         #region CombatInput
