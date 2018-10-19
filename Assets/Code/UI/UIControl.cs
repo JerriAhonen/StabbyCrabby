@@ -15,6 +15,7 @@ public class UIControl: MonoBehaviour {
     public TMP_Text timerText;
     public TMP_Text comboText;
     public TMP_Text pointsText;
+    public GameObject endCanvas;
 
     public int maxStamina;
     int staminaFallRate;
@@ -34,7 +35,8 @@ public class UIControl: MonoBehaviour {
 
         inputReader = InputReader.Instance;
         playerCombat = PlayerCombat.Instance;
-        
+        endCanvas.SetActive(false);
+
         staminaSlider.maxValue = maxStamina;
         staminaSlider.value = maxStamina;
         specialMoveSlider.maxValue = maxSpecial;
@@ -57,6 +59,7 @@ public class UIControl: MonoBehaviour {
         ComboMeter(stab);
         Points(stab);
         SpecialMove(stab);
+        Death();
 	}
 
     // Displays current stamina and toggles if the player can attack or not.
@@ -153,5 +156,16 @@ public class UIControl: MonoBehaviour {
             specialMoveSlider.value += 1;
         }
         
+    }
+
+    // Shows the end screen if player dies.
+    void Death()
+    {
+        // Add code to check if player dies.
+
+        /*if (playerCombat == dead)
+        {
+            endCanvas.SetActive(true);
+        }*/
     }
 }
