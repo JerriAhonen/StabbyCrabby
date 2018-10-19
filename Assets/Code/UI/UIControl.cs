@@ -49,22 +49,25 @@ public class UIControl: MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Stamina();
+        bool stab = inputReader.Stab;
+
+
+        Stamina(stab);
         Timer();
-        ComboMeter();
-        Points();
-        SpecialMove();
+        ComboMeter(stab);
+        Points(stab);
+        SpecialMove(stab);
 	}
 
     // Displays current stamina and toggles if the player can attack or not.
-    void Stamina()
+    void Stamina(bool stab)
     {
         if (staminaSlider.value == maxStamina)
             staminaSlider.gameObject.SetActive(false);
         else
             staminaSlider.gameObject.SetActive(true);
         
-        if (Input.GetButtonDown("Fire1"))
+        if (stab)
         {
             staminaSlider.value -= staminaFallRate;
         }
@@ -102,9 +105,9 @@ public class UIControl: MonoBehaviour {
     }
 
     // Update points for killing enemies.
-    void Points()
+    void Points(bool stab)
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(stab)
         {
             points = points + 100;
         }
@@ -112,10 +115,10 @@ public class UIControl: MonoBehaviour {
     }
 
     // Update current combo amount.
-    void ComboMeter()
+    void ComboMeter(bool stab)
     {
         // Change this to "If you kill something"
-        if(Input.GetButtonDown("Fire1"))
+        if(stab)
         {
             combo = combo + 1;
             comboResetTime = 4f;
@@ -133,7 +136,7 @@ public class UIControl: MonoBehaviour {
     }
 
     // Updates the current state of the SpecialMove bar.
-    void SpecialMove()
+    void SpecialMove(bool stab)
     {
         if (specialMoveSlider.value == maxSpecial)
         {
@@ -145,7 +148,7 @@ public class UIControl: MonoBehaviour {
         }
 
         // Change this to if getting points.
-        if (Input.GetButtonDown("Fire1"))
+        if (stab)
         {
             specialMoveSlider.value += 1;
         }
