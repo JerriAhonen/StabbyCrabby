@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour {
     public float _minimumVerticalVelocity;  // Negative number
 
     // Animation variables
-    
+
     private Animator _anim;
     private Rigidbody _rb;
 
@@ -28,12 +28,11 @@ public class PlayerMovement : MonoBehaviour {
         _anim = GetComponentInChildren<Animator>();
         _rb = GetComponent<Rigidbody>();
         _inputReader = InputReader.Instance;
-	}
+    }
 	
 	void Update () {
         Move();
         Rotate();
-        Jump();
     }
 
     void LateUpdate ()
@@ -74,12 +73,6 @@ public class PlayerMovement : MonoBehaviour {
         transform.Translate(movementVector * movementSpeed * movementSpeedMult * Time.deltaTime);
     }
 
-    void Jump()
-    {
-        if (_inputReader.Jump)
-            _rb.AddForce(new Vector3(0, _jumpForce, 0), ForceMode.Impulse);
-    }
-
     void Rotate()
     {
         if (_isMoving)
@@ -101,7 +94,5 @@ public class PlayerMovement : MonoBehaviour {
         _anim.SetFloat("VelX", _inputReader.MovementInputX);
         _anim.SetFloat("VelY", _inputReader.MovementInputZ);
     }
-    
-    
 }
 

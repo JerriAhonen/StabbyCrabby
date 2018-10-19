@@ -8,6 +8,8 @@ TagManager:
   - Obstacle
   - Ground
   - PlayerHitCollider
+  - MainMenuCanvas
+  - OptionsCanvas
   layers:
   - Default
   - TransparentFX
