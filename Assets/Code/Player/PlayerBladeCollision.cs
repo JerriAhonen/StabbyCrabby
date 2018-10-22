@@ -33,6 +33,7 @@ public class PlayerBladeCollision : MonoBehaviour {
         if (_pc.canAttack && _inputReader.Stab)
         {
             Invoke("ShootParticles",0.07f);
+
         }
         if (_pc.canAttack && _inputReader.Stab && _anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
         {
@@ -44,6 +45,7 @@ public class PlayerBladeCollision : MonoBehaviour {
     private void ShootParticles()
     {
         _slashParticle.Emit(30);
+    
     }
 
     private void OnTriggerEnter(Collider trigger)
