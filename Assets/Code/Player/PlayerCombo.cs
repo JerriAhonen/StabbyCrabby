@@ -24,7 +24,7 @@ public class PlayerCombo : MonoBehaviour
     void Start()
     {
         playerCombat = PlayerCombat.Instance;
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         _inputReader = InputReader.Instance;
     }
 
