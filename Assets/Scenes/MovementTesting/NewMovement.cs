@@ -18,8 +18,10 @@ public class NewMovement : MonoBehaviour {
     
     // ROTATION //
     
+    private Quaternion targetRotation;
     private float angle;
     private float groundAngle;
+    private Transform cam;
 
     // GROUND CHECKS //
 
@@ -40,18 +42,25 @@ public class NewMovement : MonoBehaviour {
         _inputReader = InputReader.Instance;
     }
 
+    private void Start()
+    {
+        cam = Camera.main.transform;
+    }
+
     /// <summary>
-    /// Only do Move() and Rotate if we have some Movement Input.
+    /// Only do Move() and Rotate() if we have some Movement Input.
     /// </summary>
     private void Update()
     {
         GetInput();
+        CalculateDirection();
+        CalculateForward();
         CalculateGroundAngle();
         CheckGround();
         ApplyGravity();
         DrawDebugLines();
 
-        if (Mathf.Abs(movementVector.x) < inputPadding && Mathf.Abs(movementVector.z) < inputPadding) return;
+        if (Mathf.Abs(_inputReader.MovementInputX) < inputPadding && Mathf.Abs(_inputReader.MovementInputZ) < inputPadding) return;
 
         Move();
         Rotate();
@@ -68,29 +77,12 @@ public class NewMovement : MonoBehaviour {
 
     /// <summary>
     /// 1. Check if ground angle isn't too steep.
-    /// 2. Clamp the lenght of the movement vector to maximum 1 so
-    ///     we don't move faster towards corners.
-    /// 3. Add a little speed multiplier to sideways movement since we are a Crab.
     /// </summary>
     void Move()
     {
         if (groundAngle >= maxGroundAngle) return;
 
-        // CLAMPING TO 1
-
-        if (movementVector != Vector3.zero)
-            movementVector = Vector3.ClampMagnitude(movementVector, 1);
-        
-
-        // SIDEWAYS MOVEMENT MULTIPLIER
-
-        if (Mathf.Abs(movementVector.x) > Mathf.Abs(movementVector.z))
-            movementSpeedMult = 3f;
-        else
-            movementSpeedMult = 2f;
-
-        transform.Translate(movementVector * velocity * movementSpeedMult * Time.deltaTime);
-        // TODO: This may require to take in consideration the Vector3 "forward"!!
+        transform.position += forward * velocity * Time.deltaTime;
     }
 
     /// <summary>
@@ -100,13 +92,39 @@ public class NewMovement : MonoBehaviour {
     /// </summary>
     void Rotate()
     {
+        targetRotation = Quaternion.Euler(0, angle, 0);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        /*
         Quaternion rot = _inputReader.LocalRotation;
         rot.x = 0;
         rot.z = 0;
 
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, rotationSpeed * Time.deltaTime);
+        */
     }
 
+    void CalculateDirection()
+    {
+        angle = Mathf.Atan2(movementVector.x, movementVector.z);
+        angle = Mathf.Rad2Deg * angle;
+        angle += cam.eulerAngles.y;
+    }
+
+    /// <summary>
+    /// Calculates the forward Vector3 according to the ground angle.
+    /// </summary>
+    void CalculateForward()
+    {
+        if (!grounded)
+        {
+            forward = transform.forward;
+            return;
+        }
+        
+        forward = Vector3.Cross(transform.right, hitInfo.normal);
+    }
+    
     /// <summary>
     /// 1. If we are not grounded, set the ground angle to 90. MAY WANT TO CHANGE THIS
     /// 2. GroundAngle is the angle between the the player's forward vector and the floor's normal.

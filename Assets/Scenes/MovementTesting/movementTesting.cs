@@ -40,7 +40,7 @@ public class movementTesting : MonoBehaviour {
     private void Update()
     {
         GetInput();
-        //CalculateDirection();
+        CalculateDirection();
         CalculateForward();
         CalculateGroundAngle();
         CheckGround();
