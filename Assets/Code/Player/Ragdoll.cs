@@ -7,11 +7,11 @@ public class Ragdoll : MonoBehaviour {
     private InputReader _inputReader;
     protected Collider[] ChildrenCollider;
     protected Rigidbody[] ChildrenRigidbody;
-    protected PlayerMovement playerMovement;
+    protected NewMovement playerMovement;
     protected PlayerCombo playerCombo;
     protected PlayerCombat playerCombat;
     protected Animator anim;
-    protected Rigidbody rb;
+    //protected Rigidbody rb;
     protected BoxCollider boxCollider;
 
     GameObject crabModel;
@@ -23,9 +23,9 @@ public class Ragdoll : MonoBehaviour {
         crabModel = gameObject.transform.GetChild(0).gameObject;
         knifeCollider = GameObject.FindGameObjectWithTag("PlayerHitCollider").GetComponent<Collider>();
         anim = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
-        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement = GetComponent<NewMovement>();
         playerCombat = GetComponent<PlayerCombat>();
         playerCombo = GetComponent<PlayerCombo>();
         ChildrenCollider = crabModel.GetComponentsInChildren<Collider>();
@@ -67,8 +67,8 @@ public class Ragdoll : MonoBehaviour {
         //root
         knifeCollider.isTrigger = false;
         anim.enabled = !active;
-        rb.detectCollisions = !active;
-        rb.isKinematic = active;
+        //rb.detectCollisions = !active;
+        //rb.isKinematic = active;
         boxCollider.enabled = !active;
         playerMovement.enabled = !active;
         playerCombo.enabled = !active;

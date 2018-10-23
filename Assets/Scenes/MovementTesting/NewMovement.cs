@@ -15,9 +15,11 @@ public class NewMovement : MonoBehaviour {
     private Vector3 forward;
     private bool grounded;
     public float inputPadding = 0.1f;
-    
+
+    private Animator _anim;
+
     // ROTATION //
-    
+
     private Quaternion targetRotation;
     private float angle;
     private float groundAngle;
@@ -44,6 +46,7 @@ public class NewMovement : MonoBehaviour {
 
     private void Start()
     {
+        _anim = GetComponentInChildren<Animator>();
         cam = Camera.main.transform;
     }
 
@@ -58,6 +61,7 @@ public class NewMovement : MonoBehaviour {
         CalculateGroundAngle();
         CheckGround();
         ApplyGravity();
+        Animate();
         DrawDebugLines();
 
         if (Mathf.Abs(_inputReader.MovementInputX) < inputPadding && Mathf.Abs(_inputReader.MovementInputZ) < inputPadding) return;
@@ -172,6 +176,12 @@ public class NewMovement : MonoBehaviour {
         {
             transform.position += Physics.gravity * Time.deltaTime;
         }
+    }
+
+    void Animate()
+    {
+        _anim.SetFloat("VelX", _inputReader.MovementInputX);
+        _anim.SetFloat("VelY", _inputReader.MovementInputZ);
     }
 
     /// <summary>
