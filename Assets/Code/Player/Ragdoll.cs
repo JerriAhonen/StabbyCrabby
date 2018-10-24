@@ -1,52 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Ragdoll : MonoBehaviour {
 
     private InputReader _inputReader;
-    protected Collider[] ChildrenCollider;
-    protected Rigidbody[] ChildrenRigidbody;
-    protected NewMovement playerMovement;
-    protected PlayerCombo playerCombo;
-    protected PlayerCombat playerCombat;
-    protected Animator anim;
-    //protected Rigidbody rb;
-    protected BoxCollider boxCollider;
 
-    GameObject crabModel;
-    Collider knifeCollider;
+    private Collider[] _ChildrenCollider;
+    private Rigidbody[] _ChildrenRigidbody;
+    private Animator _anim;
+    private BoxCollider _boxCollider;
 
-	// Use this for initialization
+    private PlayerMovement _playerMovement;
+    private PlayerCombo _playerCombo;
+    private PlayerCombat _playerCombat;
+
+    private GameObject _crabModel;
+    private GameObject _playerMover;
+    private Collider _knifeCollider;
+    
 	void Start () {
-
-        crabModel = gameObject.transform.GetChild(0).gameObject;
-        knifeCollider = GameObject.FindGameObjectWithTag("PlayerHitCollider").GetComponent<Collider>();
-        anim = GetComponentInChildren<Animator>();
-        //rb = GetComponent<Rigidbody>();
-        boxCollider = GetComponent<BoxCollider>();
-        playerMovement = GetComponent<NewMovement>();
-        playerCombat = GetComponent<PlayerCombat>();
-        playerCombo = GetComponent<PlayerCombo>();
-        ChildrenCollider = crabModel.GetComponentsInChildren<Collider>();
-        ChildrenRigidbody = crabModel.GetComponentsInChildren<Rigidbody>();
         _inputReader = InputReader.Instance;
-        RagdollActive(false);
 
+        _crabModel = gameObject.transform.GetChild(0).gameObject;
+        _playerMover = GameObject.FindGameObjectWithTag("PlayerMover");
+        _knifeCollider = GameObject.FindGameObjectWithTag("PlayerHitCollider").GetComponent<Collider>();
 
-        foreach (var collider in ChildrenCollider)
-            collider.enabled = !isActiveAndEnabled;
-        foreach (var rigidbody in ChildrenRigidbody)
-        {
-            rigidbody.detectCollisions = !isActiveAndEnabled;
-            rigidbody.isKinematic = isActiveAndEnabled;
-        }
+        _anim = GetComponentInChildren<Animator>();
+        _boxCollider = GetComponent<BoxCollider>();
+        _playerCombat = GetComponent<PlayerCombat>();
+        _playerCombo = GetComponent<PlayerCombo>();
+
+        _playerMovement = _playerMover.GetComponent<PlayerMovement>();
+        _ChildrenCollider = _crabModel.GetComponentsInChildren<Collider>();
+        _ChildrenRigidbody = _crabModel.GetComponentsInChildren<Rigidbody>();
         
-        knifeCollider.enabled = true;
-        knifeCollider.isTrigger = true;
+        RagdollActive(false);
+        
+        _knifeCollider.enabled = true;
+        _knifeCollider.isTrigger = true;
     }
 	
-	// Update is called once per frame
 	void Update () {
 		
         // Add here logic for Ragdoll toggle. plz
@@ -56,22 +48,20 @@ public class Ragdoll : MonoBehaviour {
     void RagdollActive(bool active)
     {
         //children
-        foreach (var collider in ChildrenCollider)
+        foreach (var collider in _ChildrenCollider)
             collider.enabled = active;
-        foreach (var rigidbody in ChildrenRigidbody)
+        foreach (var rigidbody in _ChildrenRigidbody)
         {
             rigidbody.detectCollisions = active;
             rigidbody.isKinematic = !active;
         }
 
         //root
-        knifeCollider.isTrigger = false;
-        anim.enabled = !active;
-        //rb.detectCollisions = !active;
-        //rb.isKinematic = active;
-        boxCollider.enabled = !active;
-        playerMovement.enabled = !active;
-        playerCombo.enabled = !active;
-        playerCombat.enabled = !active;
+        _knifeCollider.isTrigger = false;
+        _anim.enabled = !active;
+        _boxCollider.enabled = !active;
+        _playerMovement.enabled = !active;
+        _playerCombo.enabled = !active;
+        _playerCombat.enabled = !active;
     }
 }

@@ -2,174 +2,181 @@
 
 public class PlayerMovement : MonoBehaviour {
 
-    private InputReader _inputReader;
+    private InputReader _inputReader;  // Visible to this class and Classes derived from this class.
+    private PlayerRotator _pr;
+    public GameObject player;
 
-    [Range(0.1f, 1.0f)]
-    public float groundCollisionCheckDistance;
-    public Vector3 groundCollisionOffset;
+    // MOVEMENT //
 
-    public float movementSpeed = 5.0f;
+    public float velocity;
     public float movementSpeedMult;
-    public float rotationSpeed = 10.0f;
-    private Quaternion _groundRotation;
+    public float rotationSpeed = 100.0f;
+    private Vector3 movementVector;
+    private Vector3 forward;
+    private bool grounded;
+    public float inputPadding = 0.1f;
+    
+    // ROTATION //
 
-    public bool _isGrounded;// Change to private
-    private bool _isMoving;
+    private Quaternion targetRotation;
+    private float angle;
+    private float groundAngle;
+    private Transform cam;
 
-    private float _jumpForce = 6.0f;
-    private float _gravity = 1.0f;
-    public float _verticalVelocity; // Change to private
-    public float _minimumVerticalVelocity;  // Negative number
+    // GROUND CHECKS //
 
-    // Animation variables
+    public LayerMask ground;
+    public float maxGroundAngle = 120f;
 
-    private Animator _anim;
-    private Rigidbody _rb;
+    private RaycastHit hitInfo;
 
-	void Start () {
-        _anim = GetComponentInChildren<Animator>();
-        _rb = GetComponent<Rigidbody>();
+    public float height = 0.5f;
+    public float heightPadding = 0.05f;
+
+    // DEBUGGING //
+
+    public bool debugLines;
+    
+    private void Start()
+    {
         _inputReader = InputReader.Instance;
-
-        GetColliderInfo();
+        
+        _pr = player.GetComponent<PlayerRotator>();
+        cam = Camera.main.transform;
     }
-	
-	void Update () {
+
+    /// <summary>
+    /// Only do Move() and Rotate() if we have some Movement Input.
+    /// </summary>
+    private void Update()
+    {
+        if (_inputReader == null)
+            _inputReader = InputReader.Instance;
+
+        GetInput();
+        CalculateDirection();
+        CalculateForward();
+        CalculateGroundAngle();
+        CheckGround();
+        ApplyGravity();
+        DrawDebugLines();
+
+        if (Mathf.Abs(_inputReader.MovementInputX) < inputPadding 
+            && Mathf.Abs(_inputReader.MovementInputZ) < inputPadding) return;
+
         Move();
         Rotate();
-        IsGrounded();
+        _pr.RotateModel();
     }
 
-    void LateUpdate ()
+    /// <summary>
+    /// Gets the input form InputReader, which is a Component of the Player.
+    /// </summary>
+    void GetInput()
     {
-        Animate();
+        movementVector.x = _inputReader.MovementInputX;
+        movementVector.z = _inputReader.MovementInputZ;
     }
 
+    /// <summary>
+    /// 1. Check if ground angle isn't too steep.
+    /// </summary>
     void Move()
     {
-        Vector3 movementVector;
-        movementVector.x = _inputReader.MovementInputX;
-        movementVector.y = 0;
-        movementVector.z = _inputReader.MovementInputZ;
+        if (groundAngle >= maxGroundAngle) return;
 
-        // CLAMPING TO 1
-
-        if (movementVector != Vector3.zero)
-        {
-            movementVector = Vector3.ClampMagnitude(movementVector, 1);
-            _isMoving = true;
-        }
-        else
-        {
-            _isMoving = false;
-        }
-        
-        // SIDEWAYS MOVEMENT MULTIPLIER
-
-        if (Mathf.Abs( movementVector.x ) > Mathf.Abs( movementVector.z ))
-        {
-            movementSpeedMult = 3f;
-        }
-        else
-        {
-            movementSpeedMult = 2f;
-        }
-
-        RaycastHit hit;
-        Vector3 rayDrawPoint = transform.position - groundCollisionOffset;
-
-        if (Physics.Raycast(rayDrawPoint, Vector3.down, out hit, groundCollisionCheckDistance))
-        {
-            _isGrounded = true;
-            _groundRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-
-            movementVector.y = 0.0f;
-
-            Debug.DrawRay(rayDrawPoint, Vector3.down * groundCollisionCheckDistance, Color.cyan);
-        }
-        else
-        {
-            _isGrounded = false;
-            movementVector.y -= (_gravity * Time.deltaTime);
-
-            Debug.DrawRay(rayDrawPoint, Vector3.down * groundCollisionCheckDistance, Color.red);
-        }
-
-        /*
-        if (_isGrounded)
-        {
-            _verticalVelocity = -0.1f;
-        }
-        else
-        {
-            _verticalVelocity -= (_gravity * Time.deltaTime);
-        }
-        */
-
-        //movementVector.y = _verticalVelocity;
-
-        transform.Translate(movementVector * movementSpeed * movementSpeedMult * Time.deltaTime);
+        transform.position += forward * velocity * Time.deltaTime;
     }
 
+    /// <summary>
+    /// 1. Get the rotation Quaternion from InputReader's CameraInput.
+    /// 2. Set the X and Z axis to 0 so we only follow the camera on the Y axis.
+    /// 3. Lerp the rotation for smoother movement.
+    /// </summary>
     void Rotate()
     {
-        if (_isMoving)
+        targetRotation = Quaternion.Euler(0, angle, 0);
+        transform.rotation = targetRotation;
+    }
+
+    void CalculateDirection()
+    {
+        angle = Mathf.Atan2(movementVector.x, movementVector.z);
+        angle = Mathf.Rad2Deg * angle;
+        angle += cam.eulerAngles.y;
+    }
+
+    /// <summary>
+    /// Calculates the forward Vector3 according to the ground angle.
+    /// </summary>
+    void CalculateForward()
+    {
+        if (!grounded)
         {
-            // Rotate the player with the camera
-            Quaternion rot = _inputReader.LocalRotation;
-            //rot.x = 0;
-            //rot.z = 0;
+            forward = transform.forward;
+            return;
+        }
+        
+        forward = Vector3.Cross(transform.right, hitInfo.normal);
+    }
+    
+    /// <summary>
+    /// 1. If we are not grounded, set the ground angle to 90. MAY WANT TO CHANGE THIS
+    /// 2. GroundAngle is the angle between the the player's forward vector and the floor's normal.
+    /// </summary>
+    void CalculateGroundAngle()
+    {
+        if (!grounded)
+        {
+            groundAngle = 90;
+            return;
+        }
 
-            rot.x = _groundRotation.x;
-            rot.z = _groundRotation.z;
+        groundAngle = Vector3.Angle(hitInfo.normal, transform.forward);
+    }
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, rotationSpeed * Time.deltaTime);
+    /// <summary>
+    /// 1. Raycast straight down from the middle of the Character for "height" + "heightPadding" distance.
+    /// 1.1. NOTICE that height needs to be half of the character's colliders height!
+    /// 2. If we are grounded, correct our position with lerp if we sink in the ground.
+    /// </summary>
+    void CheckGround()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, height + heightPadding, ground))
+        {
+            if (Vector3.Distance(transform.position, hitInfo.point) < height)
+            {
+                transform.position = Vector3.Lerp(transform.position,
+                                                transform.position + Vector3.up * height,
+                                                5 * Time.deltaTime);
+            }
+            grounded = true;
         }
         else
         {
-            // Do not rotate player
+            grounded = false;
+        }
+    }
+
+    /// <summary>
+    /// Simple Gravity using Unity's built in Physics.
+    /// </summary>
+    void ApplyGravity()
+    {
+        if (!grounded)
+        {
+            transform.position += Physics.gravity * Time.deltaTime;
         }
     }
     
-    void Animate()
+    /// <summary>
+    /// Debug lines for visualisation of our vectors.
+    /// </summary>
+    void DrawDebugLines()
     {
-        _anim.SetFloat("VelX", _inputReader.MovementInputX);
-        _anim.SetFloat("VelY", _inputReader.MovementInputZ);
+        if (!debugLines) return;
+
+        Debug.DrawLine(transform.position, transform.position + forward * height * 2, Color.blue);
+        Debug.DrawLine(transform.position, transform.position + Vector3.down * (height + heightPadding), Color.green);
     }
-
-    void IsGrounded()
-    {
-        
-    }
-
-    Collider m_Collider;
-    Vector3 m_Center;
-    Vector3 m_Size, m_Min, m_Max;
-
-    void GetColliderInfo()
-    {
-        //Fetch the Collider from the GameObject
-        m_Collider = GetComponent<Collider>();
-        //Fetch the center of the Collider volume
-        m_Center = m_Collider.bounds.center;
-        //Fetch the size of the Collider volume
-        m_Size = m_Collider.bounds.size;
-        //Fetch the minimum and maximum bounds of the Collider volume
-        m_Min = m_Collider.bounds.min;
-        m_Max = m_Collider.bounds.max;
-        //Output this data into the console
-        OutputData();
-    }
-
-    void OutputData()
-    {
-        //Output to the console the center and size of the Collider volume
-        Debug.Log("Collider Center : " + m_Center);
-        Debug.Log("Collider Size : " + m_Size);
-        Debug.Log("Collider bound Minimum : " + m_Min);
-        Debug.Log("Collider bound Maximum : " + m_Max);
-    }
-
-
 }
-
