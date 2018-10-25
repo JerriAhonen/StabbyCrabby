@@ -45,11 +45,10 @@ public class PlayerRotator : MonoBehaviour {
         
         rot.x = 0;
         rot.z = 0;
-
-        rot *= Quaternion.Euler(_playerMovement.HitInfo.normal.x, 0 , _playerMovement.HitInfo.normal.z); 
         
-
-        transform.localRotation = Quaternion.Lerp(transform.rotation, rot, _rotationSpeed * Time.deltaTime);
+        Quaternion groundRot = Quaternion.LookRotation(rot * Vector3.forward, _playerMovement.HitInfo.normal);
+        
+        transform.localRotation = Quaternion.Lerp(transform.rotation, groundRot, _rotationSpeed * Time.deltaTime);
     }
 
     void RotateToGround()
