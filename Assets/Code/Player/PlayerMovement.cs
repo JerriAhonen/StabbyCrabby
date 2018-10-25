@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     public float rotationSpeed = 100.0f;
     private Vector3 movementVector;
     private Vector3 forward;
+    public Vector3 ForwardVector { get { return forward; } }
     private bool grounded;
     public float inputPadding = 0.1f;
     
@@ -28,7 +29,8 @@ public class PlayerMovement : MonoBehaviour {
     public LayerMask ground;
     public float maxGroundAngle = 120f;
 
-    private RaycastHit hitInfo;
+    private RaycastHit _hitInfo;
+    public RaycastHit HitInfo { get { return _hitInfo; } }
 
     public float height = 0.5f;
     public float heightPadding = 0.05f;
@@ -117,7 +119,7 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
         
-        forward = Vector3.Cross(transform.right, hitInfo.normal);
+        forward = Vector3.Cross(transform.right, _hitInfo.normal);
     }
     
     /// <summary>
@@ -132,7 +134,7 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
 
-        groundAngle = Vector3.Angle(hitInfo.normal, transform.forward);
+        groundAngle = Vector3.Angle(_hitInfo.normal, transform.forward);
     }
 
     /// <summary>
@@ -142,9 +144,9 @@ public class PlayerMovement : MonoBehaviour {
     /// </summary>
     void CheckGround()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, height + heightPadding, ground))
+        if (Physics.Raycast(transform.position, Vector3.down, out _hitInfo, height + heightPadding, ground))
         {
-            if (Vector3.Distance(transform.position, hitInfo.point) < height)
+            if (Vector3.Distance(transform.position, _hitInfo.point) < height)
             {
                 transform.position = Vector3.Lerp(transform.position,
                                                 transform.position + Vector3.up * height,

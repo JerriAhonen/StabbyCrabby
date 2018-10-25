@@ -1040,6 +1040,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36137b6bed23f3745a23288e58514be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _groundNormal: {x: 0, y: 0, z: 0}
+  drawDebugLines: 1
 --- !u!114 &157809857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2710,7 +2712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 157809854}
-  velocity: 7
+  velocity: 10
   movementSpeedMult: 0
   rotationSpeed: 10
   inputPadding: 0.1
@@ -2732,7 +2734,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &429010483
 GameObject:
@@ -14771,7 +14773,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400020, guid: 594862aabf9068b4cbacc4deba761e99, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 594862aabf9068b4cbacc4deba761e99, type: 3}
       propertyPath: m_Controller

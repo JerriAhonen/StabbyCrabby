@@ -5,15 +5,22 @@ public class PlayerRotator : MonoBehaviour {
     private InputReader _inputReader;
 
     private GameObject _playerMover;
+    private PlayerMovement _playerMovement;
     private Animator _anim;
+
+    private Vector3 _forward;
+    [SerializeField] private Vector3 _groundNormal;
     
     private float _rotationSpeed;
+
+    public bool drawDebugLines;
     
     private void Start()
     {
         _inputReader = InputReader.Instance;
 
         _playerMover = GameObject.FindGameObjectWithTag("PlayerMover");
+        _playerMovement = _playerMover.GetComponent<PlayerMovement>();
         _anim = GetComponentInChildren<Animator>();
         _rotationSpeed = 10;
     }
@@ -21,7 +28,10 @@ public class PlayerRotator : MonoBehaviour {
     private void Update()
     {
         Move();
+        RotateToGround();
         Animate();
+
+        DrawDebugLines();
     }
 
     void Move()
@@ -32,15 +42,32 @@ public class PlayerRotator : MonoBehaviour {
     public void RotateModel()
     {
         Quaternion rot = _inputReader.LocalRotation;
+        
         rot.x = 0;
         rot.z = 0;
 
+        rot *= Quaternion.Euler(_playerMovement.HitInfo.normal.x, 0 , _playerMovement.HitInfo.normal.z); 
+        
+
         transform.localRotation = Quaternion.Lerp(transform.rotation, rot, _rotationSpeed * Time.deltaTime);
+    }
+
+    void RotateToGround()
+    {
+        
+
+        
     }
 
     void Animate()
     {
         _anim.SetFloat("VelX", _inputReader.MovementInputX);
         _anim.SetFloat("VelY", _inputReader.MovementInputZ);
+    }
+
+    void DrawDebugLines()
+    {
+        _groundNormal = _playerMovement.HitInfo.normal;
+        Debug.DrawLine(transform.position, transform.position + _playerMovement.HitInfo.normal, Color.red);
     }
 }
