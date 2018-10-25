@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: eb8730f6140cb5f4b91475614bffa303
+guid: 0993a6e8812739d44b89ba63d11efb70
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Material_002
-    2100002: Material_002__BottleUV
+    2100000: Material_001__signUV
     2300000: //RootNode
     3300000: //RootNode
     4300000: Cylinder
     7400000: Default Take
     9500000: //RootNode
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1

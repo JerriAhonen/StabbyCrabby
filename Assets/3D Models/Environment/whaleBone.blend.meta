@@ -1,12 +1,11 @@
 fileFormatVersion: 2
-guid: eb8730f6140cb5f4b91475614bffa303
+guid: 9d789504e16bcdb4eaddf37c2b3eaf7a
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Material_002
-    2100002: Material_002__BottleUV
+    2100000: unnamed
     2300000: //RootNode
     3300000: //RootNode
     4300000: Cylinder
