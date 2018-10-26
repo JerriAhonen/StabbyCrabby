@@ -30,12 +30,15 @@ public class Health : MonoBehaviour {
         CurrentHealth = startingHealth;
     }
 
-    public void TakeDamage(int damage) {
+    // Returns whether died or not.
+    public bool TakeDamage(int damage) {
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, CurrentHealth);
 
         if (CurrentHealth == 0) {
             IsDead = true;
         }
+
+        return IsDead;
     }
 
     public void SetHealth(int health) {

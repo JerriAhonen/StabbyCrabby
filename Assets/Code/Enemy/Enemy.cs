@@ -11,20 +11,26 @@ public class Enemy : MonoBehaviour {
 
     public EnemyType enemyType;
 
-    void Start() {
-		switch (enemyType) {
-            case EnemyType.Toast: {
+    private Health _enemyHealth;
 
+    void Start() {
+        int startingHealth = 0;
+
+        switch (enemyType) {
+            case EnemyType.Toast: {
+                startingHealth = 10;
                 break;
             }
             case EnemyType.Pot: {
-
+                startingHealth = 50;
                 break;
             }
         }
+
+        _enemyHealth = new Health(startingHealth);
 	}
-	
-	void Update() {
-		
-	}
+
+    public void TakeDamage(int damage) {
+        _enemyHealth.TakeDamage(damage);
+    }
 }
