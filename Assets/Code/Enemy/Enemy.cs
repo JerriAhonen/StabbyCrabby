@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour {
     private Health _enemyHealth;
 
     void Start() {
+        gameObject.AddComponent<Health>();
+
         int startingHealth = 0;
 
         switch (enemyType) {
