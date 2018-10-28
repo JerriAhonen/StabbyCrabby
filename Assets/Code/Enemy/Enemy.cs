@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour {
     private Health _enemyHealth;
 
     void Start() {
-        gameObject.AddComponent<Health>();
+        _enemyHealth = gameObject.AddComponent<Health>();
 
         int startingHealth = 0;
 
@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour {
             }
         }
 
-        _enemyHealth = new Health(startingHealth);
+        _enemyHealth.SetHealth(startingHealth);
 	}
 
     public void TakeDamage(int damage) {

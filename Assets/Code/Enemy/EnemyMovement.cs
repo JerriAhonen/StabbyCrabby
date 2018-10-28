@@ -18,6 +18,8 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     private void Start() {
+        _enemy.baseOffset = 0f;
+
         _enemy.destination = _player.transform.position;
     }
 	

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour {
 
-    private int _currentHealth;
+    public int _currentHealth;
 
     public int CurrentHealth {
         get {
@@ -24,10 +24,6 @@ public class Health : MonoBehaviour {
         private set {
             _isDead = value;
         }
-    }
-    
-    public Health(int startingHealth) {
-        CurrentHealth = startingHealth;
     }
 
     // Returns whether died or not.
