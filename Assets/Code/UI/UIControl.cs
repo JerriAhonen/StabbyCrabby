@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIControl: MonoBehaviour {
 
@@ -172,6 +173,10 @@ public class UIControl: MonoBehaviour {
         if (playerHealth.IsDead)
         {
             endCanvas.SetActive(true);
+
+            if (Input.GetButtonDown("Cancel")) {
+                SceneManager.LoadScene(1);
+            }
         }
     }
 }
