@@ -50,12 +50,16 @@ public class PlayerBladeCollision : MonoBehaviour {
 
     private void OnTriggerEnter(Collider trigger)
     {
+
+        Debug.Log("something got Hit");
+
         if (_isStabbing && trigger.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            // TODO: ENEMY HEALTH
-            // EnemyHealth eh = collision.gameObject.GetComponent<EnemyHealth>();
-            // eh.GetHit();
-            // if (eh.dead)
+            var enemy = trigger.gameObject.GetComponent<Enemy>();
+
+            bool deadEnemy = enemy.TakeDamage(_pc.knifeDamageAmount);
+
+            if (deadEnemy)
             //      Täältä jonnekin tieto et vihu kuoli. UIControllin pitäs saada tietää se.
 
             Debug.Log(trigger.gameObject.name + " got Hit");

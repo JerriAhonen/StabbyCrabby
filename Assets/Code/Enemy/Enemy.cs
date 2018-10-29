@@ -13,26 +13,41 @@ public class Enemy : MonoBehaviour {
 
     private Health _enemyHealth;
 
+    private int _startingHealth;
+    private int _damage;
+
     void Start() {
         _enemyHealth = gameObject.AddComponent<Health>();
 
-        int startingHealth = 0;
-
         switch (enemyType) {
             case EnemyType.Toast: {
-                startingHealth = 10;
+                _startingHealth = 10;
+                _damage = 10;
                 break;
             }
             case EnemyType.Pot: {
-                startingHealth = 50;
+                _startingHealth = 50;
+                _damage = 20;
                 break;
             }
         }
 
-        _enemyHealth.SetHealth(startingHealth);
+        _enemyHealth.SetHealth(_startingHealth);
 	}
 
-    public void TakeDamage(int damage) {
-        _enemyHealth.TakeDamage(damage);
+    public bool TakeDamage(int damage) {
+        bool dead = _enemyHealth.TakeDamage(damage);
+
+        if (dead) {
+            Destroy(gameObject);
+        }
+
+        return dead;
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player")) {
+            collision.gameObject.GetComponent<Health>().TakeDamage(_damage);
+        }
     }
 }

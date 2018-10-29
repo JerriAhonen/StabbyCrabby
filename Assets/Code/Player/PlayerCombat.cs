@@ -11,7 +11,7 @@ public class PlayerCombat : MonoBehaviour {
     public GameObject meleeHitColliderObject;
 
     public float meleeHitRadius = 1.0f;
-    public float knifeDamageAmount = 100.0f;
+    public int knifeDamageAmount = 100;
 
     // Controlled thru UIControl.
     public bool canAttack = true;

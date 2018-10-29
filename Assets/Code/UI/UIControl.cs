@@ -11,6 +11,7 @@ public class UIControl: MonoBehaviour {
 
     private InputReader inputReader;
     private PlayerCombat playerCombat;
+    private Health playerHealth;
 
     public TMP_Text timerText;
     public TMP_Text comboText;
@@ -35,6 +36,11 @@ public class UIControl: MonoBehaviour {
 
         inputReader = InputReader.Instance;
         playerCombat = PlayerCombat.Instance;
+
+        // THIS SHOULD BE IN A PLAYER SCRIPT SOMEWHERE
+        playerHealth = GetComponent<Health>();
+        playerHealth.SetHealth(1);
+
         endCanvas.SetActive(false);
 
         staminaSlider.maxValue = maxStamina;
@@ -161,11 +167,11 @@ public class UIControl: MonoBehaviour {
     // Shows the end screen if player dies.
     void Death()
     {
-        // Add code to check if player dies.
+        //SHOULDN'T THIS INFO BE SENT TO UI CONTROL INSTEAD OF UI CONTROL POLLING FOR DEATH EVERY FRAME??
 
-        /*if (playerCombat == dead)
+        if (playerHealth.IsDead)
         {
             endCanvas.SetActive(true);
-        }*/
+        }
     }
 }
