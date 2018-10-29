@@ -1885,7 +1885,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
       propertyPath: m_Name
@@ -7519,7 +7519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7406e6084b4d77b4ea702bf48e9ae02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawn: 0
+  spawn: 1
   _poolSize: 100
   _enemiesInWave: 0f00000019000000
   _enemyTypes:
@@ -7666,7 +7666,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
       propertyPath: m_Name
@@ -14416,7 +14416,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
       propertyPath: m_Name
@@ -14687,10 +14687,6 @@ Prefab:
     - target: {fileID: 4198142791004704, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
       propertyPath: m_RootOrder
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
