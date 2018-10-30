@@ -12,16 +12,18 @@ public class Enemy : MonoBehaviour {
     public EnemyType enemyType;
 
     private Health _enemyHealth;
+    private EnemyMovement _enemyMovement;
 
     private int _startingHealth;
     private int _damage;
 
     void Start() {
         _enemyHealth = gameObject.AddComponent<Health>();
+        _enemyMovement = gameObject.AddComponent<EnemyMovement>();
 
         switch (enemyType) {
             case EnemyType.Toast: {
-                _startingHealth = 10;
+                _startingHealth = 50;
                 _damage = 10;
                 break;
             }
@@ -40,6 +42,8 @@ public class Enemy : MonoBehaviour {
 
         if (dead) {
             Destroy(gameObject);
+        } else {
+            _enemyMovement.GetThrown();
         }
 
         return dead;
@@ -47,7 +51,10 @@ public class Enemy : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player")) {
-            collision.gameObject.GetComponent<Health>().TakeDamage(_damage);
+            if (collision.gameObject.GetComponent<Health>() != null) {
+                Debug.Log("Collided with player health component object");
+                collision.gameObject.GetComponent<Health>().TakeDamage(_damage);
+            }
         }
     }
 }

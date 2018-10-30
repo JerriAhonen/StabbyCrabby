@@ -1127,7 +1127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeHitColliderObject: {fileID: 0}
   meleeHitRadius: 1
-  knifeDamageAmount: 100
+  knifeDamageAmount: 10
   canAttack: 0
   specialMoveIsActive: 0
 --- !u!114 &157809859
@@ -1214,9 +1214,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &158600253 stripped
 GameObject:
@@ -1884,16 +1884,8 @@ Prefab:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
       propertyPath: m_Name
       value: ToasterBoi (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4198142791004704, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 115.33
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
@@ -3160,26 +3152,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4645504685174002, guid: 2dac09a1ba31dc644a1a7ea40a2d1396,
     type: 2}
   m_PrefabInternal: {fileID: 1963255540}
---- !u!1 &519495183 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1,
-    type: 2}
-  m_PrefabInternal: {fileID: 1756417353}
---- !u!54 &519495192
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 519495183}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
 --- !u!1 &520568717
 GameObject:
   m_ObjectHideFlags: 0
@@ -3824,6 +3796,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4740107112892738, guid: 4cd374da929062d4593dde0e4320d85a, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198963187356171222, guid: 4cd374da929062d4593dde0e4320d85a,
+        type: 2}
+      propertyPath: useRigidbodyForVelocity
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -4502,26 +4479,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 674403272}
   m_CullTransparentMesh: 0
---- !u!1 &676157315 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1,
-    type: 2}
-  m_PrefabInternal: {fileID: 259805036}
---- !u!54 &676157324
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 676157315}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
 --- !u!1 &686205056
 GameObject:
   m_ObjectHideFlags: 0
@@ -14425,16 +14382,16 @@ Prefab:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
       propertyPath: m_Name
       value: ToasterBoi (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 4198142791004704, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 206.01
+    - target: {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
