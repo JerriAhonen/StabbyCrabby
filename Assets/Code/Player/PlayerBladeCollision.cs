@@ -51,8 +51,6 @@ public class PlayerBladeCollision : MonoBehaviour {
     private void OnTriggerEnter(Collider trigger)
     {
 
-        Debug.Log(trigger.gameObject.name + " got Hit");
-
         if (_isStabbing && trigger.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             var enemy = trigger.gameObject.GetComponent<Enemy>();

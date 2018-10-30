@@ -556,7 +556,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!1 &91858476
 GameObject:
   m_ObjectHideFlags: 0
@@ -5106,6 +5106,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4740107112892738, guid: 4cd374da929062d4593dde0e4320d85a, type: 2}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198963187356171222, guid: 4cd374da929062d4593dde0e4320d85a,
+        type: 2}
+      propertyPath: useRigidbodyForVelocity
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -14053,6 +14058,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 198963187356171222, guid: 4cd374da929062d4593dde0e4320d85a,
+        type: 2}
+      propertyPath: useRigidbodyForVelocity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cd374da929062d4593dde0e4320d85a, type: 2}
   m_IsPrefabAsset: 0
@@ -14566,6 +14576,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 198963187356171222, guid: 4cd374da929062d4593dde0e4320d85a,
+        type: 2}
+      propertyPath: useRigidbodyForVelocity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cd374da929062d4593dde0e4320d85a, type: 2}
   m_IsPrefabAsset: 0
@@ -14644,6 +14659,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4740107112892738, guid: 4cd374da929062d4593dde0e4320d85a, type: 2}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198963187356171222, guid: 4cd374da929062d4593dde0e4320d85a,
+        type: 2}
+      propertyPath: useRigidbodyForVelocity
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -15359,6 +15379,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4740107112892738, guid: 4cd374da929062d4593dde0e4320d85a, type: 2}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198963187356171222, guid: 4cd374da929062d4593dde0e4320d85a,
+        type: 2}
+      propertyPath: useRigidbodyForVelocity
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
