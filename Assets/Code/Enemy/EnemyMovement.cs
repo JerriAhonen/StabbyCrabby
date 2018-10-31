@@ -74,9 +74,9 @@ public class EnemyMovement : MonoBehaviour {
 
         _flyTime = 0;
 
-        _thrownBack = true;
-
         SetNavMeshComponents(false);
+
+        _thrownBack = true;
     }
 
     private void ThrowEnemy() {
