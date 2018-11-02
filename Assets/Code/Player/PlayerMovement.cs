@@ -50,6 +50,8 @@ public class PlayerMovement : MonoBehaviour {
         cam = Camera.main.transform;
 
         GameObject arenaBounds = GameObject.FindGameObjectWithTag("ArenaBounds");
+        if (arenaBounds == null)
+            Debug.LogError("No ARENA BOUNDS found!");
 
         arenaCenter = arenaBounds.transform.position;
         arenaRadius = arenaBounds.GetComponent<DrawCircle>().radius;

@@ -28,7 +28,6 @@ public class PlayerCombat : MonoBehaviour {
     void Start () {
         _inputReader = InputReader.Instance;
         meleeHitColliderObject = GameObject.FindGameObjectWithTag("PlayerHitCollider");
-        
 	}
 	
 	// Update is called once per frame

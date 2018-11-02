@@ -6,7 +6,8 @@ public class InputReader : MonoBehaviour {
 
     // CAMERA SETTINGS AND INPUT
 
-    public float clampAngle = 80.0f;
+    public float clampAngleUp = 50.0f;
+    public float clampAngleDown = 50.0f;
     public float inputSensitivity = 150.0f;
 
     private float _rightStickInputX;
@@ -61,7 +62,7 @@ public class InputReader : MonoBehaviour {
         _rotY += _finalMovementInputX * inputSensitivity * Time.deltaTime;
         _rotX += _finalMovementInputZ * inputSensitivity * Time.deltaTime;
 
-        _rotX = Mathf.Clamp(_rotX, -clampAngle, clampAngle);
+        _rotX = Mathf.Clamp(_rotX, -clampAngleDown, clampAngleUp);
 
         _localRotation = Quaternion.Euler(_rotX, _rotY, 0);
 

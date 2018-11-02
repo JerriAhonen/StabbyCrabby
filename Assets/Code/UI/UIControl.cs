@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
 public class UIControl: MonoBehaviour {
-
-    public Slider staminaSlider;
+    
     public Slider specialMoveSlider;
 
     private InputReader inputReader;
@@ -18,13 +15,7 @@ public class UIControl: MonoBehaviour {
     public TMP_Text comboText;
     public TMP_Text pointsText;
     public GameObject endCanvas;
-
-    public int maxStamina;
-    int staminaFallRate;
-    public int staminaFallMult;
-    int staminaRegainRate;
-    public int staminaRegainMult;
-
+    
     public int maxSpecial;
     
     float timer;
@@ -44,11 +35,9 @@ public class UIControl: MonoBehaviour {
 
         endCanvas.SetActive(false);
 
-        staminaSlider.maxValue = maxStamina;
-        staminaSlider.value = maxStamina;
+        
         specialMoveSlider.maxValue = maxSpecial;
         specialMoveSlider.value = 0;
-        staminaFallRate = 1;
         timer = 0f;
         combo = 1;
         points = 0;
@@ -61,49 +50,13 @@ public class UIControl: MonoBehaviour {
         bool stab = inputReader.Stab;
 
 
-        Stamina(stab);
+        //Stamina(stab);
         Timer();
         ComboMeter(stab);
         Points(stab);
         SpecialMove(stab);
         Death();
 	}
-
-    // Displays current stamina and toggles if the player can attack or not.
-    void Stamina(bool stab)
-    {
-        if (staminaSlider.value == maxStamina)
-            staminaSlider.gameObject.SetActive(false);
-        else
-            staminaSlider.gameObject.SetActive(true);
-        
-        if (stab)
-        {
-            staminaSlider.value -= staminaFallRate;
-        }
-
-        else
-        {
-            staminaSlider.value += Time.deltaTime * staminaRegainMult;
-        }
-
-        if (staminaSlider.value >= maxStamina)
-        {
-            staminaSlider.value = maxStamina;
-        }
-
-        else if (staminaSlider.value <= 0)
-        {
-            staminaSlider.value = 0;
-            playerCombat.canAttack = false;
-        }
-
-        else if (staminaSlider.value >= 1)
-        {
-            playerCombat.canAttack = true;
-        }
-
-    }
 
     // Displays the game timer.
     void Timer()
@@ -180,3 +133,53 @@ public class UIControl: MonoBehaviour {
         }
     }
 }
+//public Slider staminaSlider;
+//staminaSlider.maxValue = maxStamina;
+//staminaSlider.value = maxStamina;
+//staminaFallRate = 1;
+
+/*
+public int maxStamina;
+int staminaFallRate;
+public int staminaFallMult;
+int staminaRegainRate;
+public int staminaRegainMult;
+*/
+
+/*
+// Displays current stamina and toggles if the player can attack or not.
+void Stamina(bool stab)
+{
+    if (staminaSlider.value == maxStamina)
+        staminaSlider.gameObject.SetActive(false);
+    else
+        staminaSlider.gameObject.SetActive(true);
+
+    if (stab)
+    {
+        staminaSlider.value -= staminaFallRate;
+    }
+
+    else
+    {
+        staminaSlider.value += Time.deltaTime * staminaRegainMult;
+    }
+
+    if (staminaSlider.value >= maxStamina)
+    {
+        staminaSlider.value = maxStamina;
+    }
+
+    else if (staminaSlider.value <= 0)
+    {
+        staminaSlider.value = 0;
+        playerCombat.canAttack = false;
+    }
+
+    else if (staminaSlider.value >= 1)
+    {
+        playerCombat.canAttack = true;
+    }
+
+}
+*/

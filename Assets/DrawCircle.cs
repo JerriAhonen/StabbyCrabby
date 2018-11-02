@@ -4,6 +4,11 @@ public class DrawCircle : MonoBehaviour
 {
     public float radius;
 
+    private void Start()
+    {
+        transform.position = Vector3.zero;
+    }
+
     void OnDrawGizmosSelected()
     {
         // Draw a yellow sphere at the transform's position

@@ -31,7 +31,7 @@ public class PlayerCombo : MonoBehaviour
     void Update()
     {
         
-        if (_inputReader.Stab && comboIndex < comboParams.Length && playerCombat.canAttack)
+        if (_inputReader.Stab && comboIndex < comboParams.Length/* && playerCombat.canAttack*/)
         {
             
             animator.SetTrigger(comboParams[comboIndex]);

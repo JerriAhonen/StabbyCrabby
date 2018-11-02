@@ -1111,7 +1111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9d8c06fd6df754cbfc205dad8adb85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clampAngle: 80
+  clampAngleUp: 10
+  clampAngleDown: 35
   inputSensitivity: 150
 --- !u!114 &157809858
 MonoBehaviour:
@@ -1140,15 +1141,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05dfa7156d34b54aac014d5ae536e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaSlider: {fileID: 629355278}
   specialMoveSlider: {fileID: 1412966310}
   timerText: {fileID: 2007321774}
   comboText: {fileID: 1409609178}
   pointsText: {fileID: 686205058}
   endCanvas: {fileID: 1457403821}
-  maxStamina: 10
-  staminaFallMult: 1
-  staminaRegainMult: 2
   maxSpecial: 10
   comboResetTime: 0
 --- !u!114 &157809860
@@ -3805,7 +3802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &629355277
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8307,7 +8304,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8396,7 +8393,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1495828316
 Transform:
   m_ObjectHideFlags: 0
