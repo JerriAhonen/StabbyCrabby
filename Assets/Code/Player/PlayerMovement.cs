@@ -16,7 +16,10 @@ public class PlayerMovement : MonoBehaviour {
     public Vector3 ForwardVector { get { return forward; } }
     private bool grounded;
     public float inputPadding = 0.1f;
-    
+
+    private Vector3 arenaCenter;
+    private float arenaRadius;
+
     // ROTATION //
 
     private Quaternion targetRotation;
@@ -45,6 +48,11 @@ public class PlayerMovement : MonoBehaviour {
         
         _pr = player.GetComponent<PlayerRotator>();
         cam = Camera.main.transform;
+
+        GameObject arenaBounds = GameObject.FindGameObjectWithTag("ArenaBounds");
+
+        arenaCenter = arenaBounds.transform.position;
+        arenaRadius = arenaBounds.GetComponent<DrawCircle>().radius;
     }
 
     /// <summary>
@@ -88,6 +96,14 @@ public class PlayerMovement : MonoBehaviour {
         if (groundAngle >= maxGroundAngle) return;
 
         transform.position += forward * velocity * Time.deltaTime;
+
+        Vector3 offset = transform.position - arenaCenter;
+        if (offset.magnitude > arenaRadius)
+        {
+            offset = offset.normalized;
+            offset = offset * arenaRadius;
+            transform.position = offset;
+        }
     }
 
     /// <summary>
