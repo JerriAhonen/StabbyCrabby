@@ -34,7 +34,6 @@ public class UIControl: MonoBehaviour {
         playerHealth.SetHealth(1);
 
         endCanvas.SetActive(false);
-
         
         specialMoveSlider.maxValue = maxSpecial;
         specialMoveSlider.value = 0;
@@ -48,8 +47,7 @@ public class UIControl: MonoBehaviour {
 	void Update () {
 
         bool stab = inputReader.Stab;
-
-
+        
         //Stamina(stab);
         Timer();
         ComboMeter(stab);
@@ -64,7 +62,6 @@ public class UIControl: MonoBehaviour {
         timer += Time.deltaTime;
 
         timerText.text = timer.ToString("F2");
-       
     }
 
     // Update points for killing enemies.
@@ -85,7 +82,6 @@ public class UIControl: MonoBehaviour {
         {
             combo = combo + 1;
             comboResetTime = 4f;
-           
         }
         if(combo > 0)
         {
@@ -115,7 +111,6 @@ public class UIControl: MonoBehaviour {
         {
             specialMoveSlider.value += 1;
         }
-        
     }
 
     // Shows the end screen if player dies.
