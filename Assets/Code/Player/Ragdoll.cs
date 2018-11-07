@@ -16,6 +16,7 @@ public class Ragdoll : MonoBehaviour {
     private GameObject _crabModel;
     private GameObject _playerMover;
     private Collider _knifeCollider;
+    private Rigidbody _knifeRigidBody;
     
 	void Start () {
         _inputReader = InputReader.Instance;
@@ -23,6 +24,7 @@ public class Ragdoll : MonoBehaviour {
         _crabModel = gameObject.transform.GetChild(0).gameObject;
         _playerMover = GameObject.FindGameObjectWithTag("PlayerMover");
         _knifeCollider = GameObject.FindGameObjectWithTag("PlayerHitCollider").GetComponent<Collider>();
+        _knifeRigidBody = GameObject.FindGameObjectWithTag("PlayerHitCollider").GetComponent<Rigidbody>();
 
         _anim = GetComponentInChildren<Animator>();
         _boxCollider = GetComponent<BoxCollider>();
@@ -34,9 +36,6 @@ public class Ragdoll : MonoBehaviour {
         _ChildrenRigidbody = _crabModel.GetComponentsInChildren<Rigidbody>();
         
         RagdollActive(false);
-        
-        _knifeCollider.enabled = true;
-        _knifeCollider.isTrigger = true;
     }
 	
 	void Update () {
@@ -49,15 +48,21 @@ public class Ragdoll : MonoBehaviour {
     {
         //children
         foreach (var collider in _ChildrenCollider)
-            collider.enabled = active;
+            if (collider != _knifeCollider)
+                collider.enabled = active;
         foreach (var rigidbody in _ChildrenRigidbody)
         {
-            rigidbody.detectCollisions = active;
-            rigidbody.isKinematic = !active;
+            if (rigidbody != _knifeRigidBody)
+            {
+                rigidbody.detectCollisions = active;
+                rigidbody.isKinematic = !active;
+            }
         }
 
         //root
-        _knifeCollider.isTrigger = false;
+        _knifeRigidBody.isKinematic = !active;
+        _knifeCollider.enabled = !active;
+        _knifeCollider.isTrigger = !active;
         _anim.enabled = !active;
         _boxCollider.enabled = !active;
         _playerMovement.enabled = !active;

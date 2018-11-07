@@ -30,12 +30,12 @@ public class PlayerBladeCollision : MonoBehaviour {
         }
 
         // Particle code for slash effect. Not sure if right place to put this.
-        if (_pc.canAttack && _inputReader.Stab)
+        if (_inputReader.Stab)
         {
             Invoke("ShootParticles",0.07f);
 
         }
-        if (_pc.canAttack && _inputReader.Stab && _anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
+        if (_inputReader.Stab && _anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
         {
             ShootParticles();
         }
