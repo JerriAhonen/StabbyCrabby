@@ -9,7 +9,7 @@ public class DrawCircle : MonoBehaviour
         transform.position = Vector3.zero;
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
         // Draw a yellow sphere at the transform's position
         Gizmos.color = Color.red;
