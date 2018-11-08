@@ -7662,7 +7662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7406e6084b4d77b4ea702bf48e9ae02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawn: 1
+  spawn: 0
   _poolSize: 100
   _enemiesInWave: 0f00000019000000
   _enemyTypes:

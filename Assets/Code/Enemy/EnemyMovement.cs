@@ -6,10 +6,7 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour {
 
     private GameObject _player;
-
-    private NavMeshAgent _enemy;
-    private NavMeshObstacle _enemyObstacle;
-
+    
     private bool _thrownBack = false;
 
     public bool ThrownBack {
@@ -25,15 +22,11 @@ public class EnemyMovement : MonoBehaviour {
 
     private void Awake() {
         _player = GameObject.Find("PLAYER");
-
-        _enemy = GetComponent<NavMeshAgent>();
-        _enemyObstacle = GetComponent<NavMeshObstacle>();
+        
     }
 
     private void Start() {
-        _enemy.baseOffset = 0f;
-
-        _enemy.destination = _player.transform.position;
+        
     }
 	
 	private void Update() {
@@ -43,13 +36,7 @@ public class EnemyMovement : MonoBehaviour {
 
         float distanceToPlayer = Vector3.Distance(_player.transform.position, transform.position);
 
-        if (distanceToPlayer < _enemy.stoppingDistance) {
-            SetNavMeshComponents(false);
-        } else {
-            SetNavMeshComponents(true);
-
-            _enemy.destination = _player.transform.position;    // KEKSI JOKU TAPA ETTEI PÄIVITÄ JOKA FRAMELLA
-        }
+        
     }
 
     private void FixedUpdate() {
@@ -74,7 +61,7 @@ public class EnemyMovement : MonoBehaviour {
 
         _flyTime = 0;
 
-        SetNavMeshComponents(false);
+        
 
         _thrownBack = true;
     }
@@ -88,17 +75,10 @@ public class EnemyMovement : MonoBehaviour {
         transform.position += _verticalTrajectory * Time.deltaTime;
         transform.position += _horizontalTrajectory * Time.deltaTime;
     }
-
-    private void SetNavMeshComponents(bool setAsAgent) {
-        _enemy.enabled = setAsAgent;
-        _enemyObstacle.enabled = !setAsAgent;
-    }
-
+    
     private void OnCollisionEnter(Collision collision) {
         if (_thrownBack && collision.gameObject.CompareTag("Ground")) {
             Debug.Log("Collided with ground");
-
-            SetNavMeshComponents(true);
 
             _thrownBack = false;
         }
