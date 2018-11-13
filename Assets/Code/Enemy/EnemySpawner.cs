@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
 
-    public bool spawn;
+    private bool _spawn;
 
     private int enemyType;
 
@@ -21,14 +21,21 @@ public class EnemySpawner : MonoBehaviour {
     private int _waveCount = -1;
     private int _waveStartIndex = 0;
 
+    private float _spawnTimer;
+    private bool _waveKilled = false;
+
     private void Awake() {
         _enemyPool = new List<GameObject>(_poolSize);
 
         for (int wave = 0; wave < _enemyTypes.Length; wave++) {
-            for(int numberOfEnemies = 0; numberOfEnemies < _enemiesInWave[wave]; numberOfEnemies++) {
+            for (int numberOfEnemies = 0; numberOfEnemies < _enemiesInWave[wave]; numberOfEnemies++) {
                 AddEnemy(_enemyTypes[wave], wave);
             }
         }        
+    }
+
+    private void Start() {
+        _spawnTimer = 0;
     }
 
     private GameObject AddEnemy(GameObject enemyToAdd, int wave) {
@@ -56,9 +63,18 @@ public class EnemySpawner : MonoBehaviour {
     }
 
     private void Update() {
-        if (spawn) {
-            spawn = false;
+        _spawnTimer += Time.deltaTime;
 
+        // hard coded time probably to be changed to a float variable that changes by wave?
+        if (_spawnTimer > 10f || _waveKilled) {
+            _spawn = true;
+
+            _spawnTimer = 0f;
+        }
+
+        if (_spawn) {
+            _spawn = false;
+            
             ActivateWave(++_waveCount);
         }
     }

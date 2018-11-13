@@ -441,16 +441,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1363246984790658}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7406e6084b4d77b4ea702bf48e9ae02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawn: 0
-  _poolSize: 0
-  _enemiesInWave: 
-  _enemyTypes: []
-  _spawnLocations: []
+  _poolSize: 5
+  _enemiesInWave: 05000000
+  _enemyTypes:
+  - {fileID: 1037885761301716, guid: a4bb337644c791c48acc9bce92bf06f6, type: 2}
+  _spawnLocations:
+  - {fileID: 4198142791004704}
 --- !u!137 &137112592764247956
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

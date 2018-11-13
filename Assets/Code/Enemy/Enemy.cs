@@ -5,8 +5,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
     public enum EnemyType {
-        Toast = 0,
-        Pot = 1
+        Toaster = 0,
+        Toast = 1,
+        Pot = 2
     }
 
     public EnemyType enemyType;
@@ -22,6 +23,11 @@ public class Enemy : MonoBehaviour {
         _enemyMovement = gameObject.AddComponent<EnemyMovement>();
 
         switch (enemyType) {
+            case EnemyType.Toaster: {
+                _startingHealth = 100;
+                _damage = 10;
+                break;
+            }
             case EnemyType.Toast: {
                 _startingHealth = 50;
                 _damage = 10;
@@ -43,7 +49,7 @@ public class Enemy : MonoBehaviour {
         if (dead) {
             Destroy(gameObject);
         } else {
-            _enemyMovement.GetThrown();
+            //_enemyMovement.GetThrown();
         }
 
         return dead;
