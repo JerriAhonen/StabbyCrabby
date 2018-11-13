@@ -1,28 +1,48 @@
 fileFormatVersion: 2
-guid: c1c33df5c396c5e48a13c04839bfc730
+guid: 2fd67bfafb0864b449e3fc95e7e76ccd
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Mid
-    100004: Top
-    100006: Waist
-    400000: //RootNode
-    400002: Mid
-    400004: Top
-    400006: Waist
+    100000: Armature
+    100002: Cube
+    100004: Cube_002
+    100006: Cube_003
+    100008: Cube_004
+    100010: EyebrowL
+    100012: EyebrowR
+    100014: LegL
+    100016: LegR
+    100018: MASTER
+    100020: MASTER_001
+    100022: MASTER_002
+    100024: //RootNode
+    400000: Armature
+    400002: Cube
+    400004: Cube_002
+    400006: Cube_003
+    400008: Cube_004
+    400010: EyebrowL
+    400012: EyebrowR
+    400014: LegL
+    400016: LegR
+    400018: MASTER
+    400020: MASTER_001
+    400022: MASTER_002
+    400024: //RootNode
     2100000: unnamed
-    2300000: Mid
-    2300002: Top
-    2300004: Waist
-    3300000: Mid
-    3300002: Top
-    3300004: Waist
-    4300000: Waist
-    4300002: Top
-    4300004: Mid
+    4300000: Cube_004
+    4300002: Cube_003
+    4300004: Cube_002
+    4300006: Cube
     7400000: Default Take
+    7400002: Headbutt
+    7400004: Idle
+    7400006: Walk
     9500000: //RootNode
+    13700000: Cube
+    13700002: Cube_002
+    13700004: Cube_003
+    13700006: Cube_004
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -52,10 +72,66 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Default Take
-      takeName: Default Take
+      name: Headbutt
+      takeName: Headbutt
       firstFrame: 0
-      lastFrame: 49
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle
+      takeName: Idle
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk
+      takeName: Walk
+      firstFrame: 0
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
