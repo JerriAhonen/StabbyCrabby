@@ -21,6 +21,8 @@ public class EnemySpawner : MonoBehaviour {
     private int _waveCount = -1;
     private int _waveStartIndex = 0;
 
+    private List<Transform> _toasters = new List<Transform>();
+
     private float _spawnTimer;
     private bool _waveKilled = false;
 
@@ -41,7 +43,33 @@ public class EnemySpawner : MonoBehaviour {
     private GameObject AddEnemy(GameObject enemyToAdd, int wave) {
         GameObject enemy = Instantiate(enemyToAdd, _spawnLocations[wave].position, Quaternion.identity);
 
-        enemy.GetComponent<Enemy>().enemyType = (Enemy.EnemyType) wave;
+        var enemyType = enemy.GetComponent<Enemy>().enemyType;
+
+        enemyType = (Enemy.EnemyType) wave;
+
+        if (enemyType == Enemy.EnemyType.Toaster) {
+            _toasters.Add(enemy.transform);
+
+            List<Transform> spawnLocations = new List<Transform>();
+
+            // Fill the list of toaster spawn locations.
+            foreach (Transform child in enemy.transform) {
+                if (child.CompareTag("SpawnLocation")) {
+                    spawnLocations.Add(child);
+                }
+            }
+
+            // Give the new toaster its initial spawn location.
+            enemy.transform.position = spawnLocations[0].position;
+
+            // If any of the other toasters has the same spawn location, try for a new one.
+            foreach (Transform toaster in _toasters) {
+                
+                //while (toaster.position == enemy.transform.position) {
+                //    enemy.transform.position = spawnLocations[Random.Range(0, 4)].position;
+                //}
+            }
+        }
 
         enemy.SetActive(false);
         

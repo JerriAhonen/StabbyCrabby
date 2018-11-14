@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4041598568868248}
   - component: {fileID: 137534700045331470}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Brows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,9 +37,9 @@ GameObject:
   - component: {fileID: 4814017066799744}
   - component: {fileID: 95846704223931208}
   - component: {fileID: 114754259008277346}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Toast
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,7 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4011365990821698}
   - component: {fileID: 137831722613786220}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Morpheus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4500494272546804}
   - component: {fileID: 137134308301069646}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: White Bread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4944623877701526}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EyebrowR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4825217647869522}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MASTER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4739060751485582}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4966387482664954}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LegR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4672108897757702}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EyebrowL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4035023758338746}
   - component: {fileID: 137337121466500010}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Toast Edge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4895910056682708}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LegL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4654661275873420}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MASTER_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4226910831940836}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MASTER_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae3bc3e5efd5364bad451c0b4cc53fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 0
+  enemyType: 1
 --- !u!137 &137134308301069646
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
