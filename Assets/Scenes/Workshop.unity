@@ -8030,9 +8030,13 @@ MonoBehaviour:
   _enemyTypes:
   - {fileID: 1363246984790658, guid: c9959feb4769fdf4aa181eafb98cbbf1, type: 2}
   - {fileID: 1392384565302264, guid: 8cc404cb94b17ba46ab52709ff38e4e2, type: 2}
+  _spawnIntervals:
+  - 20
+  - 10
   _spawnLocations:
   - {fileID: 302539627}
   - {fileID: 403261317}
+  _timeToNextWave: 0
 --- !u!1 &1311687569 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100036, guid: 19af69cf82114764b917aac6f33561e8,

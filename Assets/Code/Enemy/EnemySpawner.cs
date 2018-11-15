@@ -14,6 +14,8 @@ public class EnemySpawner : MonoBehaviour {
 
     [SerializeField] private GameObject[] _enemyTypes;
 
+    [SerializeField] private float[] _spawnIntervals;
+
     [SerializeField] private Transform[] _spawnLocations;
 
     private List<GameObject> _enemyPool;
@@ -25,6 +27,7 @@ public class EnemySpawner : MonoBehaviour {
 
     private float _spawnTimer;
     private bool _waveKilled = false;
+    private float _timeToNextWave;
 
     private void Awake() {
         _enemyPool = new List<GameObject>(_poolSize);
@@ -38,6 +41,8 @@ public class EnemySpawner : MonoBehaviour {
 
     private void Start() {
         _spawnTimer = 0;
+
+        _timeToNextWave = 10f;
     }
 
     private GameObject AddEnemy(GameObject enemyToAdd, int wave) {
@@ -84,7 +89,9 @@ public class EnemySpawner : MonoBehaviour {
         } else {
             _waveStartIndex = _waveStartIndex + _enemiesInWave[wave - 1];
         }
-        
+
+        _timeToNextWave = _spawnIntervals[wave];
+
         for (int i = _waveStartIndex; i < (_waveStartIndex + _enemiesInWave[wave]); i++) {
                 _enemyPool[i].SetActive(true);
         }
@@ -93,8 +100,7 @@ public class EnemySpawner : MonoBehaviour {
     private void Update() {
         _spawnTimer += Time.deltaTime;
 
-        // hard coded time probably to be changed to a float variable that changes by wave?
-        if (_spawnTimer > 10f || _waveKilled) {
+        if ((_spawnTimer > _timeToNextWave || _waveKilled) && (_waveCount < _enemiesInWave.Length - 1)) {
             _spawn = true;
 
             _spawnTimer = 0f;
