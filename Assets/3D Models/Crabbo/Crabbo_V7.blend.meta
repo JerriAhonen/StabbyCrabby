@@ -57,6 +57,9 @@ ModelImporter:
     100102: Crab_002
     100104: Crab_003
     100106: Crab_004
+    100108: Cube
+    100110: Cube_001
+    100112: Cube_002
     400000: Armature
     400002: Big-C-Bot
     400004: Big-C-End
@@ -111,6 +114,9 @@ ModelImporter:
     400102: Crab_002
     400104: Crab_003
     400106: Crab_004
+    400108: Cube
+    400110: Cube_001
+    400112: Cube_002
     2100000: Material_001__Lightmap
     2100002: Material_003__Lightmap
     2100004: Material_002__Lightmap
@@ -123,11 +129,20 @@ ModelImporter:
     2100018: Material_002
     2100020: Material_001
     2100022: Material
+    2300000: Cube
+    2300002: Cube_001
+    2300004: Cube_002
+    3300000: Cube
+    3300002: Cube_001
+    3300004: Cube_002
     4300000: Crab
     4300002: Crab_001
     4300004: Crab_004
     4300006: Crab_003
     4300008: Crab_002
+    4300010: Cube_002
+    4300012: Cube_001
+    4300014: Cube
     7400000: Default Take
     7400002: Attack_1
     7400004: Attack_2
