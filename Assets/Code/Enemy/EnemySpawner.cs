@@ -6,8 +6,6 @@ public class EnemySpawner : MonoBehaviour {
 
     private bool _spawn;
 
-    private int enemyType;
-
     [SerializeField] private int _poolSize;
 
     [SerializeField] private int[] _enemiesInWave;
@@ -22,6 +20,8 @@ public class EnemySpawner : MonoBehaviour {
 
     private int _waveCount = -1;
     private int _waveStartIndex = 0;
+
+    private int _locationIndex = -1;
 
     private List<Transform> _toasters = new List<Transform>();
 
@@ -53,8 +53,6 @@ public class EnemySpawner : MonoBehaviour {
         enemyType = (Enemy.EnemyType) wave;
 
         if (enemyType == Enemy.EnemyType.Toaster) {
-            _toasters.Add(enemy.transform);
-
             List<Transform> spawnLocations = new List<Transform>();
 
             // Fill the list of toaster spawn locations.
@@ -64,15 +62,10 @@ public class EnemySpawner : MonoBehaviour {
                 }
             }
 
-            // Give the new toaster its initial spawn location.
-            enemy.transform.position = spawnLocations[0].position;
-
-            // If any of the other toasters has the same spawn location, try for a new one.
-            foreach (Transform toaster in _toasters) {
-                
-                //while (toaster.position == enemy.transform.position) {
-                //    enemy.transform.position = spawnLocations[Random.Range(0, 4)].position;
-                //}
+            enemy.transform.position = spawnLocations[++_locationIndex].position;
+            
+            if (_locationIndex == (_enemiesInWave[wave] - 1)) {
+                _locationIndex = 0;
             }
         }
 
