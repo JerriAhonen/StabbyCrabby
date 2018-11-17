@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour {
-
-    private bool _spawn;
+public class ToastSpawner : MonoBehaviour {
 
     [SerializeField] private int _poolSize;
 
@@ -18,13 +16,22 @@ public class EnemySpawner : MonoBehaviour {
 
     private List<GameObject> _enemyPool;
 
+    private EnemyMovement _enemy;
+
     private int _waveCount = -1;
     private int _waveStartIndex = 0;
 
     private int _locationIndex = -1;
 
+    private bool _spawn;
+
+    public bool Spawn {
+        set {
+            _spawn = value;
+        }
+    }
+
     private float _spawnTimer;
-    private bool _waveKilled = false;
     private float _timeToNextWave;
 
     private void Awake() {
@@ -34,38 +41,23 @@ public class EnemySpawner : MonoBehaviour {
             for (int numberOfEnemies = 0; numberOfEnemies < _enemiesInWave[wave]; numberOfEnemies++) {
                 AddEnemy(_enemyTypes[wave], wave);
             }
-        }        
+        }
     }
 
     private void Start() {
         _spawnTimer = 0;
 
         _timeToNextWave = 0f;
+
+        _enemy = GetComponent<EnemyMovement>();
     }
 
     private GameObject AddEnemy(GameObject enemyToAdd, int wave) {
-        GameObject enemy = Instantiate(enemyToAdd, _spawnLocations[wave].position, Quaternion.identity);
+        GameObject enemy = Instantiate(enemyToAdd, transform.position, Quaternion.identity);
 
         var enemyType = enemy.GetComponent<Enemy>().enemyType;
 
         enemyType = (Enemy.EnemyType) wave;
-
-        if (enemyType == Enemy.EnemyType.Toaster) {
-            List<Transform> spawnLocations = new List<Transform>();
-
-            // Fill the list of toaster spawn locations.
-            foreach (Transform child in enemy.transform) {
-                if (child.CompareTag("SpawnLocation")) {
-                    spawnLocations.Add(child);
-                }
-            }
-
-            enemy.transform.position = spawnLocations[++_locationIndex].position;
-            
-            if (_locationIndex == (_enemiesInWave[wave] - 1)) {
-                _locationIndex = 0;
-            }
-        }
 
         enemy.SetActive(false);
         
@@ -91,14 +83,14 @@ public class EnemySpawner : MonoBehaviour {
     private void Update() {
         _spawnTimer += Time.deltaTime;
 
-        if ((_spawnTimer > _timeToNextWave || _waveKilled) && (_waveCount < _enemiesInWave.Length - 1)) {
-            _spawn = true;
-
-            _spawnTimer = 0f;
+        if (_spawnTimer > _timeToNextWave) {
+            _enemy.BirthingTime = true;
         }
 
-        if (_spawn) {
+        if (_spawn && (_waveCount < _enemiesInWave.Length - 1)) {
             _spawn = false;
+
+            _spawnTimer = 0f;
             
             ActivateWave(++_waveCount);
         }

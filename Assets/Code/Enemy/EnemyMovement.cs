@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour {
 
     private GameObject _player;
+    private Enemy _enemy;
+    private ToastSpawner _toastSpawner;
     
     private bool _thrownBack = false;
 
@@ -17,11 +19,34 @@ public class EnemyMovement : MonoBehaviour {
         }
     }
 
+    private RaycastHit _hitInfo;
+
+    private float _height = 0.3f;
+
+    [SerializeField] private LayerMask _ground;
+
+    private bool _grounded = false;
+    private bool _birthingTime = true;
+
+    public bool BirthingTime {
+        set {
+            _birthingTime = value;
+        }
+    }
+
     private bool _disoriented = false;
+
+    public Animator _animator;
 
     private void Awake() {
         _player = GameObject.Find("PLAYER");
-        
+        _enemy = GetComponent<Enemy>();
+
+        if (_enemy.enemyType == Enemy.EnemyType.Toaster) {
+            _toastSpawner = GetComponent<ToastSpawner>();
+        }
+
+        _animator = GetComponent<Animator>();
     }
 
     private void Start() {
@@ -35,7 +60,15 @@ public class EnemyMovement : MonoBehaviour {
 
         //float distanceToPlayer = Vector3.Distance(_player.transform.position, transform.position);
 
-        
+        if (Physics.Raycast(transform.position, Vector3.down, out _hitInfo, _height, _ground)) {
+            _grounded = true;
+        } else {
+            _grounded = false;
+        }
+
+        if (!_grounded) {
+            transform.position += Physics.gravity * 3.5f * Time.deltaTime;
+        }
     }
 
     //private void FixedUpdate() {
@@ -43,6 +76,23 @@ public class EnemyMovement : MonoBehaviour {
     //        ThrowEnemy();
     //    }
     //}
+
+    private void LateUpdate() {
+        switch(_enemy.enemyType) {
+            case Enemy.EnemyType.Toaster: {
+                if (_grounded && _birthingTime) {
+                    _birthingTime = false;
+
+                    _animator.SetTrigger("Birth");
+
+                    _toastSpawner.Spawn = true;
+                }
+                break;
+            }
+        }
+
+        
+    }
 
     //private float _gravity;
     //private float _launchAngle;
@@ -60,7 +110,7 @@ public class EnemyMovement : MonoBehaviour {
 
     //    _flyTime = 0;
 
-        
+
 
     //    _thrownBack = true;
     //}
@@ -74,7 +124,7 @@ public class EnemyMovement : MonoBehaviour {
     //    transform.position += _verticalTrajectory * Time.deltaTime;
     //    transform.position += _horizontalTrajectory * Time.deltaTime;
     //}
-    
+
     //private void OnCollisionEnter(Collision collision) {
     //    if (_thrownBack && collision.gameObject.CompareTag("Ground")) {
     //        Debug.Log("Collided with ground");

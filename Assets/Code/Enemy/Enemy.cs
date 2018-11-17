@@ -20,7 +20,6 @@ public class Enemy : MonoBehaviour {
 
     void Start() {
         _enemyHealth = gameObject.AddComponent<Health>();
-        _enemyMovement = gameObject.AddComponent<EnemyMovement>();
 
         switch (enemyType) {
             case EnemyType.Toaster: {
