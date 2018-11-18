@@ -36,7 +36,10 @@ public class EnemyMovement : MonoBehaviour {
 
     private bool _disoriented = false;
 
-    public Animator _animator;
+    private Animator _animator;
+
+    private bool _dropped;
+    private float _speedModifier;
 
     private void Awake() {
         _player = GameObject.Find("PLAYER");
@@ -44,6 +47,8 @@ public class EnemyMovement : MonoBehaviour {
 
         if (_enemy.enemyType == Enemy.EnemyType.Toaster) {
             _toastSpawner = GetComponent<ToastSpawner>();
+
+            _dropped = true;
         }
 
         _animator = GetComponent<Animator>();
@@ -59,23 +64,37 @@ public class EnemyMovement : MonoBehaviour {
         //}
 
         //float distanceToPlayer = Vector3.Distance(_player.transform.position, transform.position);
+    }
 
+    private void FixedUpdate() {
         if (Physics.Raycast(transform.position, Vector3.down, out _hitInfo, _height, _ground)) {
             _grounded = true;
+
+            if (_thrownBack) {
+                _thrownBack = false;
+            }
+
+            if (_dropped) {
+                _dropped = false;
+            }
         } else {
             _grounded = false;
         }
 
         if (!_grounded) {
-            transform.position += Physics.gravity * 3.5f * Time.deltaTime;
+            if(_dropped) {
+                _speedModifier = 3f;
+            } else {
+                _speedModifier = 1f;
+            }
+
+            transform.position += Physics.gravity * _speedModifier * Time.deltaTime;
+        }
+
+        if (_thrownBack) {
+            ThrowEnemy();
         }
     }
-
-    //private void FixedUpdate() {
-    //    if (_thrownBack) {
-    //        ThrowEnemy();
-    //    }
-    //}
 
     private void LateUpdate() {
         switch(_enemy.enemyType) {
@@ -85,45 +104,51 @@ public class EnemyMovement : MonoBehaviour {
 
                     _animator.SetTrigger("Birth");
 
-                    _toastSpawner.Spawn = true;
+                    _toastSpawner.Invoke("Spawn", 1.6f);
                 }
                 break;
             }
         }
-
-        
     }
 
-    //private float _gravity;
-    //private float _launchAngle;
-    //private float _launchVelocity;
-    //private Vector3 _horizontalTrajectory;
-    //private Vector3 _verticalTrajectory;
-    //private float _flyTime = 0;
+    private float _gravity;
+    private float _launchAngle;
+    private float _launchVelocity;
+    private Vector3 _horizontalTrajectory;
+    private Vector3 _verticalTrajectory;
+    private float _flyTime = 0;
 
-    //public void GetThrown() {
-    //    _gravity = 45f;
-    //    _launchAngle = 35f;
-    //    _launchVelocity = 45f;
+    public void GetThrown(Vector3 direction) {
+        _gravity = 55f;
+        _launchAngle = 80f;
+        _launchVelocity = 45f;
 
-    //    _horizontalTrajectory = -transform.forward * _launchVelocity * Mathf.Cos(_launchAngle * Mathf.Deg2Rad);
+        _horizontalTrajectory = direction * _launchVelocity * Mathf.Cos(_launchAngle * Mathf.Deg2Rad);
 
-    //    _flyTime = 0;
+        _flyTime = 0;
 
+        _thrownBack = true;
+    }
 
+    private void ThrowEnemy() {
+        // Set flight's vertical trajectory. Gravity affects the vertical trajectory at every point in fly time.
+        _verticalTrajectory.y = _launchVelocity * Mathf.Sin(_launchAngle * Mathf.Deg2Rad) - _gravity * _flyTime;
+        // Time spent in flight always increases.
+        _flyTime += Time.deltaTime;
 
-    //    _thrownBack = true;
-    //}
+        transform.position += _verticalTrajectory * Time.deltaTime;
+        transform.position += _horizontalTrajectory * Time.deltaTime;
 
-    //private void ThrowEnemy() {
-    //    // Set flight's vertical trajectory. Gravity affects the vertical trajectory at every point in fly time.
-    //    _verticalTrajectory.y = _launchVelocity * Mathf.Sin(_launchAngle * Mathf.Deg2Rad) - _gravity * _flyTime;
-    //    // Time spent in flight always increases.
-    //    _flyTime += Time.deltaTime;
+        // Softens fall but makes it look unnatural
+        //if (transform.position.y < 0.2f) {
+        //    _thrownBack = false;
+        //}
 
-    //    transform.position += _verticalTrajectory * Time.deltaTime;
-    //    transform.position += _horizontalTrajectory * Time.deltaTime;
-    //}
+        // Makes the object bounce :D
+        //if (transform.position.y < 0f) {
+        //    _flyTime = 0f;
+        //}
+    }
 
     //private void OnCollisionEnter(Collision collision) {
     //    if (_thrownBack && collision.gameObject.CompareTag("Ground")) {

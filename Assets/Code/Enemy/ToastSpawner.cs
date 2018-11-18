@@ -25,12 +25,6 @@ public class ToastSpawner : MonoBehaviour {
 
     private bool _spawn;
 
-    public bool Spawn {
-        set {
-            _spawn = value;
-        }
-    }
-
     private float _spawnTimer;
     private float _timeToNextWave;
 
@@ -47,7 +41,7 @@ public class ToastSpawner : MonoBehaviour {
     private void Start() {
         _spawnTimer = 0;
 
-        _timeToNextWave = 0f;
+        _timeToNextWave = 5f;
 
         _enemy = GetComponent<EnemyMovement>();
     }
@@ -76,7 +70,9 @@ public class ToastSpawner : MonoBehaviour {
         _timeToNextWave = _spawnIntervals[wave];
 
         for (int i = _waveStartIndex; i < (_waveStartIndex + _enemiesInWave[wave]); i++) {
-                _enemyPool[i].SetActive(true);
+            _enemyPool[i].transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+
+            _enemyPool[i].SetActive(true);
         }
     }
 
@@ -94,5 +90,9 @@ public class ToastSpawner : MonoBehaviour {
             
             ActivateWave(++_waveCount);
         }
+    }
+
+    public void Spawn() {
+        _spawn = true;
     }
 }
