@@ -69,24 +69,21 @@ public class ToastSpawner : MonoBehaviour {
 
         _timeToNextWave = _spawnIntervals[wave];
 
-        for (int i = _waveStartIndex; i < (_waveStartIndex + _enemiesInWave[wave]); i++) {
-            _enemyPool[i].transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
-
-            _enemyPool[i].SetActive(true);
-        }
+        StartCoroutine(Activate(wave));
     }
 
     private void Update() {
         _spawnTimer += Time.deltaTime;
 
         if (_spawnTimer > _timeToNextWave) {
+            _enemy.SpawnWaitTime = 2f;
             _enemy.BirthingTime = true;
+
+            _spawnTimer = 0f;
         }
 
         if (_spawn && (_waveCount < _enemiesInWave.Length - 1)) {
             _spawn = false;
-
-            _spawnTimer = 0f;
             
             ActivateWave(++_waveCount);
         }
@@ -94,5 +91,15 @@ public class ToastSpawner : MonoBehaviour {
 
     public void Spawn() {
         _spawn = true;
+    }
+
+    private IEnumerator Activate(int wave) {
+        for (int i = _waveStartIndex; i < (_waveStartIndex + _enemiesInWave[wave]); i++) {
+            _enemyPool[i].transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+
+            _enemyPool[i].SetActive(true);
+
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 }

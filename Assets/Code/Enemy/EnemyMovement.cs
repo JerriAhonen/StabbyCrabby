@@ -34,6 +34,14 @@ public class EnemyMovement : MonoBehaviour {
         }
     }
 
+    private float _spawnWaitTime;
+
+    public float SpawnWaitTime {
+        set {
+            _spawnWaitTime = value;
+        }
+    }
+
     private bool _disoriented = false;
 
     private Animator _animator;
@@ -55,7 +63,7 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     private void Start() {
-        
+        _spawnWaitTime = 1.6f;
     }
 	
 	private void Update() {
@@ -104,7 +112,7 @@ public class EnemyMovement : MonoBehaviour {
 
                     _animator.SetTrigger("Birth");
 
-                    _toastSpawner.Invoke("Spawn", 1.6f);
+                    _toastSpawner.Invoke("Spawn", _spawnWaitTime);
                 }
                 break;
             }
@@ -121,7 +129,7 @@ public class EnemyMovement : MonoBehaviour {
     public void GetThrown(Vector3 direction) {
         _gravity = 55f;
         _launchAngle = 80f;
-        _launchVelocity = 45f;
+        _launchVelocity = 50f;
 
         _horizontalTrajectory = direction * _launchVelocity * Mathf.Cos(_launchAngle * Mathf.Deg2Rad);
 
