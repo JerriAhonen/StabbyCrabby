@@ -1435,7 +1435,7 @@ GameObject:
   - component: {fileID: 157220091}
   - component: {fileID: 157220090}
   m_Layer: 0
-  m_Name: Mussle
+  m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8534,16 +8534,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1103446612}
-  m_LocalRotation: {x: -0.9499861, y: -0.1529832, z: -0.15936749, w: 0.22073638}
-  m_LocalPosition: {x: -0.459, y: 0.24, z: 0.013}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalRotation: {x: -0.9846007, y: 0.07294151, z: -0.12637576, w: 0.09628113}
+  m_LocalPosition: {x: -0.339, y: 0.319, z: -0.101}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 157220089}
   - {fileID: 259153900}
   - {fileID: 1236476089}
   m_Father: {fileID: 1781854714}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -152.08499, y: -15.440002, z: -14.437012}
+  m_LocalEulerAnglesHint: {x: -170.145, y: -15.476013, z: 9.815994}
 --- !u!4 &1112768366 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4572087223603682, guid: 19aece3c194551b4d9d898eca4295385,
