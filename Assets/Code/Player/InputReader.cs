@@ -38,6 +38,7 @@ public class InputReader : MonoBehaviour {
 
     private bool _stab, _aim, _shoot;
     public bool Stab { get { return _stab; } }
+    public bool Shoot { get { return _shoot; } }
 
     private void Awake()
     {
@@ -79,6 +80,7 @@ public class InputReader : MonoBehaviour {
         #region CombatInput
 
         _stab = Input.GetButtonDown("Fire1");
+        _shoot = Input.GetButtonDown("Fire2");
 
         #endregion
     }

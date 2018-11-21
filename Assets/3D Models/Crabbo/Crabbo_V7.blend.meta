@@ -155,6 +155,7 @@ ModelImporter:
     7400018: Walk_F
     7400020: Walk_L
     7400022: Walk_R
+    7400024: Shoot
     9500000: //RootNode
     13700000: Crab
     13700002: Crab_001
@@ -191,10 +192,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Default Take
-      takeName: Default Take
+      name: Shoot
+      takeName: Shoot
       firstFrame: 0
-      lastFrame: 98
+      lastFrame: 15
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
