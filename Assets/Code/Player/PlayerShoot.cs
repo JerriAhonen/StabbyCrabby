@@ -2,6 +2,13 @@
 
 public class PlayerShoot : MonoBehaviour {
 
+    public bool drawDebugLines;
+
+    RaycastHit camRayHit;
+    Ray camRay;
+    RaycastHit gunRayHit;
+    Ray gunRay;
+
     public ParticleSystem gunFire;
     private InputReader _inputReader;
     Animator _animator;
@@ -10,13 +17,6 @@ public class PlayerShoot : MonoBehaviour {
     public Transform gun;
 
     public LayerMask enemyLayer;
-
-    [Range(0.0f, 1.0f)]
-    public float aimPointX;
-    [Range(0.0f, 1.0f)]
-    public float aimPointY;
-    private float aimPointZ = 0.0f;
-
 
     public Vector3 aimPoint;
 
@@ -34,45 +34,46 @@ public class PlayerShoot : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        
-        
+        Aim();
+        Shoot();
+    }
+
+    void Aim()
+    {
         // Get the point where the player is looking in world space
-        RaycastHit hit;
-        Ray camRay = Camera.main.ViewportPointToRay(new Vector3(aimPointX, aimPointY, aimPointZ));
-        
+        camRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
 
-
-
-        if (Physics.Raycast(camRay.origin, camRay.direction, out hit))
+        // Cast a ray straight out of the camera.
+        // If we hit something, set that point as the aim point.
+        // If we don't hit anything, get set the point on camRay at 100 distance as the aim point.
+        // (We could set the point to the border of the arena)
+        if (Physics.Raycast(camRay.origin, camRay.direction, out camRayHit))
         {
-            aimPoint = hit.point;
-            Debug.DrawRay(camRay.origin, camRay.direction * hit.distance, Color.black);
+            aimPoint = camRayHit.point;
+            if (drawDebugLines) Debug.DrawRay(camRay.origin, camRay.direction * camRayHit.distance, Color.black);
         }
         else
         {
             aimPoint = camRay.GetPoint(100.0f);
-            Debug.DrawRay(camRay.origin, camRay.direction * 100.0f, Color.red);
+            if (drawDebugLines) Debug.DrawRay(camRay.origin, camRay.direction * 100.0f, Color.red);
         }
-        
 
+        // Cast a ray from the gun's position to the aimpoint 
+        // (GET THE DIRECTION TO AIMPOINT BY SUBSTRACTING GUN.POSITION FROM IT)
+        gunRay = new Ray(gun.position, aimPoint - gun.position);
 
-
-        RaycastHit hit2;
-        Ray gunRay = new Ray(gun.position, aimPoint);
-
-        if (Physics.Raycast(gunRay.origin, gunRay.direction, out hit2, ~enemyLayer))
+        if (Physics.Raycast(gunRay.origin, gunRay.direction, out gunRayHit, ~enemyLayer))
         {
-            Debug.DrawRay(gunRay.origin, gunRay.direction * hit2.distance, Color.white);
+            if (drawDebugLines) Debug.DrawRay(gunRay.origin, gunRay.direction * gunRayHit.distance, Color.white);
         }
         else
         {
-            Debug.DrawRay(gunRay.origin, gunRay.direction * Vector3.Distance(gunRay.origin, aimPoint), Color.white);
+            if (drawDebugLines) Debug.DrawRay(gunRay.origin, gunRay.direction * Vector3.Distance(gunRay.origin, aimPoint), Color.white);
         }
-        
+    }
 
-
-
-
+    void Shoot()
+    {
         if (_inputReader.Shoot && _animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             if (Time.time > shootRateTimeStamp)
@@ -82,10 +83,7 @@ public class PlayerShoot : MonoBehaviour {
                 _animator.SetTrigger("ShootTrigger");
                 go.GetComponent<Rigidbody>().AddForce(gunRay.direction * shootForce);
                 shootRateTimeStamp = Time.time + shootRate;
-
-                hit.transform.gameObject.GetComponent<Health>().TakeDamage(100);
-                Debug.Log(hit2.transform.name + " was hit with gun");
-
+                
                 /*
                 if(hits.Length > 0)
                 {
@@ -100,4 +98,3 @@ public class PlayerShoot : MonoBehaviour {
         }
     }
 }
-//go.GetComponent<Rigidbody>().AddForce(gun.forward * shootForce);

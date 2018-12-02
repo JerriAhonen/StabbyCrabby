@@ -38,21 +38,15 @@ public class GameManager : MonoBehaviour {
             mainMenuCanvas = GameObject.FindGameObjectWithTag("MainMenuCanvas");
             optionsCanvas = GameObject.FindGameObjectWithTag("OptionsCanvas");
             _cameraAnim = Camera.main.GetComponent<Animator>();
+            mainMenuCanvas.SetActive(true);
+            optionsCanvas.SetActive(false);
         }
-
-        //Camera.main.transform.position = mmCameraPos.transform.position;
-        //Camera.main.transform.rotation = mmCameraPos.transform.rotation;
-
-        mainMenuCanvas.SetActive(true);
-        optionsCanvas.SetActive(false);
+        
     }
 
     private void Update()
     {
-        /*
-        if(_cameraIsMoving)
-            MoveCamera(_targetPosition, _targetRotation);
-        */
+
     }
 
     public void ChangeScene(int sceneNum)
@@ -97,7 +91,24 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    /*
+    public void Esc()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0)  // Main Menu
+        {
+            Quit();
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 1)  // Workshop
+        {
+
+        }
+    }
+
+    public void GetReferences()
+    {
+
+    }
+}
+/*
     void MoveCamera(Vector3 targetPosition, Quaternion targetRotation)
     {
         if (Vector3.Distance(Camera.main.transform.position, targetPosition) > 0.1f)
@@ -116,6 +127,3 @@ public class GameManager : MonoBehaviour {
         
     }
     */
-
-    
-}
