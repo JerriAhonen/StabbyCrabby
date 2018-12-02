@@ -54,6 +54,7 @@ public class UIControl: MonoBehaviour {
         Points(stab);
         SpecialMove(stab);
         Death();
+        if (inputReader.Esc) endCanvas.SetActive(true);
 	}
 
     // Displays the game timer.

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
     public static GameManager Instance { get; set; }
+    private int currentSceneIndex;
 
     // MAIN MENU CAMERA
 
@@ -14,12 +15,17 @@ public class GameManager : MonoBehaviour {
     private Quaternion _targetRotation;
     private bool _cameraIsMoving;
     */
+    private InputReader _inputReader;
     private Animator _cameraAnim;
 
     // MAIN MENU CANVAS
 
     public GameObject mainMenuCanvas;
     public GameObject optionsCanvas;
+
+    public GameObject gameUI;
+    public GameObject endScreenUI;
+    public GameObject pauseMenuUI;
 
     private void Awake()
     {
@@ -41,12 +47,42 @@ public class GameManager : MonoBehaviour {
             mainMenuCanvas.SetActive(true);
             optionsCanvas.SetActive(false);
         }
-        
+        else if (SceneManager.GetActiveScene().buildIndex == 1)  // Workshop
+        {
+            _inputReader = InputReader.Instance;
+            gameUI = GameObject.FindGameObjectWithTag("GameUI");
+            endScreenUI = GameObject.FindGameObjectWithTag("EndScreenUI");
+            pauseMenuUI = GameObject.FindGameObjectWithTag("PauseMenuUI");
+
+            gameUI.SetActive(true);
+            endScreenUI.SetActive(false);
+            pauseMenuUI.SetActive(false);
+        }
     }
 
     private void Update()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 1 && _inputReader.Esc) Esc();
+    }
+    /// <summary>
+    /// Possibly doesn't work.
+    /// </summary>
+    /// <param name="level"></param>
+    private void OnLevelWasLoaded(int level)
+    {
+        currentSceneIndex = level;
 
+        if (SceneManager.GetActiveScene().buildIndex == 1)  // Workshop
+        {
+            _inputReader = InputReader.Instance;
+            gameUI = GameObject.FindGameObjectWithTag("GameUI");
+            endScreenUI = GameObject.FindGameObjectWithTag("EndScreenUI");
+            pauseMenuUI = GameObject.FindGameObjectWithTag("PauseMenuUI");
+
+            gameUI.SetActive(true);
+            endScreenUI.SetActive(false);
+            pauseMenuUI.SetActive(false);
+        }
     }
 
     public void ChangeScene(int sceneNum)
@@ -93,19 +129,14 @@ public class GameManager : MonoBehaviour {
 
     public void Esc()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)  // Main Menu
+        if (currentSceneIndex == 0)  // Main Menu
         {
             Quit();
         }
-        else if (SceneManager.GetActiveScene().buildIndex == 1)  // Workshop
+        else if (currentSceneIndex == 1)  // Workshop
         {
-
+            endScreenUI.SetActive(true);
         }
-    }
-
-    public void GetReferences()
-    {
-
     }
 }
 /*

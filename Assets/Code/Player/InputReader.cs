@@ -40,6 +40,11 @@ public class InputReader : MonoBehaviour {
     public bool Stab { get { return _stab; } }
     public bool Shoot { get { return _shoot; } }
 
+    // OTHER
+
+    private bool _esc;
+    public bool Esc { get { return _esc; } }
+
     private void Awake()
     {
         if (Instance == null)
@@ -83,5 +88,7 @@ public class InputReader : MonoBehaviour {
         _shoot = Input.GetButtonDown("Fire2");
 
         #endregion
+
+        _esc = Input.GetButtonDown("Cancel");
     }
 }

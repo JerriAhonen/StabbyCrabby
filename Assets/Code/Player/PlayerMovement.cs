@@ -2,7 +2,7 @@
 
 public class PlayerMovement : MonoBehaviour {
 
-    private InputReader _inputReader;  // Visible to this class and Classes derived from this class.
+    private InputReader _inputReader;
     private PlayerRotator _pr;
     public GameObject player;
 

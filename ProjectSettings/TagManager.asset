@@ -12,6 +12,10 @@ TagManager:
   - OptionsCanvas
   - PlayerMover
   - ArenaBounds
+  - SpawnLocation
+  - EndScreenUI
+  - GameUI
+  - PauseMenuUI
   layers:
   - Default
   - TransparentFX
