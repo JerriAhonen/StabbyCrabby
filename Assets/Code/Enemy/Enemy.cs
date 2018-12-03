@@ -24,20 +24,20 @@ public class Enemy : MonoBehaviour {
 
         switch (enemyType) {
             case EnemyType.Toaster: {
-                _startingHealth = 100;
-                _damage = 10;
+                _startingHealth = 1;
+                _damage = 0;
                 break;
             }
             case EnemyType.Toast: {
-                _startingHealth = 50;
+                _startingHealth = 1;
                 _damage = 10;
 
-                transform.rotation = Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.up);
+                transform.rotation = Quaternion.AngleAxis(Random.Range(0f, 180f), Vector3.up);
                 _enemyMovement.GetThrown(transform.forward);
                 break;
             }
             case EnemyType.Pot: {
-                _startingHealth = 50;
+                _startingHealth = 1;
                 _damage = 20;
                 break;
             }
@@ -51,8 +51,6 @@ public class Enemy : MonoBehaviour {
 
         if (dead) {
             Destroy(gameObject);
-        } else {
-            //_enemyMovement.GetThrown();
         }
 
         return dead;
