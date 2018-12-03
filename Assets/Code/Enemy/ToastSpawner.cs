@@ -21,8 +21,6 @@ public class ToastSpawner : MonoBehaviour {
     private int _waveCount = -1;
     private int _waveStartIndex = 0;
 
-    private int _locationIndex = -1;
-
     private bool _spawn;
 
     private float _spawnTimer;
@@ -95,7 +93,8 @@ public class ToastSpawner : MonoBehaviour {
 
     private IEnumerator Activate(int wave) {
         for (int i = _waveStartIndex; i < (_waveStartIndex + _enemiesInWave[wave]); i++) {
-            _enemyPool[i].transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+            _enemyPool[i].transform.position = 
+                new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
 
             _enemyPool[i].SetActive(true);
 

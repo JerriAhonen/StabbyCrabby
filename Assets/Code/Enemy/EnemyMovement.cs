@@ -157,18 +157,4 @@ public class EnemyMovement : MonoBehaviour {
         //    _flyTime = 0f;
         //}
     }
-
-    //private void OnCollisionEnter(Collision collision) {
-    //    if (_thrownBack && collision.gameObject.CompareTag("Ground")) {
-    //        Debug.Log("Collided with ground");
-
-    //        _thrownBack = false;
-    //    }
-
-    //    if (_thrownBack && collision.gameObject.CompareTag("Enemy")) {
-    //        //should get bowled over
-    //        Debug.Log("Collided with another enemy");
-    //    }
-
-    //}
 }
