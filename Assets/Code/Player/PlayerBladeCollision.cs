@@ -53,7 +53,7 @@ public class PlayerBladeCollision : MonoBehaviour {
 
         if (_isStabbing && trigger.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            var enemy = trigger.gameObject.GetComponent<Enemy>();
+            Enemy enemy = trigger.gameObject.GetComponent<Enemy>();
 
             bool deadEnemy = enemy.TakeDamage(_pc.knifeDamageAmount);
 
