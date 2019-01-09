@@ -72,7 +72,7 @@ public class UIControl: MonoBehaviour {
         {
             points = points + 100;
         }
-        pointsText.text = "p: " + points.ToString();
+        pointsText.text = points.ToString();
     }
 
     // Update current combo amount.
