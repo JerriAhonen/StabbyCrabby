@@ -74,7 +74,7 @@ public class PlayerShoot : MonoBehaviour {
 
     void Shoot()
     {
-        if (_inputReader.Shoot && _animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        if (_inputReader.Shoot)
         {
             if (Time.time > shootRateTimeStamp)
             {

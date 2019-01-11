@@ -31,7 +31,7 @@ public class PlayerCombo : MonoBehaviour
     void Update()
     {
         
-        if (_inputReader.Stab && comboIndex < comboParams.Length && !_animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
+        if (_inputReader.Stab && comboIndex < comboParams.Length)
         {
             
             _animator.SetTrigger(comboParams[comboIndex]);
