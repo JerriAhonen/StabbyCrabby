@@ -42,8 +42,6 @@ public class EnemyMovement : MonoBehaviour {
         }
     }
 
-    private bool _disoriented = false;
-
     private Animator _animator;
 
     private bool _dropped;

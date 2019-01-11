@@ -35,8 +35,8 @@ public class UIControl: MonoBehaviour {
 
         endCanvas.SetActive(false);
         
-        specialMoveSlider.maxValue = maxSpecial;
-        specialMoveSlider.value = 0;
+        //specialMoveSlider.maxValue = maxSpecial;
+        //specialMoveSlider.value = 0;
         timer = 0f;
         combo = 1;
         points = 0;
@@ -52,7 +52,7 @@ public class UIControl: MonoBehaviour {
         Timer();
         ComboMeter(stab);
         Points(stab);
-        SpecialMove(stab);
+        //SpecialMove(stab);
         Death();
         if (inputReader.Esc) endCanvas.SetActive(true);
 	}
@@ -96,23 +96,23 @@ public class UIControl: MonoBehaviour {
     }
 
     // Updates the current state of the SpecialMove bar.
-    void SpecialMove(bool stab)
-    {
-        if (specialMoveSlider.value == maxSpecial)
-        {
-            playerCombat.specialMoveIsActive = true;
-        }
-        else
-        {
-            playerCombat.specialMoveIsActive = false;
-        }
+    //void SpecialMove(bool stab)
+    //{
+    //    if (specialMoveSlider.value == maxSpecial)
+    //    {
+    //        playerCombat.specialMoveIsActive = true;
+    //    }
+    //    else
+    //    {
+    //        playerCombat.specialMoveIsActive = false;
+    //    }
 
-        // Change this to if getting points.
-        if (stab)
-        {
-            specialMoveSlider.value += 1;
-        }
-    }
+    //    // Change this to if getting points.
+    //    if (stab)
+    //    {
+    //        specialMoveSlider.value += 1;
+    //    }
+    //}
 
     // Shows the end screen if player dies.
     void Death()

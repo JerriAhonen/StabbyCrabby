@@ -51,16 +51,16 @@ public class PlayerBladeCollision : MonoBehaviour {
     private void OnTriggerEnter(Collider trigger)
     {
 
-        if (_isStabbing && trigger.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            Enemy enemy = trigger.gameObject.GetComponent<Enemy>();
+        //if (_isStabbing && trigger.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        //{
+        //    Enemy enemy = trigger.gameObject.GetComponent<Enemy>();
 
-            bool deadEnemy = enemy.TakeDamage(_pc.knifeDamageAmount);
+        //    bool deadEnemy = enemy.TakeDamage(_pc.knifeDamageAmount);
 
-            if (deadEnemy)
-            //      Täältä jonnekin tieto et vihu kuoli. UIControllin pitäs saada tietää se.
+        //    if (deadEnemy)
+        //    //      Täältä jonnekin tieto et vihu kuoli. UIControllin pitäs saada tietää se.
 
-            Debug.Log(trigger.gameObject.name + " got Hit");
-        }
+        //    Debug.Log(trigger.gameObject.name + " got Hit");
+        //}
     }
 }
