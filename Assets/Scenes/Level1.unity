@@ -1230,6 +1230,7 @@ GameObject:
   - component: {fileID: 80729483}
   - component: {fileID: 80729481}
   - component: {fileID: 80729482}
+  - component: {fileID: 80729484}
   m_Layer: 10
   m_Name: Knife
   m_TagString: PlayerHitCollider
@@ -1290,6 +1291,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &80729484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 80729479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e8308703412424d84079358b03a73a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _origin: {x: 0, y: -1, z: 0}
+  _direction: {x: 0, y: 1, z: 0}
 --- !u!1 &91858476
 GameObject:
   m_ObjectHideFlags: 0
