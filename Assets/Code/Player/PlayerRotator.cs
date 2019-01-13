@@ -51,12 +51,7 @@ public class PlayerRotator : MonoBehaviour {
         transform.localRotation = Quaternion.Lerp(transform.rotation, groundRot, _rotationSpeed * Time.deltaTime);
     }
 
-    void RotateToGround()
-    {
-        
-
-        
-    }
+    void RotateToGround() {}
 
     void Animate()
     {

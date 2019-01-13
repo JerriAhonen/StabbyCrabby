@@ -6,11 +6,8 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; set; }
     
     private InputReader _inputReader;
+    private UIManager _uiManager;
     
-    public GameObject gameUI;
-    public GameObject endScreenUI;
-    public GameObject pauseMenuUI;
-
     public bool gamePaused;
     public bool gameOver;
 
@@ -25,33 +22,30 @@ public class GameManager : MonoBehaviour {
     private void Start()
     {
         _inputReader = InputReader.Instance;
-
-        gameUI.SetActive(true);
-        endScreenUI.SetActive(false);
-        pauseMenuUI.SetActive(false);
-
+        _uiManager = UIManager.Instance;
+        
         MouseLocked(true);
     }
 
     private void Update()
     {
-        if (_inputReader.Esc) Esc();
+        if (_inputReader.Esc) Pause();
     }
     
-    public void Esc()
+    public void Pause()
     {
         // Toggle pause menu on/off
         gamePaused = !gamePaused;
         
         if (gamePaused)
         {
-            pauseMenuUI.SetActive(true);
+            _uiManager.Pause(true);
             MouseLocked(false);
             Time.timeScale = 0;
         }
         else
         {
-            pauseMenuUI.SetActive(false);
+            _uiManager.Pause(false);
             MouseLocked(true);
             Time.timeScale = 1;
         }

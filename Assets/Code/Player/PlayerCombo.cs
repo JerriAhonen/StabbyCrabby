@@ -10,9 +10,7 @@ public class PlayerCombo : MonoBehaviour
     private InputReader _inputReader;
     Animator _animator;
     public float resetTimer;
-
-    public UIControl uiControl;
-
+    
     private PlayerCombat playerCombat;
 
     void Awake()
@@ -33,7 +31,6 @@ public class PlayerCombo : MonoBehaviour
         
         if (_inputReader.Stab && comboIndex < comboParams.Length)
         {
-            
             _animator.SetTrigger(comboParams[comboIndex]);
            
             // If combo must not loop
