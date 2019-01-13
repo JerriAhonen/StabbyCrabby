@@ -16,9 +16,9 @@ public class UIManager : MonoBehaviour {
     public GameObject pauseMenuUI;
 
     private float timer;
-    private int combo;
+    [SerializeField] private int combo;
     private int points;
-    private float comboResetTime = 4.0f;
+    [SerializeField] private float comboResetTime;
 
     private void Awake()
     {
@@ -37,13 +37,16 @@ public class UIManager : MonoBehaviour {
 	void Update () {
         Timer();
         ComboResetTimer();
+        
+        if (Input.GetButtonDown("Fire1"))
+            ComboMeter(true);
 	}
 
     // Update current combo amount.
     void ComboMeter(bool kill)
     {
         // Change this to "If you kill something"
-        if (Input.GetButtonDown("Fire1"))
+        if (kill)
         {
             combo++;
             comboResetTime = 4.0f;
@@ -55,15 +58,17 @@ public class UIManager : MonoBehaviour {
         
         comboText.text = combo.ToString();
     }
-
     void ComboResetTimer()
     {
         if (combo > 0)
         {
+            comboText.fontSize = 35.0f + (35.0f * comboResetTime);
+
             comboResetTime -= Time.deltaTime;
             if (comboResetTime <= 0)
             {
                 combo = 0;
+                comboText.text = combo.ToString();
             }
         }
     }
