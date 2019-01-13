@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using BzKovSoft.ObjectSlicer;
-using System.Diagnostics;
 
 /// <summary>
 /// This script will invoke slice method of IBzSliceableAsync interface if knife slices this GameObject.
@@ -11,6 +10,7 @@ using System.Diagnostics;
 /// </summary>
 [DisallowMultipleComponent]
 public class SliceableAsync : MonoBehaviour {
+    // The Sliceable script that implements the IBzSliceableAsync interface.
     IBzSliceableAsync _sliceableAsync;
 
     void Start() {
@@ -19,7 +19,7 @@ public class SliceableAsync : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         var knife = other.gameObject.GetComponent<Slicer>();
-        if(knife == null)
+        if (knife == null)
             return;
 
         StartCoroutine(Slice(knife));
