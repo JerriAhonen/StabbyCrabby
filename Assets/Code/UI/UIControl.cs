@@ -7,7 +7,7 @@ public class UIControl: MonoBehaviour {
     
     public Slider specialMoveSlider;
 
-    private InputReader inputReader;
+    //private InputReader inputReader;
     private PlayerCombat playerCombat;
     private Health playerHealth;
 
@@ -26,7 +26,7 @@ public class UIControl: MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        inputReader = InputReader.Instance;
+        //inputReader = InputReader.Instance;
         playerCombat = PlayerCombat.Instance;
 
         // THIS SHOULD BE IN A PLAYER SCRIPT SOMEWHERE
@@ -46,7 +46,7 @@ public class UIControl: MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        bool stab = inputReader.Stab;
+        bool stab = false;
         
         //Stamina(stab);
         Timer();
@@ -54,7 +54,6 @@ public class UIControl: MonoBehaviour {
         Points(stab);
         //SpecialMove(stab);
         Death();
-        if (inputReader.Esc) endCanvas.SetActive(true);
 	}
 
     // Displays the game timer.
