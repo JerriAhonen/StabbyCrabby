@@ -5,6 +5,8 @@ public class TimeManager : MonoBehaviour
     [Tooltip("Reads current timescale.")] public float timeScale = 1f;
     public GUIStyle style;
 
+    public bool displayTimeManager;
+
     private void Update()
     {
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
@@ -22,6 +24,8 @@ public class TimeManager : MonoBehaviour
             SetTimescale(1f);
         else if (Input.GetKeyDown(KeyCode.End))
             SetTimescale(0f);
+        else if (Input.GetKeyDown(KeyCode.T))
+            displayTimeManager = !displayTimeManager;
 
         timeScale = Time.timeScale;
     }
@@ -29,13 +33,15 @@ public class TimeManager : MonoBehaviour
 #if UNITY_EDITOR
     void OnGUI()
     {
-        UnityEditor.EditorGUILayout.LabelField("Page up", "+0.05 Timescale", style);
-        UnityEditor.EditorGUILayout.LabelField("Page down", "-0.05 Timescale", style);
-        UnityEditor.EditorGUILayout.LabelField("+Shift", "+0.1 / -0.1", style);
-        UnityEditor.EditorGUILayout.LabelField("Home", "Set timescale to 1", style);
-        UnityEditor.EditorGUILayout.LabelField("End", "Set timescale to 0", style);
-        UnityEditor.EditorGUILayout.LabelField("TIMESCALE", timeScale.ToString(), style);
-
+        if (displayTimeManager)
+        {
+            UnityEditor.EditorGUILayout.LabelField("Page up", "+0.05 Timescale", style);
+            UnityEditor.EditorGUILayout.LabelField("Page down", "-0.05 Timescale", style);
+            UnityEditor.EditorGUILayout.LabelField("+Shift", "+0.1 / -0.1", style);
+            UnityEditor.EditorGUILayout.LabelField("Home", "Set timescale to 1", style);
+            UnityEditor.EditorGUILayout.LabelField("End", "Set timescale to 0", style);
+            UnityEditor.EditorGUILayout.LabelField("TIMESCALE", timeScale.ToString(), style);
+        }
     }
 #endif
 

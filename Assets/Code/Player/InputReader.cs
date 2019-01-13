@@ -89,6 +89,7 @@ public class InputReader : MonoBehaviour {
 
         #endregion
 
-        _esc = Input.GetButtonDown("Cancel");
+        //_esc = Input.GetButtonDown("Cancel");
+        _esc = Input.GetKeyDown(KeyCode.P);
     }
 }

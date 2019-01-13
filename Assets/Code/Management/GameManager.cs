@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour {
     public GameObject endScreenUI;
     public GameObject pauseMenuUI;
 
+    public bool gamePaused;
+    public bool gameOver;
+
     private void Awake()
     {
         if (Instance == null)
@@ -22,43 +25,54 @@ public class GameManager : MonoBehaviour {
     private void Start()
     {
         _inputReader = InputReader.Instance;
-        gameUI = GameObject.FindGameObjectWithTag("GameUI");
-        endScreenUI = GameObject.FindGameObjectWithTag("EndScreenUI");
-        pauseMenuUI = GameObject.FindGameObjectWithTag("PauseMenuUI");
 
         gameUI.SetActive(true);
         endScreenUI.SetActive(false);
         pauseMenuUI.SetActive(false);
+
+        MouseLocked(true);
     }
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1 && _inputReader.Esc) Esc();
+        if (_inputReader.Esc) Esc();
+    }
+    
+    public void Esc()
+    {
+        // Toggle pause menu on/off
+        gamePaused = !gamePaused;
+        
+        if (gamePaused)
+        {
+            pauseMenuUI.SetActive(true);
+            MouseLocked(false);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            pauseMenuUI.SetActive(false);
+            MouseLocked(true);
+            Time.timeScale = 1;
+        }
+    }
+
+    private void MouseLocked(bool locked)
+    {
+        if (locked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     public void ChangeScene(int sceneNum)
     {
         SceneManager.LoadSceneAsync(sceneNum);
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
-    }
-    
-    public void Esc()
-    {
-        // Toggle pause menu on off
-
-        endScreenUI.SetActive(true);
-    }
-
-    /// <summary>
-    /// Change the speed at which time passes.
-    /// </summary>
-    /// <param name="scale">1=Normal speed, 0=Paused</param>
-    public void ChangeTimeScale(float scale)
-    {
-        Time.timeScale = scale;
     }
 }
