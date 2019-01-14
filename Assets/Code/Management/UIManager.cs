@@ -95,6 +95,9 @@ public class UIManager : MonoBehaviour {
         if (paused)
             pauseMenuUI.SetActive(true);
         else
+        {
             pauseMenuUI.SetActive(false);
+            // TODO: Allow for the exit Animation before disabling.
+        }
     }
 }

@@ -1,21 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour {
 
     public static PlayerCombat Instance { get; set; }
 
-    private InputReader _inputReader;
+    private InputReader _ir;
+    private UIManager _um;
     
     public GameObject meleeHitColliderObject;
 
-    public float meleeHitRadius = 1.0f;
-    public int knifeDamageAmount = 100;
-
-    // Controlled thru UIControl.
-    public bool canAttack = true;
-    public bool specialMoveIsActive;
+    // Stuff from PlayerCombo.cs
+    public float fireRate;
+    public string[] comboParams;
+    public int comboIndex = 0;
+    Animator _animator;
+    public float resetTimer;
 
     void Awake()
     {
@@ -26,22 +25,44 @@ public class PlayerCombat : MonoBehaviour {
     }
 
     void Start () {
-        _inputReader = InputReader.Instance;
+        _ir = InputReader.Instance;
+        _um = UIManager.Instance;
         meleeHitColliderObject = GameObject.FindGameObjectWithTag("PlayerHitCollider");
-	}
+
+        // From PlayerCombo.cs
+        if (comboParams == null || (comboParams != null && comboParams.Length == 0))
+            comboParams = new string[] { "Attack 1", "Attack 2" };
+
+        _animator = GetComponentInChildren<Animator>();
+    }
 	
 	// Update is called once per frame
-	void Update () {
-		
-        if (_inputReader.Stab)
-        {
-            Stab();
-        }
+	void Update ()
+    {
+        Stab(_ir.Stab);
 	}
 
-    void Stab()
+    void Stab(bool stab)
     {
-        
-    }
+        if (stab && comboIndex < comboParams.Length)
+        {
+            _animator.SetTrigger(comboParams[comboIndex]);
 
+            comboIndex = (comboIndex + 1) % comboParams.Length;
+
+            resetTimer = 0f;
+        }
+
+        // Reset combo if the user has not clicked quickly enough
+        if (comboIndex > 0)
+        {
+            resetTimer += Time.deltaTime;
+
+            if (resetTimer > fireRate)
+            {
+                _animator.SetTrigger("Reset");
+                comboIndex = 0;
+            }
+        }
+    }
 }

@@ -1985,7 +1985,6 @@ GameObject:
   - component: {fileID: 157809857}
   - component: {fileID: 157809856}
   - component: {fileID: 157809858}
-  - component: {fileID: 157809863}
   - component: {fileID: 157809864}
   - component: {fileID: 157809862}
   - component: {fileID: 157809860}
@@ -2053,10 +2052,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeHitColliderObject: {fileID: 0}
-  meleeHitRadius: 1
-  knifeDamageAmount: 10
-  canAttack: 0
-  specialMoveIsActive: 0
+  fireRate: 0.3
+  comboParams: []
+  comboIndex: 0
+  resetTimer: 0
 --- !u!114 &157809860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2092,21 +2091,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHealth: 0
---- !u!114 &157809863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 157809854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a628f438412bc447a182cd8c65c377f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireRate: 0.3
-  comboParams: []
-  comboIndex: 0
-  resetTimer: 0
 --- !u!114 &157809864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2544,7 +2528,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -3015,7 +2999,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -3332,7 +3316,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -10229,7 +10213,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -10805,7 +10789,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ac54f6720caad6348bb824934392914f, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -12476,7 +12460,7 @@ MonoBehaviour:
     lineCount: 2
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -29898,7 +29882,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -31333,7 +31317,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
