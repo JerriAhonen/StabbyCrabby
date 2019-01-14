@@ -52,10 +52,8 @@ public class PlayerBladeCollision : MonoBehaviour {
     
     }
 
-    // TRIGGER IS NOW IN SLICEABLEASYNC SCRIPT BECAUSE REASONS
     private void OnTriggerEnter(Collider trigger)
     {
-
         if (_isStabbing && trigger.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             StartCoroutine(trigger.gameObject.GetComponent<SliceableAsync>().Slice(_slicer));
