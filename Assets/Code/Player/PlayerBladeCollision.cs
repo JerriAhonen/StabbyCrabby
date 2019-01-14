@@ -8,12 +8,16 @@ public class PlayerBladeCollision : MonoBehaviour {
     private ParticleSystem _slashParticle;
     private InputReader _inputReader;
 
+    private Slicer _slicer;
+
     // Use this for initialization
     void Start () {
         _pc = GetComponentInParent<PlayerCombat>();
         _anim = GetComponentInParent<Animator>();
         _slashParticle = GetComponentInChildren<ParticleSystem>();
         _inputReader = InputReader.Instance;
+
+        _slicer = GetComponent<Slicer>();
     }
 	
 	// Update is called once per frame
@@ -48,19 +52,17 @@ public class PlayerBladeCollision : MonoBehaviour {
     
     }
 
+    // TRIGGER IS NOW IN SLICEABLEASYNC SCRIPT BECAUSE REASONS
     private void OnTriggerEnter(Collider trigger)
     {
 
-        //if (_isStabbing && trigger.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        //{
-        //    Enemy enemy = trigger.gameObject.GetComponent<Enemy>();
-
-        //    bool deadEnemy = enemy.TakeDamage(_pc.knifeDamageAmount);
-
-        //    if (deadEnemy)
-        //    //      Täältä jonnekin tieto et vihu kuoli. UIControllin pitäs saada tietää se.
-
-        //    Debug.Log(trigger.gameObject.name + " got Hit");
-        //}
+        if (_isStabbing && trigger.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            StartCoroutine(trigger.gameObject.GetComponent<SliceableAsync>().Slice(_slicer));
+            
+            // NEED TO GET DEADENEMY INFO FROM NEW PLACE
+            //if (deadEnemy)
+            //      Täältä jonnekin tieto et vihu kuoli. UIControllin pitäs saada tietää se.
+        }
     }
 }

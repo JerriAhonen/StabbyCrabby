@@ -17,15 +17,17 @@ public class SliceableAsync : MonoBehaviour {
         _sliceableAsync = GetComponentInParent<IBzSliceableAsync>();
     }
 
-    void OnTriggerEnter(Collider other) {
-        var knife = other.gameObject.GetComponent<Slicer>();
-        if (knife == null)
-            return;
+    // ORIGINAL BZKOVSOFT CODE:
+    //void OnTriggerEnter(Collider other) {
+        
+    //    //var knife = other.gameObject.GetComponent<Slicer>();
+    //    //if (knife == null)
+    //    //    return;
 
-        StartCoroutine(Slice(knife));
-    }
+    //    //StartCoroutine(Slice(knife));
+    //}
 
-    private IEnumerator Slice(Slicer knife) {
+    public IEnumerator Slice(Slicer knife) {
         // The call from OnTriggerEnter, so some object positions are wrong.
         // We have to wait for next frame to work with correct values
         yield return null;
