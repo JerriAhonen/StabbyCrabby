@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class UIManager : MonoBehaviour {
@@ -14,6 +12,9 @@ public class UIManager : MonoBehaviour {
     public GameObject gameUI;
     public GameObject endScreenUI;
     public GameObject pauseMenuUI;
+
+    // Managed 
+    public bool stab;
 
     private float timer;
     [SerializeField] private int combo;
@@ -58,6 +59,7 @@ public class UIManager : MonoBehaviour {
         
         comboText.text = combo.ToString();
     }
+
     void ComboResetTimer()
     {
         if (combo > 0)

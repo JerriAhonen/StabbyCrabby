@@ -10,7 +10,6 @@ public class Ragdoll : MonoBehaviour {
     private BoxCollider _boxCollider;
 
     private PlayerMovement _playerMovement;
-    //private PlayerCombo _playerCombo;
     private PlayerCombat _playerCombat;
 
     private GameObject _crabModel;
@@ -29,7 +28,6 @@ public class Ragdoll : MonoBehaviour {
         _anim = GetComponentInChildren<Animator>();
         _boxCollider = GetComponent<BoxCollider>();
         _playerCombat = GetComponent<PlayerCombat>();
-        //_playerCombo = GetComponent<PlayerCombo>();
 
         _playerMovement = _playerMover.GetComponent<PlayerMovement>();
         _ChildrenCollider = _crabModel.GetComponentsInChildren<Collider>();
@@ -66,7 +64,6 @@ public class Ragdoll : MonoBehaviour {
         _anim.enabled = !active;
         _boxCollider.enabled = !active;
         _playerMovement.enabled = !active;
-        //_playerCombo.enabled = !active;
         _playerCombat.enabled = !active;
     }
 }

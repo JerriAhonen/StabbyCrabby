@@ -8,8 +8,7 @@ public class PlayerCombat : MonoBehaviour {
     private UIManager _um;
     
     public GameObject meleeHitColliderObject;
-
-    // Stuff from PlayerCombo.cs
+    
     public float fireRate;
     public string[] comboParams;
     public int comboIndex = 0;
@@ -28,8 +27,7 @@ public class PlayerCombat : MonoBehaviour {
         _ir = InputReader.Instance;
         _um = UIManager.Instance;
         meleeHitColliderObject = GameObject.FindGameObjectWithTag("PlayerHitCollider");
-
-        // From PlayerCombo.cs
+        
         if (comboParams == null || (comboParams != null && comboParams.Length == 0))
             comboParams = new string[] { "Attack 1", "Attack 2" };
 
