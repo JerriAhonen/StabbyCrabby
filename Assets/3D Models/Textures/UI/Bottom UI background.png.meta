@@ -1,7 +1,12 @@
 fileFormatVersion: 2
 guid: 165738e8e53d8504b936ef7b6694b308
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Bottom UI background_0
+    21300002: Bottom UI background_1
+    21300004: Bottom UI background_2
+    21300006: Bottom UI background_3
+    21300008: Bottom UI background_4
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -40,7 +45,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -82,11 +87,111 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Bottom UI background_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 219
+        width: 216
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a852bb3e4f4010548a65a37df0fc6a8c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bottom UI background_1
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 141
+        width: 54
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7257649dfad3684a9e83049f405d1f8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bottom UI background_2
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 54
+        width: 60
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5a33ed4a4a20114ba902f40d5d81251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bottom UI background_3
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 0
+        width: 143
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 649b31740a4a78b48ace10e005617bd0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bottom UI background_4
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 32
+        width: 151
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d24a4662afc16a4ab3abee0cb5411a3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0d0d8adf025bf0541ba53f50cfe9c362
     vertices: []
     indices: 
     edges: []
