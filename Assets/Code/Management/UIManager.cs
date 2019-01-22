@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class UIManager : MonoBehaviour {
 
@@ -12,14 +13,15 @@ public class UIManager : MonoBehaviour {
     public GameObject gameUI;
     public GameObject endScreenUI;
     public GameObject pauseMenuUI;
+    public GameObject tempPoints;
 
-    // Managed 
-    public bool stab;
-
+    private Animator _pauseMenuAnim;
+    public Animator pauseMenuContinueButtonAnim;
+    
     private float timer;
-    [SerializeField] private int combo;
+    private int combo;
     private int points;
-    [SerializeField] private float comboResetTime;
+    private float comboResetTime;
 
     private void Awake()
     {
@@ -41,7 +43,9 @@ public class UIManager : MonoBehaviour {
         
         if (Input.GetButtonDown("Fire1"))
             ComboMeter(true);
-	}
+        if (Input.GetButtonDown("Fire2"))
+            ComboMeter(false);
+    }
 
     // Update current combo amount.
     void ComboMeter(bool kill)
@@ -95,11 +99,31 @@ public class UIManager : MonoBehaviour {
     public void Pause(bool paused)
     {
         if (paused)
+        {
             pauseMenuUI.SetActive(true);
+            _pauseMenuAnim = pauseMenuUI.GetComponent<Animator>();
+            _pauseMenuAnim.SetTrigger("Open");
+            pauseMenuContinueButtonAnim.SetTrigger("Highlighted");
+        }
+
         else
         {
-            pauseMenuUI.SetActive(false);
             // TODO: Allow for the exit Animation before disabling.
+
+            _pauseMenuAnim.SetTrigger("Exit");
+            StartCoroutine(DeactivatePauseMenu(0.25f));
         }
+    }
+
+    IEnumerator DeactivatePauseMenu(float delay)
+    {
+        while (delay >= 0)
+        {
+            delay -= Time.deltaTime;
+            yield return null;
+        }
+
+        pauseMenuUI.SetActive(false);
+        yield break;
     }
 }

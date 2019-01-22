@@ -84,8 +84,11 @@ public class InputReader : MonoBehaviour {
 
         #region CombatInput
 
-        _stab = Input.GetButtonDown("Fire1");
-        _shoot = Input.GetButtonDown("Fire2");
+        if (Time.timeScale != 0)
+        {
+            _stab = Input.GetButtonDown("Fire1");
+            _shoot = Input.GetButtonDown("Fire2");
+        }
 
         #endregion
 
