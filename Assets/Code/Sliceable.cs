@@ -254,9 +254,9 @@ public class Sliceable : BzSliceableCharacterBase {
 
     static string drawText = "-";
 
-    void OnGUI() {
-        GUI.Label(new Rect(10, 10, 2000, 2000), drawText);
-    }
+    //void OnGUI() {
+    //    GUI.Label(new Rect(10, 10, 2000, 2000), drawText);
+    //}
 
     // Sample of data that can be attached to slice request.
     // In this the Stopwatch is used to time duration of slice operation.

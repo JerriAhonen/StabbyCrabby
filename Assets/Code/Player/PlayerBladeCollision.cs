@@ -23,10 +23,19 @@ public class PlayerBladeCollision : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // Check if one of the Attack animations are playing.
-        if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 1") 
-            || _anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
+        if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
         {
             _isStabbing = true;
+
+            _slicer.OriginVector = Vector3.down;
+            _slicer.DirectionVector = Vector3.right;
+        }
+        else if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 2"))
+        {
+            _isStabbing = true;
+
+            _slicer.OriginVector = Vector3.down;
+            _slicer.DirectionVector = Vector3.right;
         }
         else
         {
@@ -56,11 +65,13 @@ public class PlayerBladeCollision : MonoBehaviour {
     {
         if (_isStabbing && trigger.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            StartCoroutine(trigger.gameObject.GetComponent<SliceableAsync>().Slice(_slicer));
-            
-            // NEED TO GET DEADENEMY INFO FROM NEW PLACE
-            //if (deadEnemy)
-            //      Täältä jonnekin tieto et vihu kuoli. UIControllin pitäs saada tietää se.
+            if (trigger.gameObject.GetComponent<SliceableAsync>() != null) {
+                StartCoroutine(trigger.gameObject.GetComponent<SliceableAsync>().Slice(_slicer));
+
+                // NEED TO GET DEADENEMY INFO FROM NEW PLACE
+                //if (deadEnemy)
+                //      Täältä jonnekin tieto et vihu kuoli. UIControllin pitäs saada tietää se.
+            }
         }
     }
 }
