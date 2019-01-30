@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerBullets : MonoBehaviour {
 
+    private UIManager _ui;
+
     public int Bullets { private set; get; }
 
 	// Use this for initialization
@@ -19,6 +21,18 @@ public class PlayerBullets : MonoBehaviour {
 
     private void OnTriggerEnter(Collider trigger)
     {
-        
+        if (trigger.gameObject.layer == LayerMask.NameToLayer("Collectable"))
+        {
+            if (Bullets < 6)
+            {
+                Bullets++;
+                Destroy(trigger.gameObject);
+            }
+        }
+    }
+
+    void UpdateBulletsUI()
+    {
+
     }
 }
