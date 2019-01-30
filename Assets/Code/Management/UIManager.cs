@@ -9,18 +9,19 @@ public class UIManager : MonoBehaviour {
     public TMP_Text timerText;
     public TMP_Text comboText;
     public TMP_Text pointsText;
+    public TMP_Text tempPointsText;
 
     public GameObject gameUI;
     public GameObject endScreenUI;
     public GameObject pauseMenuUI;
-    public GameObject tempPoints;
 
     private Animator _pauseMenuAnim;
     public Animator pauseMenuContinueButtonAnim;
     
     private float timer;
-    private int combo;
+    public int combo;
     private int points;
+    private int tempPoints;
     private float comboResetTime;
 
     private void Awake()
@@ -41,14 +42,16 @@ public class UIManager : MonoBehaviour {
         Timer();
         ComboResetTimer();
         
+        /*
         if (Input.GetButtonDown("Fire1"))
             ComboMeter(true);
         if (Input.GetButtonDown("Fire2"))
             ComboMeter(false);
+        */
     }
 
     // Update current combo amount.
-    void ComboMeter(bool kill)
+    public void ComboMeter(bool kill)
     {
         // Change this to "If you kill something"
         if (kill)
@@ -73,10 +76,29 @@ public class UIManager : MonoBehaviour {
             comboResetTime -= Time.deltaTime;
             if (comboResetTime <= 0)
             {
+                int newPoints = tempPoints * combo;
+                Points(newPoints);
+
+                tempPoints = 0;
                 combo = 0;
                 comboText.text = combo.ToString();
+                UpdateTempPoints();
             }
         }
+    }
+
+    public void TempPoints(int tempPoints)
+    {
+        this.tempPoints += tempPoints;
+        UpdateTempPoints();
+    }
+
+    private void UpdateTempPoints()
+    {
+        if (tempPoints > 0)
+            tempPointsText.text = tempPoints.ToString();
+        else
+            tempPointsText.text = "";
     }
 
     // Add points and update UI
@@ -105,11 +127,8 @@ public class UIManager : MonoBehaviour {
             _pauseMenuAnim.SetTrigger("Open");
             pauseMenuContinueButtonAnim.SetTrigger("Highlighted");
         }
-
         else
         {
-            // TODO: Allow for the exit Animation before disabling.
-
             _pauseMenuAnim.SetTrigger("Exit");
             StartCoroutine(DeactivatePauseMenu(0.25f));
         }

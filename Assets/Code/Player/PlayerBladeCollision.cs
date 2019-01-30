@@ -1,18 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerBladeCollision : MonoBehaviour {
 
     private PlayerCombat _pc;
+    private UIManager _ui;
     private bool _isStabbing;
     private Animator _anim;
     private ParticleSystem _slashParticle;
     private InputReader _inputReader;
 
     private Slicer _slicer;
-
+    
     // Use this for initialization
     void Start () {
         _pc = GetComponentInParent<PlayerCombat>();
+        _ui = UIManager.Instance;
         _anim = GetComponentInParent<Animator>();
         _slashParticle = GetComponentInChildren<ParticleSystem>();
         _inputReader = InputReader.Instance;
@@ -46,7 +49,6 @@ public class PlayerBladeCollision : MonoBehaviour {
         if (_inputReader.Stab)
         {
             Invoke("ShootParticles",0.07f);
-
         }
         if (_inputReader.Stab && _anim.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
         {
@@ -58,7 +60,6 @@ public class PlayerBladeCollision : MonoBehaviour {
     private void ShootParticles()
     {
         _slashParticle.Emit(30);
-    
     }
 
     private void OnTriggerEnter(Collider trigger)
@@ -72,6 +73,29 @@ public class PlayerBladeCollision : MonoBehaviour {
                 //if (deadEnemy)
                 //      Täältä jonnekin tieto et vihu kuoli. UIControllin pitäs saada tietää se.
             }
+
+            Enemy enemy = trigger.gameObject.GetComponentInParent<Enemy>();
+            Health enemyHealth = trigger.gameObject.GetComponentInParent<Health>();
+
+            if (enemy && enemyHealth)
+            {
+                if (enemyHealth.CurrentHealth > 0 && enemyHealth.TakeDamage(_pc.knifeDamageAmount))
+                {
+                    // Enemy died
+                    _ui.ComboMeter(true);
+                    _ui.TempPoints(enemy.Points);
+                }
+                else if (enemyHealth.CurrentHealth > 0)
+                {
+                    // Still alive
+                    _ui.ComboMeter(false);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Didn't find Health.cs OR Enemy.cs on Enemy!");
+            }
+
         }
     }
 }

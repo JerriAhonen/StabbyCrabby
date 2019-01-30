@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour {
 
-    public int _currentHealth;
+    private int _currentHealth;
 
     public int CurrentHealth {
         get {

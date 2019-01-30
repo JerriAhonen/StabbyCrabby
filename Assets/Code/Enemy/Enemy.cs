@@ -17,6 +17,9 @@ public class Enemy : MonoBehaviour {
 
     private int _startingHealth;
     private int _damage;
+    //private int _points;
+
+    public int Points { private set; get; }
 
     void Start() {
         _enemyHealth = gameObject.AddComponent<Health>();
@@ -26,11 +29,13 @@ public class Enemy : MonoBehaviour {
             case EnemyType.Toaster: {
                 _startingHealth = 1;
                 _damage = 0;
+                Points = 1000;
                 break;
             }
             case EnemyType.Toast: {
                 _startingHealth = 1;
                 _damage = 10;
+                Points = 100;
 
                 transform.rotation = Quaternion.AngleAxis(Random.Range(0f, 180f), Vector3.up);
                 _enemyMovement.GetThrown(transform.forward);
@@ -39,6 +44,7 @@ public class Enemy : MonoBehaviour {
             case EnemyType.Pot: {
                 _startingHealth = 1;
                 _damage = 20;
+                Points = 100;
                 break;
             }
         }

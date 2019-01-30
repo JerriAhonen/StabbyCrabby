@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.703
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.050105825, g: 0.2503986, b: 0.66995907, a: 0.703}
+  m_IndirectSpecularColor: {r: 0.050071087, g: 0.25028774, b: 0.6693969, a: 0.703}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1067,8 +1067,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e8308703412424d84079358b03a73a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _origin: {x: 0, y: -1, z: 0}
-  _direction: {x: 0, y: 1, z: 0}
 --- !u!1 &81066512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1960,6 +1958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df4ee7cb25f8f6742b8b70bb96f2e675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knifeDamageAmount: 10
   meleeHitColliderObject: {fileID: 0}
   fireRate: 0.3
   comboParams: []
@@ -1999,7 +1998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd825cf08ae8a54d8a19544f355eecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHealth: 0
 --- !u!114 &157809864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9474,6 +9472,12 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 477614829}
   m_CullTransparentMesh: 0
+--- !u!114 &498513349 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114839276448871764, guid: f27af99095013af429e83f61c7c86f63,
+    type: 2}
+  m_PrefabInternal: {fileID: 885004418}
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 --- !u!4 &504323756
 Transform:
   m_ObjectHideFlags: 0
@@ -11333,7 +11337,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 999.99
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b1f1df083db62924c8376f09eb8186b5, type: 2}
   m_sharedMaterial: {fileID: 21723776438793168, guid: b1f1df083db62924c8376f09eb8186b5,
@@ -11402,10 +11406,10 @@ MonoBehaviour:
   m_margin: {x: 128.2494, y: 28.211836, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 0}
-    characterCount: 6
+    characterCount: 1
     spriteCount: 0
     spaceCount: 0
-    wordCount: 2
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -13004,6 +13008,36 @@ Prefab:
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839276448871764, guid: f27af99095013af429e83f61c7c86f63,
+        type: 2}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839276448871764, guid: f27af99095013af429e83f61c7c86f63,
+        type: 2}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839276448871764, guid: f27af99095013af429e83f61c7c86f63,
+        type: 2}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839276448871764, guid: f27af99095013af429e83f61c7c86f63,
+        type: 2}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839276448871764, guid: f27af99095013af429e83f61c7c86f63,
+        type: 2}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839276448871764, guid: f27af99095013af429e83f61c7c86f63,
+        type: 2}
+      propertyPath: m_textInfo.pageCount
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f27af99095013af429e83f61c7c86f63, type: 2}
@@ -16584,10 +16618,12 @@ MonoBehaviour:
   timerText: {fileID: 2007321774}
   comboText: {fileID: 2087892255}
   pointsText: {fileID: 686205058}
+  tempPointsText: {fileID: 498513349}
   gameUI: {fileID: 1170017262}
   endScreenUI: {fileID: 1457403821}
   pauseMenuUI: {fileID: 648044017}
   pauseMenuContinueButtonAnim: {fileID: 1138699648}
+  combo: 0
 --- !u!1 &1267788672
 GameObject:
   m_ObjectHideFlags: 0
@@ -32266,7 +32302,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 10
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b1f1df083db62924c8376f09eb8186b5, type: 2}
   m_sharedMaterial: {fileID: 21723776438793168, guid: b1f1df083db62924c8376f09eb8186b5,
@@ -32335,7 +32371,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 0}
-    characterCount: 2
+    characterCount: 1
     spriteCount: 0
     spaceCount: 0
     wordCount: 1

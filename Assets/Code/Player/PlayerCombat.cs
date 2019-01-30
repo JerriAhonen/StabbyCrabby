@@ -6,7 +6,8 @@ public class PlayerCombat : MonoBehaviour {
 
     private InputReader _ir;
     private UIManager _um;
-    
+
+    public int knifeDamageAmount;
     public GameObject meleeHitColliderObject;
     
     public float fireRate;
