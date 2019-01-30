@@ -19,9 +19,12 @@ public class EnemyMovement : MonoBehaviour {
         }
     }
 
-    private RaycastHit _hitInfo;
+    //private RaycastHit _hitInfo;
 
-    private float _height = 0.3f;
+    //private float _height = 0.2f;
+
+    private float _groundHeight = -0.5f;
+    private float _heightPadding = -0.05f;
 
     [SerializeField] private LayerMask _ground;
 
@@ -45,7 +48,7 @@ public class EnemyMovement : MonoBehaviour {
     private Animator _animator;
 
     private bool _dropped;
-    private float _speedModifier;
+    private float _speedModifier = 3f;
 
     private void Awake() {
         _player = GameObject.Find("PLAYER");
@@ -73,28 +76,69 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if (Physics.Raycast(transform.position, Vector3.down, out _hitInfo, _height, _ground)) {
-            _grounded = true;
+        //if (Physics.Raycast(transform.position, Vector3.down, out _hitInfo, _height + 0.01f, _ground)) {
+        //    //if (Vector3.Distance(transform.position, _hitInfo.point) < _height)
+        //    //{
+        //    //    transform.position = Vector3.Lerp(transform.position,
+        //    //                                    transform.position + Vector3.up * _height,
+        //    //                                    5 * Time.deltaTime);
+        //    //}
 
-            if (_thrownBack) {
+        //    _grounded = true;
+        //    Debug.Log("grounded " + _grounded);
+
+        //    if (_thrownBack) {
+        //        _thrownBack = false;
+        //    }
+
+        //    if (_dropped) {
+        //        _dropped = false;
+        //    }
+        //} else {
+        //    _grounded = false;
+        //}
+
+        //if (!_grounded) {
+        //    if(_dropped) {
+        //        _speedModifier = 3f;
+        //    } else {
+        //        _speedModifier = 1f;
+        //    }
+
+        //    if (transform.position.y > -0.5f) {
+        //        transform.position += Physics.gravity * _speedModifier * Time.deltaTime;
+        //    }
+        //}
+
+        if (transform.position.y > _groundHeight)
+        {
+            transform.position += Physics.gravity * _speedModifier * Time.deltaTime;
+
+            _grounded = false;
+        } else if (transform.position.y < _groundHeight + _heightPadding)
+        {
+            transform.position = Vector3.Lerp(transform.position,
+                                            transform.position + Vector3.up,
+                                            5 * Time.deltaTime);
+
+            _grounded = false;
+
+            if (_thrownBack)
+            {
                 _thrownBack = false;
             }
+        } else {
+            _grounded = true;
 
-            if (_dropped) {
+            if (_dropped)
+            {
                 _dropped = false;
             }
-        } else {
-            _grounded = false;
-        }
-
-        if (!_grounded) {
-            if(_dropped) {
-                _speedModifier = 3f;
-            } else {
-                _speedModifier = 1f;
+            
+            if (_thrownBack)
+            {
+                _thrownBack = false;
             }
-
-            transform.position += Physics.gravity * _speedModifier * Time.deltaTime;
         }
 
         if (_thrownBack) {
@@ -127,7 +171,7 @@ public class EnemyMovement : MonoBehaviour {
     public void GetThrown(Vector3 direction) {
         _gravity = 55f;
         _launchAngle = 80f;
-        _launchVelocity = 50f;
+        _launchVelocity = 65f;
 
         _horizontalTrajectory = direction * _launchVelocity * Mathf.Cos(_launchAngle * Mathf.Deg2Rad);
 
