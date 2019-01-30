@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour {
     public GameObject pauseMenuUI;
 
     private Animator _pauseMenuAnim;
+    public Animator gameUIAnim;
     public Animator pauseMenuContinueButtonAnim;
     
     private float timer;
@@ -57,6 +58,7 @@ public class UIManager : MonoBehaviour {
         if (kill)
         {
             combo++;
+            gameUIAnim.SetTrigger("Refresh Combo");
             comboResetTime = 4.0f;
         } 
         else
