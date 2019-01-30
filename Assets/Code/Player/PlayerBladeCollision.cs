@@ -37,8 +37,8 @@ public class PlayerBladeCollision : MonoBehaviour {
         {
             _isStabbing = true;
 
-            _slicer.OriginVector = Vector3.down;
-            _slicer.DirectionVector = Vector3.right;
+            _slicer.OriginVector = Vector3.up;
+            _slicer.DirectionVector = Vector3.left;
         }
         else
         {

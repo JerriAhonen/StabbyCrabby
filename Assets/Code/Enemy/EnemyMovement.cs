@@ -110,7 +110,7 @@ public class EnemyMovement : MonoBehaviour {
         //    }
         //}
 
-        if (transform.position.y > _groundHeight)
+        if (transform.position.y > _groundHeight - _heightPadding) // _heightPadding subtracted for a small bounce when landing
         {
             transform.position += Physics.gravity * _speedModifier * Time.deltaTime;
 
