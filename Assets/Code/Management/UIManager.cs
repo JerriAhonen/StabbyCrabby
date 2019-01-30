@@ -71,7 +71,7 @@ public class UIManager : MonoBehaviour {
     {
         if (combo > 0)
         {
-            comboText.fontSize = 35.0f + (35.0f * comboResetTime);
+            comboText.fontSize = 35.0f + (35.0f * (comboResetTime/2));
 
             comboResetTime -= Time.deltaTime;
             if (comboResetTime <= 0)
