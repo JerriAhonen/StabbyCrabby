@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4964171489043422}
   - component: {fileID: 33036376859047208}
   - component: {fileID: 23939577264241840}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Waist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4590207018906418}
   - component: {fileID: 33870587095693274}
   - component: {fileID: 23359851105623220}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4874500777721980}
   - component: {fileID: 95427851228858686}
-  m_Layer: 0
+  - component: {fileID: 65620536738069606}
+  m_Layer: 13
   m_Name: BulletPickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +72,7 @@ GameObject:
   - component: {fileID: 4629088891249032}
   - component: {fileID: 33062348132936546}
   - component: {fileID: 23384133957739906}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +89,7 @@ GameObject:
   - component: {fileID: 4827255328802834}
   - component: {fileID: 198655417475291350}
   - component: {fileID: 199928035959554404}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Glow effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +143,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1503876998858246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.239}
+  m_LocalPosition: {x: -4.022808, y: 0, z: -4.142418}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4590207018906418}
@@ -290,6 +291,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1205529086218456}
   m_Mesh: {fileID: 4300004, guid: c1c33df5c396c5e48a13c04839bfc730, type: 3}
+--- !u!65 &65620536738069606
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503876998858246}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!95 &95427851228858686
 Animator:
   serializedVersion: 3
