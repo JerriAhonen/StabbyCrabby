@@ -23,7 +23,7 @@ public class EnemyMovement : MonoBehaviour {
 
     //private float _height = 0.2f;
 
-    private float _groundHeight = -0.5f;
+    private float _groundHeight = 0f;
     private float _heightPadding = -0.05f;
 
     [SerializeField] private LayerMask _ground;
