@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour {
 
@@ -11,7 +13,7 @@ public class PlayerShoot : MonoBehaviour {
 
     public ParticleSystem gunFire;
     private InputReader _inputReader;
-    Animator _animator;
+    private Animator _animator;
 
     public GameObject bullet;
     public Transform gun;
@@ -22,13 +24,24 @@ public class PlayerShoot : MonoBehaviour {
 
     public float shootRate = 0f;
     public float shootForce = 0f;
-    private float shootRateTimeStamp = 0f;
+    private float _shootRateTimeStamp = 0f;
+
+    private UIManager _ui;
+
+    public const int MAX_BULLETS = 6;
+    public const int MIN_BULLETS = 0;
+    public int bullets;
+    public float bulletDestroyDelay;
 
     // Use this for initialization
     void Start () {
 
         _inputReader = InputReader.Instance;
+        _ui = UIManager.Instance;
         _animator = GetComponentInChildren<Animator>();
+
+        bullets = 1;
+        _ui.SetBulletCount(1);
     }
 	
 	// Update is called once per frame
@@ -74,27 +87,43 @@ public class PlayerShoot : MonoBehaviour {
 
     void Shoot()
     {
-        if (_inputReader.Shoot)
+        if (_inputReader.Shoot && bullets > MIN_BULLETS)
         {
-            if (Time.time > shootRateTimeStamp)
+            if (Time.time > _shootRateTimeStamp)
             {
                 GameObject go = (GameObject)Instantiate(bullet, gun.position, gun.rotation);
                 gunFire.Play();
                 _animator.SetTrigger("ShootTrigger");
                 go.GetComponent<Rigidbody>().AddForce(gunRay.direction * shootForce);
-                shootRateTimeStamp = Time.time + shootRate;
-                
-                /*
-                if(hits.Length > 0)
-                {
-                    Debug.Log("Gun was Shot and we hit something");
-                    foreach (RaycastHit hit2 in hits)
-                    {
-                        //hit.transform.gameObject.GetComponent<Health>().TakeDamage(100);
-                        Debug.Log(hit2.transform.name + " was hit with gun");
-                    }
-                }*/
+                _shootRateTimeStamp = Time.time + shootRate;
+                _ui.RemoveBullet();
+                bullets--;
             }
         }
+    }
+
+    private void OnTriggerEnter(Collider trigger)
+    {
+        if (trigger.gameObject.layer == LayerMask.NameToLayer("Collectable"))
+        {
+            if (bullets < MAX_BULLETS)
+            {
+                bullets++;
+                StartCoroutine(DestroyBulletPickUp(trigger.gameObject, bulletDestroyDelay));
+                _ui.AddBullet();
+            }
+        }
+    }
+    
+    IEnumerator DestroyBulletPickUp(GameObject bullet, float delay)
+    {
+        float i = delay;
+        while (i >= 0)
+        {
+            i -= Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(bullet);
     }
 }

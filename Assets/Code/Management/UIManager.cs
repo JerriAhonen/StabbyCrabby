@@ -10,10 +10,14 @@ public class UIManager : MonoBehaviour {
     public TMP_Text comboText;
     public TMP_Text pointsText;
     public TMP_Text tempPointsText;
+    public TMP_Text bulletsText;
 
     public GameObject gameUI;
     public GameObject endScreenUI;
     public GameObject pauseMenuUI;
+    
+    public GameObject[] bullets = new GameObject[6];
+    public int bulletCount;
 
     private Animator _pauseMenuAnim;
     public Animator gameUIAnim;
@@ -37,18 +41,14 @@ public class UIManager : MonoBehaviour {
         gameUI.SetActive(true);
         endScreenUI.SetActive(false);
         pauseMenuUI.SetActive(false);
+
+        UpdateBullets();
     }
 	
 	void Update () {
         Timer();
         ComboResetTimer();
         
-        /*
-        if (Input.GetButtonDown("Fire1"))
-            ComboMeter(true);
-        if (Input.GetButtonDown("Fire2"))
-            ComboMeter(false);
-        */
     }
 
     // Update current combo amount.
@@ -101,6 +101,39 @@ public class UIManager : MonoBehaviour {
             tempPointsText.text = tempPoints.ToString();
         else
             tempPointsText.text = "";
+    }
+
+    public void SetBulletCount(int amount)
+    {
+        bulletCount = amount;
+        UpdateBullets();
+    }
+
+    public void AddBullet()
+    {
+        bulletCount++;
+        UpdateBullets();
+    }
+
+    public void RemoveBullet()
+    {
+        bulletCount--;
+        UpdateBullets();
+    }
+
+    public void UpdateBullets()
+    {
+        foreach (GameObject bullet in bullets)
+        {
+            bullet.SetActive(false);
+        }
+
+        for (int i = 0; i < bulletCount; i++)
+        {
+            bullets[i].SetActive(true);
+        }
+
+        bulletsText.text = bulletCount.ToString() + "/6";
     }
 
     // Add points and update UI
