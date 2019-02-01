@@ -42,6 +42,10 @@ public class TimeManager : MonoBehaviour
             UnityEditor.EditorGUILayout.LabelField("End", "Set timescale to 0", style);
             UnityEditor.EditorGUILayout.LabelField("TIMESCALE", timeScale.ToString(), style);
         }
+        else
+        {
+            UnityEditor.EditorGUILayout.LabelField("T", "Show Time manager", style);
+        }
     }
 #endif
 

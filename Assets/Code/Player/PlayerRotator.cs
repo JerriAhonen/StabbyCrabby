@@ -62,8 +62,12 @@ public class PlayerRotator : MonoBehaviour {
         while (i >= 0)
         {
             angle -= (360 / duration) * Time.deltaTime;
-            transform.localRotation = Quaternion.Euler(angle, 0, 0);
 
+            //transform.localRotation = Quaternion.Euler(angle, 0, 0);
+
+            //transform.localRotation = Vector3.right * angle;
+            transform.localRotation = Quaternion.AngleAxis(angle, Vector3.right);
+            
             i -= Time.deltaTime;
             Debug.Log(angle);
 

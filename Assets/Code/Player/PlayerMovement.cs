@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using EZCameraShake;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -123,6 +124,9 @@ public class PlayerMovement : MonoBehaviour {
     {
         doBackflip = true;
         _pr.DoBackflip(flyTime);
+
+        CameraShaker.Instance.ShakeOnce(10f, 5f, 0.1f, 1f);
+
         float i = 0;
         while (i <= flyTime)
         {
