@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour {
 
     public bool drawDebugLines;
+    public PlayerMovement pm;
 
     RaycastHit camRayHit;
     Ray camRay;
@@ -96,8 +97,12 @@ public class PlayerShoot : MonoBehaviour {
                 _animator.SetTrigger("ShootTrigger");
                 go.GetComponent<Rigidbody>().AddForce(gunRay.direction * shootForce);
                 _shootRateTimeStamp = Time.time + shootRate;
+
                 _ui.RemoveBullet();
                 bullets--;
+
+                // Tell PlayerMovement to move the crab backwards.
+                pm.FlyFromShooting();
             }
         }
     }

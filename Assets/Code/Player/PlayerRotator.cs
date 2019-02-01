@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerRotator : MonoBehaviour {
 
@@ -28,9 +29,7 @@ public class PlayerRotator : MonoBehaviour {
     private void Update()
     {
         Move();
-        RotateToGround();
         Animate();
-
         DrawDebugLines();
     }
 
@@ -50,9 +49,28 @@ public class PlayerRotator : MonoBehaviour {
         
         transform.localRotation = Quaternion.Lerp(transform.rotation, groundRot, _rotationSpeed * Time.deltaTime);
     }
+    
+    public void DoBackflip(float dur)
+    {
+        StartCoroutine(Flip(dur));
+    }
 
-    void RotateToGround() {}
+    IEnumerator Flip(float duration)
+    {
+        float angle = 0;
+        float i = duration;
+        while (i >= 0)
+        {
+            angle -= (360 / duration) * Time.deltaTime;
+            transform.localRotation = Quaternion.Euler(angle, 0, 0);
 
+            i -= Time.deltaTime;
+            Debug.Log(angle);
+
+            yield return null;
+        }
+    }
+    
     void Animate()
     {
         _anim.SetFloat("VelX", _inputReader.MovementInputX);

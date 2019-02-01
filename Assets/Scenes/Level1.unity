@@ -2130,6 +2130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawDebugLines: 0
+  pm: {fileID: 421023786}
   gunFire: {fileID: 273533573}
   bullet: {fileID: 1011286184034386, guid: fe4500c9bff6c1c42adca53d7fd38222, type: 2}
   gun: {fileID: 909701073}
@@ -9276,6 +9277,9 @@ MonoBehaviour:
   movementSpeedMult: 0
   rotationSpeed: 10
   inputPadding: 0.1
+  flyTime: 0.5
+  flyVelocity: 50
+  doBackflip: 0
   ground:
     serializedVersion: 2
     m_Bits: 4096

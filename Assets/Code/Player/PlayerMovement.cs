@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -19,6 +20,12 @@ public class PlayerMovement : MonoBehaviour {
 
     private Vector3 arenaCenter;
     private float arenaRadius;
+
+    // MOVEMENT - SHOOTING //
+
+    public float flyTime;
+    public float flyVelocity;
+    public bool doBackflip;
 
     // ROTATION //
 
@@ -47,6 +54,7 @@ public class PlayerMovement : MonoBehaviour {
         _inputReader = InputReader.Instance;
         
         _pr = player.GetComponent<PlayerRotator>();
+        doBackflip = false;
         cam = Camera.main.transform;
 
         GameObject arenaBounds = GameObject.FindGameObjectWithTag("ArenaBounds");
@@ -62,9 +70,6 @@ public class PlayerMovement : MonoBehaviour {
     /// </summary>
     private void Update()
     {
-        if (_inputReader == null)
-            _inputReader = InputReader.Instance;
-
         GetInput();
         CalculateDirection();
         CalculateForward();
@@ -72,13 +77,14 @@ public class PlayerMovement : MonoBehaviour {
         CheckGround();
         ApplyGravity();
         DrawDebugLines();
-
+        
         if (Mathf.Abs(_inputReader.MovementInputX) < inputPadding 
             && Mathf.Abs(_inputReader.MovementInputZ) < inputPadding) return;
 
         Move();
         Rotate();
-        _pr.RotateModel();
+        if (!doBackflip)
+            _pr.RotateModel();
     }
 
     /// <summary>
@@ -106,6 +112,36 @@ public class PlayerMovement : MonoBehaviour {
             offset = offset * arenaRadius;
             transform.position = offset;
         }
+    }
+
+    public void FlyFromShooting()
+    {
+        StartCoroutine(FlyBackWards(CalculateBackward()));
+    }
+
+    IEnumerator FlyBackWards(Vector3 backward)
+    {
+        doBackflip = true;
+        _pr.DoBackflip(flyTime);
+        float i = 0;
+        while (i <= flyTime)
+        {
+            if (groundAngle >= maxGroundAngle) yield break;
+
+            transform.position += backward * flyVelocity * Time.deltaTime;
+
+            Vector3 offset = transform.position - arenaCenter;
+            if (offset.magnitude > arenaRadius)
+            {
+                offset = offset.normalized;
+                offset = offset * arenaRadius;
+                transform.position = offset;
+            }
+
+            i += Time.deltaTime;
+            yield return null;
+        }
+        doBackflip = false;
     }
 
     /// <summary>
@@ -139,7 +175,18 @@ public class PlayerMovement : MonoBehaviour {
         
         forward = Vector3.Cross(transform.right, _hitInfo.normal);
     }
-    
+
+    /// <summary>
+    /// Calculates the backward Vector3 according to the ground angle.
+    /// </summary>
+    Vector3 CalculateBackward()
+    {
+        if (!grounded)
+            return -_pr.transform.forward;
+        
+        return -Vector3.Cross(_pr.transform.right, _hitInfo.normal);
+    }
+
     /// <summary>
     /// 1. If we are not grounded, set the ground angle to 90. MAY WANT TO CHANGE THIS
     /// 2. GroundAngle is the angle between the the player's forward vector and the floor's normal.
