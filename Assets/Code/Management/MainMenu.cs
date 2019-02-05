@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
-    private InputReader _inputReader;
+    //private InputReader _inputReader;
+    private AudioManager _am;
     private Animator _cameraAnim;
     
     public GameObject mainMenuCanvas;
@@ -24,6 +25,9 @@ public class MainMenu : MonoBehaviour {
         _cameraAnim = Camera.main.GetComponent<Animator>();
         mainMenuCanvas.SetActive(true);
         optionsCanvas.SetActive(false);
+
+        _am = AudioManager.Instance;
+        _am.Play("Song");
     }
 	
 	void Update ()

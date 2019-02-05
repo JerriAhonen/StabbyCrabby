@@ -28,6 +28,7 @@ public class PlayerShoot : MonoBehaviour {
     private float _shootRateTimeStamp = 0f;
 
     private UIManager _ui;
+    private AudioManager _am;
 
     public const int MAX_BULLETS = 6;
     public const int MIN_BULLETS = 0;
@@ -39,6 +40,7 @@ public class PlayerShoot : MonoBehaviour {
 
         _inputReader = InputReader.Instance;
         _ui = UIManager.Instance;
+        _am = AudioManager.Instance;
         _animator = GetComponentInChildren<Animator>();
 
         bullets = 1;
@@ -100,6 +102,8 @@ public class PlayerShoot : MonoBehaviour {
 
                 _ui.RemoveBullet();
                 bullets--;
+
+                _am.Play("Gunshot1");
 
                 // Tell PlayerMovement to move the crab backwards.
                 pm.FlyFromShooting();

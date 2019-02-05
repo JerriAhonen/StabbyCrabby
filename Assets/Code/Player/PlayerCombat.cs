@@ -6,6 +6,7 @@ public class PlayerCombat : MonoBehaviour {
 
     private InputReader _ir;
     private UIManager _um;
+    private AudioManager _am;
 
     public int knifeDamageAmount;
     public GameObject meleeHitColliderObject;
@@ -27,6 +28,7 @@ public class PlayerCombat : MonoBehaviour {
     void Start () {
         _ir = InputReader.Instance;
         _um = UIManager.Instance;
+        _am = AudioManager.Instance;
         meleeHitColliderObject = GameObject.FindGameObjectWithTag("PlayerHitCollider");
         
         if (comboParams == null || (comboParams != null && comboParams.Length == 0))
@@ -46,7 +48,8 @@ public class PlayerCombat : MonoBehaviour {
         if (stab && comboIndex < comboParams.Length)
         {
             _animator.SetTrigger(comboParams[comboIndex]);
-
+            _am.PlayWithRandomPitch("SwordWoosh1", 0.5f, 2.0f);
+            
             comboIndex = (comboIndex + 1) % comboParams.Length;
 
             resetTimer = 0f;

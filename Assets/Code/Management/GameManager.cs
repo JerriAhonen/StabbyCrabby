@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     
     private InputReader _inputReader;
     private UIManager _uiManager;
+    private AudioManager _am;
     
     public bool gamePaused;
     public bool gameOver;
@@ -23,7 +24,10 @@ public class GameManager : MonoBehaviour {
     {
         _inputReader = InputReader.Instance;
         _uiManager = UIManager.Instance;
-        
+        _am = AudioManager.Instance;
+        _am.Play("Song");
+
+        Time.timeScale = 1;
         MouseLocked(true);
     }
 
@@ -40,12 +44,14 @@ public class GameManager : MonoBehaviour {
         if (gamePaused)
         {
             _uiManager.Pause(true);
+            _am.ChangePitch("Song", 0.8f);
             MouseLocked(false);
             Time.timeScale = 0;
         }
         else
         {
             _uiManager.Pause(false);
+            _am.ChangePitch("Song", 1.0f);
             MouseLocked(true);
             Time.timeScale = 1;
         }
