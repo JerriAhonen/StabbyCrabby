@@ -57,17 +57,17 @@ public class PlayerRotator : MonoBehaviour {
 
     IEnumerator Flip(float duration)
     {
+        Vector3 flipAxis = transform.right - transform.localPosition;
+
         float angle = 0;
         float i = duration;
         while (i >= 0)
         {
-            angle -= (360 / duration) * Time.deltaTime;
+            // Calculate amount of degrees to rotate in order to complete a complete round (360) in duration time.
+            angle = (360 / duration) * Time.deltaTime;
 
-            //transform.localRotation = Quaternion.Euler(angle, 0, 0);
+            transform.rotation = Quaternion.AngleAxis(-angle, transform.right) * transform.rotation;
 
-            //transform.localRotation = Vector3.right * angle;
-            transform.localRotation = Quaternion.AngleAxis(angle, Vector3.right);
-            
             i -= Time.deltaTime;
             Debug.Log(angle);
 
