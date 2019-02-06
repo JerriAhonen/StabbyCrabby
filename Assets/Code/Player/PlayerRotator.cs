@@ -10,7 +10,6 @@ public class PlayerRotator : MonoBehaviour {
     private Animator _anim;
 
     private Vector3 _forward;
-    [SerializeField] private Vector3 _groundNormal;
     
     private float _rotationSpeed;
 
@@ -57,8 +56,6 @@ public class PlayerRotator : MonoBehaviour {
 
     IEnumerator Flip(float duration)
     {
-        Vector3 flipAxis = transform.right - transform.localPosition;
-
         float angle = 0;
         float i = duration;
         while (i >= 0)
@@ -69,7 +66,6 @@ public class PlayerRotator : MonoBehaviour {
             transform.rotation = Quaternion.AngleAxis(-angle, transform.right) * transform.rotation;
 
             i -= Time.deltaTime;
-            Debug.Log(angle);
 
             yield return null;
         }
@@ -83,7 +79,6 @@ public class PlayerRotator : MonoBehaviour {
 
     void DrawDebugLines()
     {
-        _groundNormal = _playerMovement.HitInfo.normal;
         Debug.DrawLine(transform.position, transform.position + _playerMovement.HitInfo.normal, Color.red);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour {
 
-    private GameObject _player;
+    //private GameObject _player; Isn't used.
     private Enemy _enemy;
     private ToastSpawner _toastSpawner;
     
@@ -51,7 +51,7 @@ public class EnemyMovement : MonoBehaviour {
     private float _speedModifier = 3f;
 
     private void Awake() {
-        _player = GameObject.Find("PLAYER");
+        //_player = GameObject.Find("PLAYER"); Isn't used.
         _enemy = GetComponent<Enemy>();
 
         if (_enemy.enemyType == Enemy.EnemyType.Toaster) {

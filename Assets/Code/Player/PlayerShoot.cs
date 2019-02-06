@@ -6,6 +6,7 @@ public class PlayerShoot : MonoBehaviour {
 
     public bool drawDebugLines;
     public PlayerMovement pm;
+    public ControlTime controlTime;
 
     RaycastHit camRayHit;
     Ray camRay;
@@ -20,6 +21,7 @@ public class PlayerShoot : MonoBehaviour {
     public Transform gun;
 
     public LayerMask enemyLayer;
+    //public LayerMask playerLayer;
 
     public Vector3 aimPoint;
 
@@ -103,12 +105,25 @@ public class PlayerShoot : MonoBehaviour {
                 _ui.RemoveBullet();
                 bullets--;
 
-                _am.Play("Gunshot1");
-
-                // Tell PlayerMovement to move the crab backwards.
-                pm.FlyFromShooting();
+                GunshotEffects();
             }
         }
+    }
+
+    void GunshotEffects()
+    {
+        _am.Play("Gunshot1");
+
+        // Tell PlayerMovement to move the crab backwards.
+        pm.FlyFromShooting();
+
+        float flytime = 0.5f;
+
+        float stopTime = 0.1f;
+        float slowSpeed = 0.3f;
+        float slowTime = (flytime / slowSpeed) - stopTime;
+
+        StartCoroutine(controlTime.StopAndSlowTime(stopTime, slowTime, slowSpeed));
     }
 
     private void OnTriggerEnter(Collider trigger)

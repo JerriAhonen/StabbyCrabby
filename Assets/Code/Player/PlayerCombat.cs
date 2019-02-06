@@ -5,7 +5,6 @@ public class PlayerCombat : MonoBehaviour {
     public static PlayerCombat Instance { get; set; }
 
     private InputReader _ir;
-    private UIManager _um;
     private AudioManager _am;
 
     public int knifeDamageAmount;
@@ -27,7 +26,6 @@ public class PlayerCombat : MonoBehaviour {
 
     void Start () {
         _ir = InputReader.Instance;
-        _um = UIManager.Instance;
         _am = AudioManager.Instance;
         meleeHitColliderObject = GameObject.FindGameObjectWithTag("PlayerHitCollider");
         

@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
 public class Ragdoll : MonoBehaviour {
-
-    private InputReader _inputReader;
-
+    
     private Collider[] _ChildrenCollider;
     private Rigidbody[] _ChildrenRigidbody;
     private Animator _anim;
@@ -18,7 +16,6 @@ public class Ragdoll : MonoBehaviour {
     private Rigidbody _knifeRigidBody;
     
 	void Start () {
-        _inputReader = InputReader.Instance;
 
         _crabModel = gameObject.transform.GetChild(0).gameObject;
         _playerMover = GameObject.FindGameObjectWithTag("PlayerMover");
