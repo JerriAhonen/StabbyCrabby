@@ -25,6 +25,9 @@ public class PlayerShoot : MonoBehaviour {
 
     public Vector3 aimPoint;
 
+    public float stopTime;
+    public float slowSpeed;
+
     public float shootRate = 0f;
     public float shootForce = 0f;
     private float _shootRateTimeStamp = 0f;
@@ -96,6 +99,16 @@ public class PlayerShoot : MonoBehaviour {
         {
             if (Time.time > _shootRateTimeStamp)
             {
+                // STOP TIME BEFORE SHOOTING //
+                float flytime = pm.flyTime;
+
+                
+                float slowTime = (flytime / slowSpeed) - stopTime;
+
+                StartCoroutine(controlTime.StopAndSlowTime(stopTime, slowTime, slowSpeed));
+                
+                // SHOOT //
+
                 GameObject go = (GameObject)Instantiate(bullet, gun.position, gun.rotation);
                 gunFire.Play();
                 _animator.SetTrigger("ShootTrigger");
@@ -105,27 +118,15 @@ public class PlayerShoot : MonoBehaviour {
                 _ui.RemoveBullet();
                 bullets--;
 
-                GunshotEffects();
+                _am.Play("Gunshot1");
+
+                // Tell PlayerMovement to move the crab backwards.
+                pm.FlyFromShooting();
+                
             }
         }
     }
-
-    void GunshotEffects()
-    {
-        _am.Play("Gunshot1");
-
-        // Tell PlayerMovement to move the crab backwards.
-        pm.FlyFromShooting();
-
-        float flytime = 0.5f;
-
-        float stopTime = 0.1f;
-        float slowSpeed = 0.3f;
-        float slowTime = (flytime / slowSpeed) - stopTime;
-
-        StartCoroutine(controlTime.StopAndSlowTime(stopTime, slowTime, slowSpeed));
-    }
-
+    
     private void OnTriggerEnter(Collider trigger)
     {
         if (trigger.gameObject.layer == LayerMask.NameToLayer("Collectable"))
