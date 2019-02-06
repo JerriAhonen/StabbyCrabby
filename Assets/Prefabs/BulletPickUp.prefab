@@ -55,6 +55,8 @@ GameObject:
   - component: {fileID: 4874500777721980}
   - component: {fileID: 95427851228858686}
   - component: {fileID: 65620536738069606}
+  - component: {fileID: 114731468439653130}
+  - component: {fileID: 54588204246972392}
   m_Layer: 13
   m_Name: BulletPickUp
   m_TagString: Untagged
@@ -291,6 +293,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1205529086218456}
   m_Mesh: {fileID: 4300004, guid: c1c33df5c396c5e48a13c04839bfc730, type: 3}
+--- !u!54 &54588204246972392
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503876998858246}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!65 &65620536738069606
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -298,7 +315,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1503876998858246}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -321,6 +338,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114731468439653130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503876998858246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da0e1b4229cb0434584617324f3abe33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bs: {fileID: 0}
 --- !u!198 &198655417475291350
 ParticleSystem:
   m_ObjectHideFlags: 1

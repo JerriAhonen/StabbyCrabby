@@ -149,6 +149,7 @@ public class PlayerShoot : MonoBehaviour {
             yield return null;
         }
 
+        bullet.GetComponent<BulletPickup>().bs.DelayedBulletSpawn();
         Destroy(bullet);
     }
 }
