@@ -66,6 +66,23 @@ public class Sliceable : BzSliceableCharacterBase {
         var lazyActionNeg = result.outObjectNeg.GetComponent<LazyActionRunner>();
         var lazyActionPos = result.outObjectPos.GetComponent<LazyActionRunner>();
 
+        var lleft = new Action<GameObject>((g) => {
+
+            if (g.GetComponentInChildren<Rigidbody>() != null) {
+                g.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0f, 0f, -10f), ForceMode.Impulse);
+            }
+        });
+
+        var lright = new Action<GameObject>((g) => {
+
+            if (g.GetComponentInChildren<Rigidbody>() != null) {
+                g.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0f, 0f, 10f), ForceMode.Impulse);
+            }
+        });
+
+        AddAction(lleft, result.outObjectNeg);
+        AddAction(lright, result.outObjectPos);
+
         // convert to ragdoll
         if(_convertToRagdoll & !IsDead) {
             Profiler.BeginSample("ConvertToRagdoll");
@@ -83,6 +100,16 @@ public class Sliceable : BzSliceableCharacterBase {
         --_maxSliceCount;
         resultNeg._maxSliceCount = _maxSliceCount;
         resultPos._maxSliceCount = _maxSliceCount;
+    }
+
+    private static void AddAction(Action<GameObject> l, GameObject go) {
+        var lazyRunner = go.GetComponent<LazyActionRunner>();
+
+        if (lazyRunner != null) {
+            lazyRunner.AddLazyAction(() => l(go));
+        } else {
+            l(go);
+        }
     }
 
     private void ConvertToRagdoll(GameObject resultNeg, GameObject resultPos, LazyActionRunner lazyRunnerNeg, LazyActionRunner lazyRunnerPos) {
