@@ -24,6 +24,12 @@ public class Sliceable : BzSliceableCharacterBase {
 
     public bool IsDead { get; private set; }
 
+    private GarbageCollector _garbageCollector;
+
+    private void Awake() {
+        _garbageCollector = GarbageCollector.Instance;
+    }
+
     protected override BzSliceTryData PrepareData(Plane plane) {
         if(_maxSliceCount == 0)
             return null;
@@ -69,14 +75,14 @@ public class Sliceable : BzSliceableCharacterBase {
         var lleft = new Action<GameObject>((g) => {
 
             if (g.GetComponentInChildren<Rigidbody>() != null) {
-                g.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0f, 0f, -10f), ForceMode.Impulse);
+                g.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0f, 5f, -10f), ForceMode.Impulse);
             }
         });
 
         var lright = new Action<GameObject>((g) => {
 
             if (g.GetComponentInChildren<Rigidbody>() != null) {
-                g.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0f, 0f, 10f), ForceMode.Impulse);
+                g.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0f, 5f, 10f), ForceMode.Impulse);
             }
         });
 
@@ -100,6 +106,8 @@ public class Sliceable : BzSliceableCharacterBase {
         --_maxSliceCount;
         resultNeg._maxSliceCount = _maxSliceCount;
         resultPos._maxSliceCount = _maxSliceCount;
+
+        StartCoroutine(_garbageCollector.FadeOut(gameObject));
     }
 
     private static void AddAction(Action<GameObject> l, GameObject go) {

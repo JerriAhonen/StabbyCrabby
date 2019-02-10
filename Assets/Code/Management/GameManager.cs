@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     
     private InputReader _inputReader;
     private UIManager _uiManager;
+    private GarbageCollector _garbageCollector;
     private AudioManager _am;
     
     public bool gamePaused;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour {
     {
         _inputReader = InputReader.Instance;
         _uiManager = UIManager.Instance;
+        _garbageCollector = GarbageCollector.Instance;
         _am = AudioManager.Instance;
         _am.Play("Song");
 
