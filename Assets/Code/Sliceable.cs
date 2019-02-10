@@ -106,8 +106,9 @@ public class Sliceable : BzSliceableCharacterBase {
         --_maxSliceCount;
         resultNeg._maxSliceCount = _maxSliceCount;
         resultPos._maxSliceCount = _maxSliceCount;
-
-        StartCoroutine(_garbageCollector.FadeOut(gameObject));
+        
+        StartCoroutine(_garbageCollector.FadeOut(result.outObjectPos));
+        StartCoroutine(_garbageCollector.FadeOut(result.outObjectNeg));
     }
 
     private static void AddAction(Action<GameObject> l, GameObject go) {

@@ -17,8 +17,6 @@ public class GarbageCollector : MonoBehaviour {
     }
 
     public IEnumerator FadeOut(GameObject go) {
-        Debug.Log("HERE");
-
         yield return new WaitForSeconds(_waitTime);
 
         Destroy(go);
