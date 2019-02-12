@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour {
 
+    public static PlayerShoot Instance { get; set; }
+
     public bool drawDebugLines;
     public PlayerMovement pm;
     public ControlTime controlTime;
@@ -19,6 +21,7 @@ public class PlayerShoot : MonoBehaviour {
 
     public GameObject bullet;
     public Transform gun;
+    public int bulletDamage;
 
     public LayerMask enemyLayer;
     //public LayerMask playerLayer;
@@ -47,8 +50,7 @@ public class PlayerShoot : MonoBehaviour {
         _ui = UIManager.Instance;
         _am = AudioManager.Instance;
         _animator = GetComponentInChildren<Animator>();
-
-        bullets = 1;
+        
         _ui.SetBulletCount(1);
     }
 	
@@ -109,6 +111,8 @@ public class PlayerShoot : MonoBehaviour {
                 
                 // SHOOT //
 
+                ApplyDamage();
+
                 GameObject go = (GameObject)Instantiate(bullet, gun.position, gun.rotation);
                 gunFire.Play();
                 _animator.SetTrigger("ShootTrigger");
@@ -124,6 +128,55 @@ public class PlayerShoot : MonoBehaviour {
                 pm.FlyFromShooting();
                 
             }
+        }
+    }
+
+    private void ApplyDamage()
+    {
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(gunRay.origin, gunRay.direction);
+
+        if (hits.Length != 0)
+        {
+            Debug.Log("Hit something with bullet");
+            Debug.Log("Amount of hits: " + hits.Length);
+        }
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            RaycastHit hit = hits[i];
+            Debug.Log("Object hit by bullet: " + hit.transform.name);
+
+            //if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            //{
+                Enemy enemy = hit.transform.gameObject.GetComponentInParent<Enemy>();
+                Health enemyHealth = hit.transform.gameObject.GetComponentInParent<Health>();
+
+                if (!enemy)
+                    Debug.LogWarning("Didn't find Enemy.cs");
+                if (!enemyHealth)
+                    Debug.LogWarning("Didn't find Health.cs");
+
+                if (enemy && enemyHealth)
+                {
+                    Debug.Log("Hit enemy");
+                    if (enemyHealth.CurrentHealth > 0 && enemyHealth.TakeDamage(bulletDamage))
+                    {
+                        // Enemy died
+                        _ui.ComboMeter(true);
+                        _ui.TempPoints(enemy.Points);
+                    }
+                    else if (enemyHealth.CurrentHealth > 0)
+                    {
+                        // Still alive
+                        _ui.ComboMeter(false);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("Didn't find Health.cs OR Enemy.cs on Enemy!");
+                }
+            //}
         }
     }
     
