@@ -26,7 +26,7 @@ public class Sliceable : BzSliceableCharacterBase {
 
     private GarbageCollector _garbageCollector;
 
-    private void Awake() {
+    private void Start() {
         _garbageCollector = GarbageCollector.Instance;
     }
 
