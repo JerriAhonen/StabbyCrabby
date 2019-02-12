@@ -66,20 +66,15 @@ public class PlayerBladeCollision : MonoBehaviour {
     {
         if (_isStabbing && trigger.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            if (trigger.gameObject.GetComponent<SliceableAsync>() != null) {
-                StartCoroutine(trigger.gameObject.GetComponent<SliceableAsync>().Slice(_slicer));
-
-                // NEED TO GET DEADENEMY INFO FROM NEW PLACE
-                //if (deadEnemy)
-                //      Täältä jonnekin tieto et vihu kuoli. UIControllin pitäs saada tietää se.
-            }
-
             Enemy enemy = trigger.gameObject.GetComponentInParent<Enemy>();
             Health enemyHealth = trigger.gameObject.GetComponentInParent<Health>();
 
             if (enemy && enemyHealth)
             {
-                if (enemyHealth.CurrentHealth > 0 && enemyHealth.TakeDamage(_pc.knifeDamageAmount))
+                // Check has to be outside of following if-loop to slice every time
+                bool dead = enemy.TakeDamage(_pc.knifeDamageAmount, _slicer);
+
+                if (enemyHealth.CurrentHealth > 0 && dead)
                 {
                     // Enemy died
                     _ui.ComboMeter(true);

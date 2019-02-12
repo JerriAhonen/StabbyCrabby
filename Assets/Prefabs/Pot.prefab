@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23479296774816750}
   - component: {fileID: 136372253858196148}
   - component: {fileID: 114131354320820232}
+  - component: {fileID: 114067634296257712}
   m_Layer: 9
   m_Name: Pot
   m_TagString: Enemy
@@ -159,6 +160,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1475896212882352}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114067634296257712
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1392384565302264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd825cf08ae8a54d8a19544f355eecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114131354320820232
 MonoBehaviour:
   m_ObjectHideFlags: 1

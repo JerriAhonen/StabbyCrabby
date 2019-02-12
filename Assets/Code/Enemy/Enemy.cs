@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour {
     public int Points { private set; get; }
 
     void Start() {
-        _enemyHealth = gameObject.AddComponent<Health>();
+        _enemyHealth = GetComponent<Health>();
         _enemyMovement = GetComponent<EnemyMovement>();
 
         switch (enemyType) {
@@ -52,6 +52,18 @@ public class Enemy : MonoBehaviour {
         _enemyHealth.SetHealth(_startingHealth);
 	}
 
+    // For death by blade
+    public bool TakeDamage(int damage, Slicer slicer) {
+        bool dead = _enemyHealth.TakeDamage(damage);
+
+        if (gameObject.GetComponent<SliceableAsync>() != null) {
+            StartCoroutine(gameObject.GetComponent<SliceableAsync>().Slice(slicer));
+        }
+
+        return dead;
+    }
+
+    // For death by other means
     public bool TakeDamage(int damage) {
         bool dead = _enemyHealth.TakeDamage(damage);
 
@@ -61,6 +73,8 @@ public class Enemy : MonoBehaviour {
 
         return dead;
     }
+
+    
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player")) {
