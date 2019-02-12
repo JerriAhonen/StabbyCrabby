@@ -2163,12 +2163,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4df4f32b65f7b2748ae742fbe2d616a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawDebugLines: 0
+  drawDebugLines: 1
   pm: {fileID: 421023786}
   controlTime: {fileID: 1307074660}
   gunFire: {fileID: 273533573}
   bullet: {fileID: 1011286184034386, guid: fe4500c9bff6c1c42adca53d7fd38222, type: 2}
   gun: {fileID: 909701073}
+  bulletDamage: 50
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -2177,7 +2178,7 @@ MonoBehaviour:
   slowSpeed: 0.5
   shootRate: 0.5
   shootForce: 50000
-  bullets: 0
+  bullets: 6
   bulletDestroyDelay: 0.1
 --- !u!1 &158600253
 GameObject:
