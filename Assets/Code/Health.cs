@@ -17,28 +17,19 @@ public class Health : MonoBehaviour {
 
     private bool _isDead;
 
-    public bool IsDead {
-        get {
-            return _isDead;
-        }
-        private set {
-            _isDead = value;
-        }
-    }
-
     // Returns whether died or not.
     public bool TakeDamage(int damage) {
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, CurrentHealth);
 
         if (CurrentHealth == 0) {
-            IsDead = true;
+            _isDead = true;
         }
 
-        return IsDead;
+        return _isDead;
     }
 
     public void SetHealth(int health) {
-        if (!IsDead) {
+        if (!_isDead) {
             CurrentHealth = health;
         }
     }

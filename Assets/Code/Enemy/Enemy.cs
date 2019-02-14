@@ -21,9 +21,30 @@ public class Enemy : MonoBehaviour {
 
     public int Points { private set; get; }
 
+    private bool _isDead;
+
+    public bool IsDead {
+        get {
+            return _isDead;
+        }
+        private set {
+            _isDead = value;
+        }
+    }
+
+    private Sliceable _sliceable;
+
     void Start() {
         _enemyHealth = GetComponent<Health>();
         _enemyMovement = GetComponent<EnemyMovement>();
+        _sliceable = GetComponent<Sliceable>();
+
+        // Slice creates new gameObjects that shouldn't go through the rest of Start
+        if (_sliceable != null) {
+            if (_sliceable.Sliced) {
+                return;
+            }
+        }
 
         switch (enemyType) {
             case EnemyType.Toaster: {
@@ -54,27 +75,25 @@ public class Enemy : MonoBehaviour {
 
     // For death by blade
     public bool TakeDamage(int damage, Slicer slicer) {
-        bool dead = _enemyHealth.TakeDamage(damage);
+        IsDead = _enemyHealth.TakeDamage(damage);
 
         if (gameObject.GetComponent<SliceableAsync>() != null) {
             StartCoroutine(gameObject.GetComponent<SliceableAsync>().Slice(slicer));
         }
 
-        return dead;
+        return IsDead;
     }
 
     // For death by other means
     public bool TakeDamage(int damage) {
-        bool dead = _enemyHealth.TakeDamage(damage);
+        IsDead = _enemyHealth.TakeDamage(damage);
 
-        if (dead) {
+        if (IsDead) {
             Destroy(gameObject);
         }
 
-        return dead;
+        return IsDead;
     }
-
-    
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player")) {

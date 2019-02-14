@@ -22,7 +22,9 @@ public class Sliceable : BzSliceableCharacterBase {
     bool _alignPrefSize = false;
 #pragma warning restore 0649
 
-    public bool IsDead { get; private set; }
+    //public bool IsDead { get; private set; }
+
+    public bool Sliced { get; private set; }
 
     private GarbageCollector _garbageCollector;
 
@@ -90,7 +92,7 @@ public class Sliceable : BzSliceableCharacterBase {
         AddAction(lright, result.outObjectPos);
 
         // convert to ragdoll
-        if(_convertToRagdoll & !IsDead) {
+        if(_convertToRagdoll & !Sliced) {
             Profiler.BeginSample("ConvertToRagdoll");
             ConvertToRagdoll(result.outObjectNeg, result.outObjectPos, lazyActionNeg, lazyActionPos);
             Profiler.EndSample();
@@ -99,9 +101,9 @@ public class Sliceable : BzSliceableCharacterBase {
         // show elapsed time
         drawText += addData.stopwatch.ElapsedMilliseconds.ToString() + " - " + gameObject.name + Environment.NewLine;
 
-        IsDead = true;
-        resultNeg.IsDead = IsDead;
-        resultPos.IsDead = IsDead;
+        Sliced = true;
+        resultNeg.Sliced = Sliced;
+        resultPos.Sliced = Sliced;
 
         --_maxSliceCount;
         resultNeg._maxSliceCount = _maxSliceCount;
@@ -225,9 +227,11 @@ public class Sliceable : BzSliceableCharacterBase {
         // if your player is dead, you do not need animator or collision collider
         Animator animator = go.GetComponent<Animator>();
         Collider triggerCollider = go.GetComponent<Collider>();
+        EnemyMovement enemyMovement = go.GetComponent<EnemyMovement>();
 
         UnityEngine.Object.Destroy(animator);
         UnityEngine.Object.Destroy(triggerCollider);
+        UnityEngine.Object.Destroy(enemyMovement);
 
         StartCoroutine(SmoothDepenetration(go, velocityContinue, angularVelocityContinue));
 

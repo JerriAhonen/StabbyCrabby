@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour {
 
-    //private GameObject _player; Isn't used.
+    private GameObject _player;
     private Enemy _enemy;
     private ToastSpawner _toastSpawner;
     
@@ -50,8 +50,10 @@ public class EnemyMovement : MonoBehaviour {
     private bool _dropped;
     private float _speedModifier = 3f;
 
+    private Vector3 _targetLocation;
+
     private void Awake() {
-        //_player = GameObject.Find("PLAYER"); Isn't used.
+        _player = GameObject.Find("PLAYER");
         _enemy = GetComponent<Enemy>();
 
         if (_enemy.enemyType == Enemy.EnemyType.Toaster) {
@@ -139,6 +141,15 @@ public class EnemyMovement : MonoBehaviour {
             {
                 _thrownBack = false;
             }
+
+            if (_enemy.enemyType == Enemy.EnemyType.Toast) {
+
+                if (!_enemy.IsDead) {
+                    _targetLocation = _player.transform.position;
+
+                    Wander(_targetLocation);
+                }
+            }
         }
 
         if (_thrownBack) {
@@ -147,18 +158,30 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     private void LateUpdate() {
-        switch(_enemy.enemyType) {
-            case Enemy.EnemyType.Toaster: {
-                if (_grounded && _birthingTime) {
-                    _birthingTime = false;
+        if(!_enemy.IsDead) {
+            switch(_enemy.enemyType) {
+                case Enemy.EnemyType.Toaster: {
+                    if(_grounded && _birthingTime) {
+                        _birthingTime = false;
 
-                    _animator.SetTrigger("Birth");
+                        _animator.SetTrigger("Birth");
 
-                    _toastSpawner.Invoke("Spawn", _spawnWaitTime);
+                        _toastSpawner.Invoke("Spawn", _spawnWaitTime);
+                    }
+                    break;
                 }
-                break;
+                case Enemy.EnemyType.Toast: {
+                    if(_grounded) {
+                        _animator.SetTrigger("Walk");
+                    }
+                    break;
+                }
             }
         }
+    }
+
+    private void Wander(Vector3 target) {
+        transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime);
     }
 
     private float _gravity;
