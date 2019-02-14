@@ -8,14 +8,14 @@ public class EnemyMovement : MonoBehaviour {
     private Enemy _enemy;
     private ToastSpawner _toastSpawner;
     
-    private bool _thrownBack = false;
+    private bool _isThrown = false;
 
     public bool ThrownBack {
         get {
-            return _thrownBack;
+            return _isThrown;
         }
         set {
-            _thrownBack = value;
+            _isThrown = value;
         }
     }
 
@@ -28,7 +28,7 @@ public class EnemyMovement : MonoBehaviour {
 
     [SerializeField] private LayerMask _ground;
 
-    private bool _grounded = false;
+    private bool _isGrounded = false;
     private bool _birthingTime = true;
 
     public bool BirthingTime {
@@ -47,10 +47,12 @@ public class EnemyMovement : MonoBehaviour {
 
     private Animator _animator;
 
-    private bool _dropped;
+    private bool _isDropped;
     private float _speedModifier = 3f;
 
+    private Vector3 _playerPosition;
     private Vector3 _targetLocation;
+    private float _maxDistance;
 
     private void Awake() {
         _player = GameObject.Find("PLAYER");
@@ -59,7 +61,7 @@ public class EnemyMovement : MonoBehaviour {
         if (_enemy.enemyType == Enemy.EnemyType.Toaster) {
             _toastSpawner = GetComponent<ToastSpawner>();
 
-            _dropped = true;
+            _isDropped = true;
         }
 
         _animator = GetComponent<Animator>();
@@ -67,14 +69,29 @@ public class EnemyMovement : MonoBehaviour {
 
     private void Start() {
         _spawnWaitTime = 1.6f;
+
+        _playerPosition = _player.transform.position;
+
+        _targetLocation = new Vector3(_player.transform.position.x, _groundHeight, _player.transform.position.z);
+
+        _maxDistance = 2f;
     }
 	
 	private void Update() {
-        //if (_thrownBack) {
-        //    return;
-        //}
+        float distance = Vector3.Distance(_player.transform.position, _targetLocation);
 
-        //float distanceToPlayer = Vector3.Distance(_player.transform.position, transform.position);
+        if (distance < _maxDistance) {
+            _targetLocation = new Vector3(_player.transform.position.x, _groundHeight, _player.transform.position.z);
+        }
+        
+        if (_isGrounded) {
+            if (_enemy.enemyType == Enemy.EnemyType.Toast) {
+
+                Wander(_targetLocation);
+
+                Rotate(_targetLocation);
+            }
+        }
     }
 
     private void FixedUpdate() {
@@ -116,43 +133,34 @@ public class EnemyMovement : MonoBehaviour {
         {
             transform.position += Physics.gravity * _speedModifier * Time.deltaTime;
 
-            _grounded = false;
+            _isGrounded = false;
         } else if (transform.position.y < _groundHeight + _heightPadding)
         {
             transform.position = Vector3.Lerp(transform.position,
                                             transform.position + Vector3.up,
                                             5 * Time.deltaTime);
 
-            _grounded = false;
+            _isGrounded = false;
 
-            if (_thrownBack)
+            if (_isThrown)
             {
-                _thrownBack = false;
+                _isThrown = false;
             }
         } else {
-            _grounded = true;
+            _isGrounded = true;
 
-            if (_dropped)
+            if (_isDropped)
             {
-                _dropped = false;
+                _isDropped = false;
             }
             
-            if (_thrownBack)
+            if (_isThrown)
             {
-                _thrownBack = false;
-            }
-
-            if (_enemy.enemyType == Enemy.EnemyType.Toast) {
-
-                if (!_enemy.IsDead) {
-                    _targetLocation = _player.transform.position;
-
-                    Wander(_targetLocation);
-                }
+                _isThrown = false;
             }
         }
 
-        if (_thrownBack) {
+        if (_isThrown) {
             ThrowEnemy();
         }
     }
@@ -161,7 +169,7 @@ public class EnemyMovement : MonoBehaviour {
         if(!_enemy.IsDead) {
             switch(_enemy.enemyType) {
                 case Enemy.EnemyType.Toaster: {
-                    if(_grounded && _birthingTime) {
+                    if(_isGrounded && _birthingTime) {
                         _birthingTime = false;
 
                         _animator.SetTrigger("Birth");
@@ -171,7 +179,7 @@ public class EnemyMovement : MonoBehaviour {
                     break;
                 }
                 case Enemy.EnemyType.Toast: {
-                    if(_grounded) {
+                    if(_isGrounded) {
                         _animator.SetTrigger("Walk");
                     }
                     break;
@@ -180,8 +188,16 @@ public class EnemyMovement : MonoBehaviour {
         }
     }
 
+    private void Rotate(Vector3 target) {
+        if (target != Vector3.zero) {
+            Quaternion newRotation = Quaternion.LookRotation(target);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 5f);
+        }
+    }
+
     private void Wander(Vector3 target) {
-        transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target, _enemy.Speed * Time.deltaTime);
     }
 
     private float _gravity;
@@ -200,7 +216,7 @@ public class EnemyMovement : MonoBehaviour {
 
         _flyTime = 0;
 
-        _thrownBack = true;
+        _isThrown = true;
     }
 
     private void ThrowEnemy() {
