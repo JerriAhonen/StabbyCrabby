@@ -30177,6 +30177,7 @@ GameObject:
   - component: {fileID: 1791101284}
   - component: {fileID: 1791101285}
   - component: {fileID: 1791101286}
+  - component: {fileID: 1791101287}
   m_Layer: 10
   m_Name: PARENT
   m_TagString: Untagged
@@ -30243,6 +30244,17 @@ CapsuleCollider:
   m_Height: 1.2967782
   m_Direction: 1
   m_Center: {x: -0.5673775, y: -0.019661898, z: -0.6198208}
+--- !u!114 &1791101287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1791101283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd825cf08ae8a54d8a19544f355eecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1809223380 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e6e3073c694052045ac5344c20916e39,

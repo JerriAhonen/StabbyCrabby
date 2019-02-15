@@ -180,4 +180,9 @@ public class UIManager : MonoBehaviour {
         pauseMenuUI.SetActive(false);
         yield break;
     }
+
+    //TEMP QUICK GAMEOVER
+    public void GameOver() {
+        endScreenUI.SetActive(true);
+    }
 }

@@ -63,4 +63,9 @@ public class Ragdoll : MonoBehaviour {
         _playerMovement.enabled = !active;
         _playerCombat.enabled = !active;
     }
+
+    // TEMP RAGDOLL AFTER DEATH, LIMBS GO BERSERK...
+    public void Temp() {
+        RagdollActive(true);
+    }
 }

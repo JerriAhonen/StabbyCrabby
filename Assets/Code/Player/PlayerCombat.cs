@@ -16,6 +16,11 @@ public class PlayerCombat : MonoBehaviour {
     Animator _animator;
     public float resetTimer;
 
+    // SHOULD THERE BE A PLAYER CLASS THAT INITIALIZES HEALTH, 
+    // GETS SENT INFO ABOUT DEATH, THEN SETS RAGDOLL TO TRUE 
+    // AND TELLS UI IT'S "GAMEOVER, MAN, GAMEOVER!"??
+    private Health _health;
+
     void Awake()
     {
         if (Instance == null)
@@ -33,6 +38,13 @@ public class PlayerCombat : MonoBehaviour {
             comboParams = new string[] { "Attack 1", "Attack 2" };
 
         _animator = GetComponentInChildren<Animator>();
+
+        // SHOULD THERE BE A PLAYER CLASS THAT INITIALIZES HEALTH, 
+        // GETS SENT INFO ABOUT DEATH, THEN SETS RAGDOLL TO TRUE 
+        // AND TELLS UI IT'S "GAMEOVER, MAN, GAMEOVER!"??
+        _health = GetComponentInChildren<Health>();
+
+        _health.SetHealth(1);
     }
 	
 	// Update is called once per frame

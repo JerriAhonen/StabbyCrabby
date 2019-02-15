@@ -50,9 +50,11 @@ public class EnemyMovement : MonoBehaviour {
     private bool _isDropped;
     private float _speedModifier = 3f;
 
-    private Vector3 _playerPosition;
-    private Vector3 _targetLocation;
-    private float _maxDistance;
+    public Vector3 _playerPosition;
+    public Vector3 _targetLocation;
+    public float _maxDistance;
+    public float _maxAttackDistance;
+    public bool _attack;
 
     private void Awake() {
         _player = GameObject.Find("PLAYER");
@@ -68,28 +70,50 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     private void Start() {
-        _spawnWaitTime = 1.6f;
+        _enemy.Init();
 
         _playerPosition = _player.transform.position;
 
         _targetLocation = new Vector3(_player.transform.position.x, _groundHeight, _player.transform.position.z);
 
+        _spawnWaitTime = 1.6f;
         _maxDistance = 2f;
+        _maxAttackDistance = _enemy.AttackDistance;
     }
-	
+
+    public float distance;
+    public float attackDistance;
+
 	private void Update() {
-        float distance = Vector3.Distance(_player.transform.position, _targetLocation);
+        distance = Vector3.Distance(_player.transform.position, _targetLocation);
+        attackDistance = Vector3.Distance(_player.transform.position, transform.position);
 
         if (distance < _maxDistance) {
             _targetLocation = new Vector3(_player.transform.position.x, _groundHeight, _player.transform.position.z);
         }
-        
-        if (_isGrounded) {
+
+        if (attackDistance < _maxAttackDistance) {
+            _animator.SetTrigger("Attack");
+        } else if (_isGrounded && _targetLocation != Vector3.zero) {
             if (_enemy.enemyType == Enemy.EnemyType.Toast) {
 
                 Wander(_targetLocation);
 
-                Rotate(_targetLocation);
+                _animator.SetTrigger("Walk");
+            }
+        } else {
+            _animator.SetTrigger("Idle");
+        }
+
+        Rotate(_targetLocation);
+
+        if (_enemy.enemyType == Enemy.EnemyType.Toaster) {
+            if (_isGrounded && _birthingTime) {
+                _birthingTime = false;
+
+                _animator.SetTrigger("Birth");
+
+                _toastSpawner.Invoke("Spawn", _spawnWaitTime);
             }
         }
     }
@@ -166,31 +190,12 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     private void LateUpdate() {
-        if(!_enemy.IsDead) {
-            switch(_enemy.enemyType) {
-                case Enemy.EnemyType.Toaster: {
-                    if(_isGrounded && _birthingTime) {
-                        _birthingTime = false;
-
-                        _animator.SetTrigger("Birth");
-
-                        _toastSpawner.Invoke("Spawn", _spawnWaitTime);
-                    }
-                    break;
-                }
-                case Enemy.EnemyType.Toast: {
-                    if(_isGrounded) {
-                        _animator.SetTrigger("Walk");
-                    }
-                    break;
-                }
-            }
-        }
+        
     }
 
     private void Rotate(Vector3 target) {
-        if (target != Vector3.zero) {
-            Quaternion newRotation = Quaternion.LookRotation(target);
+        if ((target - transform.position) != Vector3.zero) {
+            Quaternion newRotation = Quaternion.LookRotation(target - transform.position);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 5f);
         }

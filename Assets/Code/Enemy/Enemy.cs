@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour {
 
     public float Speed { private set; get; }
 
+    public float AttackDistance { private set; get; }
+
     //private int _points;
 
     public int Points { private set; get; }
@@ -37,23 +39,24 @@ public class Enemy : MonoBehaviour {
 
     private Sliceable _sliceable;
 
-    void Start() {
+    private UIManager _ui;
+
+    private void Awake() {
         _enemyHealth = GetComponent<Health>();
         _enemyMovement = GetComponent<EnemyMovement>();
         _sliceable = GetComponent<Sliceable>();
 
-        // Slice creates new gameObjects that shouldn't go through the rest of Start
-        if (_sliceable != null) {
-            if (_sliceable.Sliced) {
-                return;
-            }
-        }
+        _ui = UIManager.Instance;
+    }
 
+    // Init instead of Start since changing the script execution order did nothing and this info is needed AFTER EnemyMovement Awake but before Start
+    public void Init() {
         switch (enemyType) {
             case EnemyType.Toaster: {
                 _startingHealth = 1;
                 _damage = 0;
                 Speed = 1f;
+                AttackDistance = 0f;
                 Points = 1000;
                 break;
             }
@@ -61,16 +64,21 @@ public class Enemy : MonoBehaviour {
                 _startingHealth = 1;
                 _damage = 10;
                 Speed = 5f;
+                AttackDistance = 1.5f;
                 Points = 100;
 
                 transform.rotation = Quaternion.AngleAxis(Random.Range(0f, 180f), Vector3.up);
-                _enemyMovement.GetThrown(transform.forward);
+
+                if (_enemyMovement != null) {
+                    _enemyMovement.GetThrown(transform.forward);
+                }
                 break;
             }
             case EnemyType.Pot: {
                 _startingHealth = 1;
                 _damage = 20;
                 Speed = 5f;
+                AttackDistance = 10f;
                 Points = 100;
                 break;
             }
@@ -101,11 +109,19 @@ public class Enemy : MonoBehaviour {
         return IsDead;
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player")) {
-            if (collision.gameObject.GetComponent<Health>() != null) {
+    private void OnTriggerEnter(Collider collider) {
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Player")) {
+            if (collider.gameObject.GetComponent<Health>() != null) {
                 Debug.Log("Collided with player health component object");
-                collision.gameObject.GetComponent<Health>().TakeDamage(_damage);
+                bool dead = collider.gameObject.GetComponent<Health>().TakeDamage(_damage);
+
+                // SHOULD THERE BE A PLAYER CLASS THAT INITIALIZES HEALTH, 
+                // GETS SENT INFO ABOUT DEATH, THEN SETS RAGDOLL TO TRUE 
+                // AND TELLS UI IT'S "GAMEOVER, MAN, GAMEOVER!"??
+                if (dead) {
+                    _ui.GameOver();
+                    collider.gameObject.GetComponent<Ragdoll>().Temp();
+                }
             }
         }
     }
