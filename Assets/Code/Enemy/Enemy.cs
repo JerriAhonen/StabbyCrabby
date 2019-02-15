@@ -112,7 +112,6 @@ public class Enemy : MonoBehaviour {
     private void OnTriggerEnter(Collider collider) {
         if (collider.gameObject.layer == LayerMask.NameToLayer("Player")) {
             if (collider.gameObject.GetComponent<Health>() != null) {
-                Debug.Log("Collided with player health component object");
                 bool dead = collider.gameObject.GetComponent<Health>().TakeDamage(_damage);
 
                 // SHOULD THERE BE A PLAYER CLASS THAT INITIALIZES HEALTH, 
