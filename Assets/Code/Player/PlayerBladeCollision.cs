@@ -67,20 +67,21 @@ public class PlayerBladeCollision : MonoBehaviour {
         if (_isStabbing && trigger.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             Enemy enemy = trigger.gameObject.GetComponentInParent<Enemy>();
-            Health enemyHealth = trigger.gameObject.GetComponentInParent<Health>();
 
-            if (enemy && enemyHealth)
+            bool wasAlive = !enemy.IsDead;
+
+            if (enemy)
             {
                 // Check has to be outside of following if-loop to slice every time
-                bool dead = enemy.TakeDamage(_pc.knifeDamageAmount, _slicer);
+                bool isDead = enemy.TakeDamage(_pc.knifeDamageAmount, _slicer);
 
-                if (enemyHealth.CurrentHealth > 0 && dead)
+                if (wasAlive && isDead)
                 {
                     // Enemy died
                     _ui.ComboMeter(true);
-                    _ui.TempPoints(enemy.Points);
+                    _ui.Points(enemy.Points);
                 }
-                else if (enemyHealth.CurrentHealth > 0)
+                else if (!isDead)
                 {
                     // Still alive
                     _ui.ComboMeter(false);
