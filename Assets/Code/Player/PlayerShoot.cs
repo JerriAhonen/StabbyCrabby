@@ -83,7 +83,11 @@ public class PlayerShoot : MonoBehaviour {
 
         // Cast a ray from the gun's position to the aimpoint 
         // (GET THE DIRECTION TO AIMPOINT BY SUBSTRACTING GUN.POSITION FROM IT)
-        gunRay = new Ray(gun.position, aimPoint - gun.position);
+
+        Vector3 gunRayDirection = aimPoint - gun.position;
+        gunRayDirection.y = 1;
+
+        gunRay = new Ray(gun.position, gunRayDirection);
 
         if (Physics.Raycast(gunRay.origin, gunRay.direction, out gunRayHit, ~enemyLayer))
         {
@@ -160,7 +164,7 @@ public class PlayerShoot : MonoBehaviour {
                 if (enemy && enemyHealth)
                 {
                     Debug.Log("Hit enemy");
-                    if (enemyHealth.CurrentHealth > 0 && enemyHealth.TakeDamage(bulletDamage))
+                    if (enemyHealth.CurrentHealth > 0 && enemy.TakeDamage(bulletDamage))
                     {
                         // Enemy died
                         _ui.ComboMeter(true);
