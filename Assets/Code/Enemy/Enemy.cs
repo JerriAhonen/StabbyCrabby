@@ -26,7 +26,8 @@ public class Enemy : MonoBehaviour {
 
     public int Points { private set; get; }
 
-    public bool _isDead;
+    [SerializeField, HideInInspector]
+    private bool _isDead;
 
     public bool IsDead {
         get {
@@ -37,18 +38,11 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    private Sliceable _sliceable;
-
     private UIManager _ui;
 
     private void Awake() {
         _enemyHealth = GetComponent<Health>();
         _enemyMovement = GetComponent<EnemyMovement>();
-        _sliceable = GetComponent<Sliceable>();
-
-        //if (!_sliceable.Sliced) {
-            
-        //}
     }
 
     // Init instead of Start since changing the script execution order did nothing and this info is needed AFTER EnemyMovement Awake but before Start
