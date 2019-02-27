@@ -102,7 +102,9 @@ public class EnemyMovement : MonoBehaviour {
                 _animator.SetTrigger("Walk");
             }
         } else {
-            _animator.SetTrigger("Idle");
+            if (_enemy.enemyType == Enemy.EnemyType.Toast) {
+                _animator.SetTrigger("Idle");
+            }
         }
 
         Rotate(_targetLocation);

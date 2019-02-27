@@ -26,7 +26,16 @@ public class Enemy : MonoBehaviour {
 
     public int Points { private set; get; }
 
-    public bool IsDead { get; private set; }
+    public bool _isDead;
+
+    public bool IsDead {
+        get {
+            return _isDead;
+        }
+        private set {
+            _isDead = value;
+        }
+    }
 
     private Sliceable _sliceable;
 

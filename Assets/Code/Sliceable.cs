@@ -22,9 +22,17 @@ public class Sliceable : BzSliceableCharacterBase {
     bool _alignPrefSize = false;
 #pragma warning restore 0649
 
-    //public bool IsDead { get; private set; }
-
-    public bool Sliced { get; private set; }
+    public bool _sliced;
+    
+    // Originally IsDead
+    public bool Sliced {
+        get {
+            return _sliced;
+        }
+        private set {
+            _sliced = value;
+        }
+    }
 
     private GarbageCollector _garbageCollector;
 

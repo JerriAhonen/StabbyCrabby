@@ -89,7 +89,7 @@ public class PlayerBladeCollision : MonoBehaviour {
             }
             else
             {
-                Debug.LogWarning("Didn't find Health.cs OR Enemy.cs on Enemy!");
+                Debug.LogWarning("Didn't find Enemy.cs on Enemy!");
             }
 
         }
