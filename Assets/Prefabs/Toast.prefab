@@ -597,6 +597,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 1
+  _isDead: 0
+  _materials: []
 --- !u!114 &114900314860133234
 MonoBehaviour:
   m_ObjectHideFlags: 1

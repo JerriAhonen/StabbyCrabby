@@ -34,7 +34,12 @@ public class Sliceable : BzSliceableCharacterBase {
         }
     }
 
+    [SerializeField, HideInInspector]
     private GarbageCollector _garbageCollector;
+    [SerializeField, HideInInspector]
+    private Material[] _materialsPos;
+    [SerializeField, HideInInspector]
+    private Material[] _materialsNeg;
 
     private void Start() {
         _garbageCollector = GarbageCollector.Instance;
@@ -116,9 +121,26 @@ public class Sliceable : BzSliceableCharacterBase {
         --_maxSliceCount;
         resultNeg._maxSliceCount = _maxSliceCount;
         resultPos._maxSliceCount = _maxSliceCount;
+
+        SkinnedMeshRenderer[] renderersNeg = result.outObjectNeg.GetComponentsInChildren<SkinnedMeshRenderer>();
         
-        StartCoroutine(_garbageCollector.FadeOut(result.outObjectPos));
-        StartCoroutine(_garbageCollector.FadeOut(result.outObjectNeg));
+        foreach (SkinnedMeshRenderer rend in renderersNeg) {
+            Material[] temp = rend.materials;
+
+            _materialsNeg = _materialsNeg.Concat(temp).ToArray();
+        }
+
+        StartCoroutine(_garbageCollector.FadeOut(result.outObjectNeg, _materialsNeg, 10));
+
+        SkinnedMeshRenderer[] renderersPos = result.outObjectPos.GetComponentsInChildren<SkinnedMeshRenderer>();
+
+        foreach(SkinnedMeshRenderer rend in renderersPos) {
+            Material[] temp = rend.materials;
+
+            _materialsPos = _materialsPos.Concat(temp).ToArray();
+        }
+
+        StartCoroutine(_garbageCollector.FadeOut(result.outObjectPos, _materialsPos, 10));
     }
 
     private static void AddAction(Action<GameObject> l, GameObject go) {

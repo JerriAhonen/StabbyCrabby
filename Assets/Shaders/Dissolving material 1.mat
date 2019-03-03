@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Dissolving material 1
-  m_Shader: {fileID: 4800000, guid: c3d83aa1036166747a04520eb2d7fe19, type: 3}
+  m_Shader: {fileID: 4800000, guid: b22951a7c0df0a64db4a809e29fe9f20, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -64,7 +64,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_2B2DFAFE: 0.1
+    - Vector1_3BB64A1E: 0
     - Vector1_79115611: 1
+    - Vector1_9D317B6: 0
     - Vector1_DEA9EF5F: 30
     - _AlphaClip: 0
     - _Blend: 0
@@ -88,6 +90,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_2EFE19E8: {r: 0.8860781, g: 0, b: 0.9716981, a: 0}
+    - Color_773BB0B: {r: 0.23765805, g: 0.6415094, b: 0.22089705, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

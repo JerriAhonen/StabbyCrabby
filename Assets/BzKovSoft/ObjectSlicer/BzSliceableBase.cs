@@ -298,7 +298,7 @@ namespace BzKovSoft.ObjectSlicer
             resultObjNeg = this.gameObject;
             resultObjPos = Instantiate(this.gameObject, this.gameObject.transform.parent);
 
-			resultObjPos.name = resultObjNeg.name + "_pos";
+            resultObjPos.name = resultObjNeg.name + "_pos";
 			resultObjNeg.name = resultObjNeg.name + "_neg";
         }
 
