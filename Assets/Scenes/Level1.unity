@@ -2173,6 +2173,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   aimPoint: {x: 0, y: 0, z: 0}
   stopTime: 0.1
   slowSpeed: 0.5

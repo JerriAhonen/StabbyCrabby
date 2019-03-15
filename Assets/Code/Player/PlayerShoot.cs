@@ -24,7 +24,7 @@ public class PlayerShoot : MonoBehaviour {
     public int bulletDamage;
 
     public LayerMask enemyLayer;
-    //public LayerMask playerLayer;
+    public LayerMask playerLayer;
 
     public Vector3 aimPoint;
 
@@ -70,7 +70,7 @@ public class PlayerShoot : MonoBehaviour {
         // If we hit something, set that point as the aim point.
         // If we don't hit anything, get set the point on camRay at 100 distance as the aim point.
         // (We could set the point to the border of the arena)
-        if (Physics.Raycast(camRay.origin, camRay.direction, out camRayHit))
+        if (Physics.Raycast(camRay.origin, camRay.direction, out camRayHit, 100.0f, ~playerLayer))
         {
             aimPoint = camRayHit.point;
             if (drawDebugLines) Debug.DrawRay(camRay.origin, camRay.direction * camRayHit.distance, Color.black);
@@ -85,17 +85,20 @@ public class PlayerShoot : MonoBehaviour {
         // (GET THE DIRECTION TO AIMPOINT BY SUBSTRACTING GUN.POSITION FROM IT)
 
         Vector3 gunRayDirection = aimPoint - gun.position;
-        gunRayDirection.y = 1;
+        gunRayDirection = gunRayDirection.normalized;
 
-        gunRay = new Ray(gun.position, gunRayDirection);
+        // Flatten the gun vector so that it runs parallel to the ground.
+        Vector3 flattenedGunrayDir = Vector3.ProjectOnPlane(gunRayDirection, Vector3.up);
 
-        if (Physics.Raycast(gunRay.origin, gunRay.direction, out gunRayHit, ~enemyLayer))
+        gunRay = new Ray(gun.position, flattenedGunrayDir);
+
+        if (Physics.Raycast(gunRay.origin, gunRay.direction, out gunRayHit, 100.0f, ~playerLayer))
         {
             if (drawDebugLines) Debug.DrawRay(gunRay.origin, gunRay.direction * gunRayHit.distance, Color.white);
         }
         else
         {
-            if (drawDebugLines) Debug.DrawRay(gunRay.origin, gunRay.direction * Vector3.Distance(gunRay.origin, aimPoint), Color.white);
+            if (drawDebugLines) Debug.DrawRay(gunRay.origin, gunRay.direction * 100.0f, Color.white);
         }
     }
 
@@ -107,7 +110,6 @@ public class PlayerShoot : MonoBehaviour {
             {
                 // STOP TIME BEFORE SHOOTING //
                 float flytime = pm.flyTime;
-
                 
                 float slowTime = (flytime / slowSpeed) - stopTime;
 
