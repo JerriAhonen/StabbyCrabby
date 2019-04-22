@@ -600,13 +600,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolSize: 100
-  _enemiesInWave: 05000000060000000700000008000000
+  _enemiesInWave: 05000000060000000700000008000000080000000800000008000000080000000800000008000000
   _enemyTypes:
   - {fileID: 1037885761301716, guid: a4bb337644c791c48acc9bce92bf06f6, type: 2}
   - {fileID: 1037885761301716, guid: a4bb337644c791c48acc9bce92bf06f6, type: 2}
   - {fileID: 1037885761301716, guid: a4bb337644c791c48acc9bce92bf06f6, type: 2}
   - {fileID: 1037885761301716, guid: a4bb337644c791c48acc9bce92bf06f6, type: 2}
+  - {fileID: 1037885761301716, guid: a4bb337644c791c48acc9bce92bf06f6, type: 2}
+  - {fileID: 1037885761301716, guid: a4bb337644c791c48acc9bce92bf06f6, type: 2}
+  - {fileID: 1037885761301716, guid: a4bb337644c791c48acc9bce92bf06f6, type: 2}
+  - {fileID: 1037885761301716, guid: a4bb337644c791c48acc9bce92bf06f6, type: 2}
+  - {fileID: 1037885761301716, guid: a4bb337644c791c48acc9bce92bf06f6, type: 2}
+  - {fileID: 1037885761301716, guid: a4bb337644c791c48acc9bce92bf06f6, type: 2}
   _spawnIntervals:
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -640,6 +652,9 @@ MonoBehaviour:
   _ground:
     serializedVersion: 2
     m_Bits: 4096
+  _enemies:
+    serializedVersion: 2
+    m_Bits: 512
   _playerPosition: {x: 0, y: 0, z: 0}
   _targetLocation: {x: 0, y: 0, z: 0}
   _maxDistance: 0
