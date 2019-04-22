@@ -27,6 +27,7 @@ public class EnemyMovement : MonoBehaviour {
     private float _heightPadding = -0.05f;
 
     [SerializeField] private LayerMask _ground;
+    [SerializeField] private LayerMask _enemies;
 
     private bool _isGrounded = false;
     private bool _birthingTime = true;
@@ -55,6 +56,8 @@ public class EnemyMovement : MonoBehaviour {
     public float _maxDistance;
     public float _maxAttackDistance;
     public bool _attack;
+
+    Vector3 _currentVelocity;
 
     private void Awake() {
         _player = GameObject.Find("PLAYER");
@@ -204,6 +207,51 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     private void Wander(Vector3 target) {
+        // Get current agent data for the agent.
+        Vector3 position = transform.position;
+        Quaternion rotation = transform.rotation;
+
+        // Get current controller data for the agent.
+        Vector3 separation = Vector3.zero;
+        Vector3 alignment = transform.forward;
+        Vector3 cohesion = transform.position;
+
+        Collider[] agents = Physics.OverlapSphere(position,
+            _enemy.DistanceBetweenAgents, _enemies, QueryTriggerInteraction.Collide);
+
+        foreach(var agent in agents) {
+            // If the agent is this agent, it already has the current controller data.
+            if (agent.gameObject == this.gameObject) {
+                continue;
+            }
+
+            // Update the other agents in the flock.
+            separation += CalculateSeparationVector(agent.transform);
+            alignment += agent.transform.forward;
+            cohesion += agent.transform.position;
+        }
+
+        float average = 1.0f / agents.Length;
+
+        // Steer to align to the average heading of neighbors
+        alignment *= average;
+        // Steer towards the average position of neighbors = finds middle point of all neighbors and tries to move there
+        cohesion *= average;
+        cohesion = (cohesion - position).normalized; // offset from own position
+        //cohesion = Vector3.SmoothDamp(cohesion, target, ref _currentVelocity, 0.5f);
+
+        // THIS MAKES IT RAINNNNNNNNNNNNN :D
+        //Vector3 newDirection = separation + alignment + cohesion;
+
+        Vector3 flockMove = new Vector3(separation.x * 7 + alignment.x + cohesion.x, 0, separation.z * 7 + alignment.z + cohesion.z);
+
+        // THIS MAKES THEM RUN AWAY AND CIRCLE THE LEVEL :D
+        //transform.position = Vector3.MoveTowards(transform.position + newDirection, target, _enemy.Speed * Time.deltaTime);
+
+        //transform.forward = newDirection;
+
+        transform.position += flockMove * 0.5f * Time.deltaTime;
+
         transform.position = Vector3.MoveTowards(transform.position, target, _enemy.Speed * Time.deltaTime);
     }
 
@@ -244,5 +292,18 @@ public class EnemyMovement : MonoBehaviour {
         //if (transform.position.y < 0f) {
         //    _flyTime = 0f;
         //}
+    }
+
+    // Calculates the separation vector between an agent in the flock and the current agent.
+    private Vector3 CalculateSeparationVector(Transform target) {
+        // Steer to avoid hitting neighbors
+        Vector3 separationVector = transform.position - target.transform.position;
+
+        // The length of the vector.
+        float distance = separationVector.magnitude;
+
+        float scaler = Mathf.Clamp01(1.0f - distance / _enemy.DistanceBetweenAgents);
+
+        return separationVector * (scaler / distance);
     }
 }

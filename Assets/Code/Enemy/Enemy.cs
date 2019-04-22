@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour {
 
     public float AttackDistance { private set; get; }
 
+    public float DistanceBetweenAgents { private set; get; }
+
     //private int _points;
 
     public int Points { private set; get; }
@@ -53,14 +55,16 @@ public class Enemy : MonoBehaviour {
                 Damage = 0;
                 Speed = 1f;
                 AttackDistance = 0f;
+                DistanceBetweenAgents = 5f;
                 Points = 1000;
                 break;
             }
             case EnemyType.Toast: {
                 _startingHealth = 1;
                 Damage = 10;
-                Speed = 5f;
+                Speed = 1f;
                 AttackDistance = 1.5f;
+                DistanceBetweenAgents = 2f;
                 Points = 100;
 
                 transform.rotation = Quaternion.AngleAxis(Random.Range(0f, 180f), Vector3.up);
@@ -75,6 +79,7 @@ public class Enemy : MonoBehaviour {
                 Damage = 20;
                 Speed = 5f;
                 AttackDistance = 10f;
+                DistanceBetweenAgents = 4f;
                 Points = 100;
                 break;
             }

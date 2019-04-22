@@ -511,6 +511,9 @@ MonoBehaviour:
   _ground:
     serializedVersion: 2
     m_Bits: 4096
+  _enemies:
+    serializedVersion: 2
+    m_Bits: 512
   _playerPosition: {x: 0, y: 0, z: 0}
   _targetLocation: {x: 0, y: 0, z: 0}
   _maxDistance: 0
@@ -563,6 +566,9 @@ MonoBehaviour:
   _prefubDirection: {x: 0, y: 0, z: 0}
   _convertToRagdoll: 1
   _alignPrefSize: 0
+  _garbageCollector: {fileID: 0}
+  _materialsPos: []
+  _materialsNeg: []
 --- !u!114 &114423642951981354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -598,7 +604,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 1
   _isDead: 0
-  _materials: []
 --- !u!114 &114900314860133234
 MonoBehaviour:
   m_ObjectHideFlags: 1
