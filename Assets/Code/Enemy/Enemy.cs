@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
@@ -30,6 +31,10 @@ public class Enemy : MonoBehaviour {
 
     [SerializeField, HideInInspector]
     private bool _isDead;
+    [SerializeField, HideInInspector]
+    private GarbageCollector _garbageCollector;
+    [SerializeField, HideInInspector]
+    private Material[] _materials;
 
     public bool IsDead {
         get {
@@ -47,11 +52,15 @@ public class Enemy : MonoBehaviour {
         _enemyMovement = GetComponent<EnemyMovement>();
     }
 
+    private void Start() {
+        _garbageCollector = GarbageCollector.Instance;
+    }
+
     // Init instead of Start since changing the script execution order did nothing and this info is needed AFTER EnemyMovement Awake but before Start
     public void Init() {
         switch (enemyType) {
             case EnemyType.Toaster: {
-                _startingHealth = 1;
+                _startingHealth = 10000000;
                 Damage = 0;
                 Speed = 1f;
                 AttackDistance = 0f;
@@ -104,9 +113,53 @@ public class Enemy : MonoBehaviour {
         IsDead = _enemyHealth.TakeDamage(damage);
 
         if (IsDead) {
-            Destroy(gameObject);
+            Animator animator = GetComponent<Animator>();
+            EnemyMovement enemyMovement = GetComponent<EnemyMovement>();
+
+            UnityEngine.Object.Destroy(animator);
+            UnityEngine.Object.Destroy(enemyMovement);
+
+            PrepareToDie();
         }
 
         return IsDead;
+    }
+
+    private void ConvertToRagDoll() {
+        Animator animator = GetComponent<Animator>();
+        Collider triggerCollider = GetComponent<Collider>();
+        EnemyMovement enemyMovement = GetComponent<EnemyMovement>();
+
+        UnityEngine.Object.Destroy(animator);
+        UnityEngine.Object.Destroy(triggerCollider);
+        UnityEngine.Object.Destroy(enemyMovement);
+
+        var collidersArr = GetComponentsInChildren<Collider>();
+        for(int i = 0; i < collidersArr.Length; i++) {
+            var collider = collidersArr[i];
+            if(collider == triggerCollider)
+                continue;
+
+            collider.isTrigger = false;
+        }
+
+        // set rigid bodies as non kinematic
+        var rigidsArr = GetComponentsInChildren<Rigidbody>();
+        for(int i = 0; i < rigidsArr.Length; i++) {
+            var rigid = rigidsArr[i];
+            rigid.isKinematic = false;
+        }
+    }
+
+    private void PrepareToDie() {
+        SkinnedMeshRenderer[] renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+
+        foreach(SkinnedMeshRenderer rend in renderers) {
+            Material[] temp = rend.materials;
+
+            _materials = _materials.Concat(temp).ToArray();
+        }
+
+        StartCoroutine(_garbageCollector.FadeOut(gameObject, _materials, 5));
     }
 }

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 114423642951981354}
   m_Layer: 9
   m_Name: Toast
-  m_TagString: Enemy
+  m_TagString: Toast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 114151932801919928}
   m_Layer: 9
   m_Name: MASTER
-  m_TagString: Untagged
+  m_TagString: Toast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 54947128681362146}
   m_Layer: 9
   m_Name: Armature
-  m_TagString: Untagged
+  m_TagString: Toast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

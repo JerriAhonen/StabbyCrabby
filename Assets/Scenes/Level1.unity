@@ -146,7 +146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 195.99997, y: 5}
+  m_AnchoredPosition: {x: 195.99997, y: 4}
   m_SizeDelta: {x: 157.02, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7296413
@@ -826,7 +826,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &56426910
 RectTransform:
   m_ObjectHideFlags: 0
@@ -843,7 +843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -324, y: -85.5}
+  m_AnchoredPosition: {x: -324, y: -165.5}
   m_SizeDelta: {x: 218.7, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &56426911
@@ -875,8 +875,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -1417,7 +1417,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 260
+  m_textAlignment: 257
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -9491,7 +9491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 195.99997, y: -35}
+  m_AnchoredPosition: {x: 195.99997, y: 5}
   m_SizeDelta: {x: 157.02, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &477614831
@@ -10741,7 +10741,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 195.99997, y: 45}
+  m_AnchoredPosition: {x: 195.99997, y: 6}
   m_SizeDelta: {x: 157.02, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &638846630
@@ -11167,7 +11167,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 260
+  m_textAlignment: 257
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -11923,8 +11923,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -12239,7 +12239,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -324, y: -125.5}
+  m_AnchoredPosition: {x: -324, y: -85.5}
   m_SizeDelta: {x: 218.7, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &760564983
@@ -12271,8 +12271,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -14637,7 +14637,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1018406497
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16254,7 +16254,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -324, y: -165.5}
+  m_AnchoredPosition: {x: -324, y: -125.5}
   m_SizeDelta: {x: 218.7, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1160178551
@@ -17179,6 +17179,12 @@ MonoBehaviour:
   pointsText: {fileID: 686205058}
   tempPointsText: {fileID: 498513349}
   bulletsText: {fileID: 1582986011}
+  killedbyText: {fileID: 1083379501}
+  yourTimeText: {fileID: 91858478}
+  yourPointsText: {fileID: 666630286}
+  bestComboText: {fileID: 1560460604}
+  bulletsUsedText: {fileID: 638846630}
+  enemiesKilledText: {fileID: 7296413}
   gameUI: {fileID: 1170017262}
   endScreenUI: {fileID: 1457403821}
   pauseMenuUI: {fileID: 648044017}
@@ -29617,7 +29623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1740845326
 RectTransform:
   m_ObjectHideFlags: 0

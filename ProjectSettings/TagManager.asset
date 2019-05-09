@@ -16,6 +16,8 @@ TagManager:
   - EndScreenUI
   - GameUI
   - PauseMenuUI
+  - ToasterBoi
+  - Toast
   layers:
   - Default
   - TransparentFX

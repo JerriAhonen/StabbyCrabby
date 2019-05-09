@@ -11,6 +11,13 @@ public class UIManager : MonoBehaviour {
     public TMP_Text pointsText;
     public TMP_Text tempPointsText;
     public TMP_Text bulletsText;
+    public TMP_Text killedbyText;
+    public TMP_Text yourTimeText;
+    public TMP_Text yourPointsText;
+    public TMP_Text bestComboText;
+    //public TMP_Text powerStabsText;
+    public TMP_Text bulletsUsedText;
+    public TMP_Text enemiesKilledText;
 
     public GameObject gameUI;
     public GameObject endScreenUI;
@@ -18,6 +25,7 @@ public class UIManager : MonoBehaviour {
     
     public GameObject[] bullets = new GameObject[6];
     public int bulletCount;
+    private int bulletsUsed = 0;
 
     private Animator _pauseMenuAnim;
     public Animator gameUIAnim;
@@ -25,9 +33,13 @@ public class UIManager : MonoBehaviour {
     
     private float timer;
     public int combo;
+    private int bestCombo = 0;
+    private int enemiesKilled = 0;
     private int points;
     private int tempPoints;
     private float comboResetTime;
+
+    private bool gameOver = false;
 
     private void Awake()
     {
@@ -46,9 +58,11 @@ public class UIManager : MonoBehaviour {
     }
 	
 	void Update () {
-        Timer();
-        ComboResetTimer();
+        if (!gameOver) {
+            Timer();
+        }
         
+        ComboResetTimer();
     }
 
     // Update current combo amount.
@@ -60,6 +74,12 @@ public class UIManager : MonoBehaviour {
             combo++;
             gameUIAnim.SetTrigger("Refresh Combo");
             comboResetTime = 4.0f;
+
+            if (combo > bestCombo) {
+                bestCombo = combo;
+            }
+
+            enemiesKilled++;
         } 
         else
         {
@@ -118,6 +138,7 @@ public class UIManager : MonoBehaviour {
     public void RemoveBullet()
     {
         bulletCount--;
+        bulletsUsed++;
         UpdateBullets();
     }
 
@@ -182,7 +203,17 @@ public class UIManager : MonoBehaviour {
     }
 
     //TEMP QUICK GAMEOVER
-    public void GameOver() {
+    public void GameOver(GameObject killer) {
+        gameOver = true;
+
+        killedbyText.text = "Killed by:  " + killer.tag;
+        yourTimeText.text = timerText.text;
+        yourPointsText.text = pointsText.text;
+        bestComboText.text = bestCombo.ToString();
+        //powerStabsText.text = "";
+        bulletsUsedText.text = bulletsUsed.ToString();
+        enemiesKilledText.text = enemiesKilled.ToString();
+
         endScreenUI.SetActive(true);
     }
 }

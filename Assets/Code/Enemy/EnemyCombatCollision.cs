@@ -27,7 +27,7 @@ public class EnemyCombatCollision : MonoBehaviour {
                 // GETS SENT INFO ABOUT DEATH, THEN SETS RAGDOLL TO TRUE 
                 // AND TELLS UI IT'S "GAMEOVER, MAN, GAMEOVER!"??
                 if(dead) {
-                    _ui.GameOver();
+                    _ui.GameOver(this.gameObject);
 
                     if (collider.gameObject.GetComponent<Ragdoll>() != null)
                         collider.gameObject.GetComponent<Ragdoll>().Temp();
