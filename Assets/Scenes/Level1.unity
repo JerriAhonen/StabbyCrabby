@@ -2181,7 +2181,7 @@ MonoBehaviour:
   slowSpeed: 0.5
   shootRate: 0.5
   shootForce: 50000
-  bullets: 6
+  bullets: 1
   bulletDestroyDelay: 0.1
 --- !u!1 &158600253
 GameObject:

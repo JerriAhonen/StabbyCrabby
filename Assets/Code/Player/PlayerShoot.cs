@@ -50,8 +50,10 @@ public class PlayerShoot : MonoBehaviour {
         _ui = UIManager.Instance;
         _am = AudioManager.Instance;
         _animator = GetComponentInChildren<Animator>();
-        
-        _ui.SetBulletCount(1);
+
+        bullets = 1;
+
+        _ui.SetBulletCount(bullets);
     }
 	
 	// Update is called once per frame
@@ -106,6 +108,8 @@ public class PlayerShoot : MonoBehaviour {
     {
         if (_inputReader.Shoot && bullets > MIN_BULLETS)
         {
+            Debug.Log(bullets);
+
             if (Time.time > _shootRateTimeStamp)
             {
                 // STOP TIME BEFORE SHOOTING //
