@@ -51,8 +51,6 @@ public class PlayerShoot : MonoBehaviour {
         _am = AudioManager.Instance;
         _animator = GetComponentInChildren<Animator>();
 
-        bullets = 1;
-
         _ui.SetBulletCount(bullets);
     }
 	
@@ -157,36 +155,35 @@ public class PlayerShoot : MonoBehaviour {
             RaycastHit hit = hits[i];
             Debug.Log("Object hit by bullet: " + hit.transform.name);
 
-            //if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-            //{
-                Enemy enemy = hit.transform.gameObject.GetComponentInParent<Enemy>();
-                Health enemyHealth = hit.transform.gameObject.GetComponentInParent<Health>();
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+            Enemy enemy = hit.transform.gameObject.GetComponentInParent<Enemy>();
 
-                if (!enemy)
-                    Debug.LogWarning("Didn't find Enemy.cs");
-                if (!enemyHealth)
-                    Debug.LogWarning("Didn't find Health.cs");
+            bool wasAlive = !enemy.IsDead;
 
-                if (enemy && enemyHealth)
+            if (enemy)
+            {
+                Debug.Log("Hit enemy");
+
+                bool isDead = enemy.TakeDamage(bulletDamage);
+
+                if (wasAlive && isDead)
                 {
-                    Debug.Log("Hit enemy");
-                    if (enemyHealth.CurrentHealth > 0 && enemy.TakeDamage(bulletDamage))
-                    {
-                        // Enemy died
-                        _ui.ComboMeter(true);
-                        _ui.TempPoints(enemy.Points);
-                    }
-                    else if (enemyHealth.CurrentHealth > 0)
-                    {
-                        // Still alive
-                        _ui.ComboMeter(false);
-                    }
+                    // Enemy died
+                    _ui.ComboMeter(true);
+                    _ui.Points(enemy.Points);
                 }
-                else
+                else if (!isDead)
                 {
-                    Debug.LogWarning("Didn't find Health.cs OR Enemy.cs on Enemy!");
+                    // Still alive
+                    _ui.ComboMeter(false);
                 }
-            //}
+            }
+            else
+            {
+                Debug.LogWarning("Didn't find Health.cs OR Enemy.cs on Enemy!");
+            }
+            }
         }
     }
     
