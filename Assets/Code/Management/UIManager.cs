@@ -227,8 +227,6 @@ public class UIManager : MonoBehaviour {
         enemiesKilledText.text = enemiesKilled.ToString();
 
         endScreenUI.SetActive(true);
-
-        //Time.timeScale = 0;
     }
 
     //TEMP QUICK WIN
@@ -245,7 +243,5 @@ public class UIManager : MonoBehaviour {
         winEnemiesKilledText.text = enemiesKilled.ToString();
 
         winScreenUI.SetActive(true);
-
-        //Time.timeScale = 0;
     }
 }
