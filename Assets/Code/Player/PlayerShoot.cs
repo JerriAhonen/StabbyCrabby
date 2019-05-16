@@ -37,6 +37,7 @@ public class PlayerShoot : MonoBehaviour {
 
     private UIManager _ui;
     private AudioManager _am;
+    private EnemyManager _enemyManager;
 
     public const int MAX_BULLETS = 6;
     public const int MIN_BULLETS = 0;
@@ -48,6 +49,7 @@ public class PlayerShoot : MonoBehaviour {
 
         _inputReader = InputReader.Instance;
         _ui = UIManager.Instance;
+        _enemyManager = EnemyManager.Instance;
         _am = AudioManager.Instance;
         _animator = GetComponentInChildren<Animator>();
 
@@ -172,6 +174,7 @@ public class PlayerShoot : MonoBehaviour {
                     // Enemy died
                     _ui.ComboMeter(true);
                     _ui.Points(enemy.Points);
+                    _enemyManager.IncreaseKillCount(hit.transform.gameObject);
                 }
                 else if (!isDead)
                 {

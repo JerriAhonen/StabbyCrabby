@@ -5,6 +5,7 @@ public class PlayerBladeCollision : MonoBehaviour {
 
     private PlayerCombat _pc;
     private UIManager _ui;
+    private EnemyManager _enemyManager;
     private bool _isStabbing;
     private Animator _anim;
     private ParticleSystem _slashParticle;
@@ -16,6 +17,7 @@ public class PlayerBladeCollision : MonoBehaviour {
     void Start () {
         _pc = GetComponentInParent<PlayerCombat>();
         _ui = UIManager.Instance;
+        _enemyManager = EnemyManager.Instance;
         _anim = GetComponentInParent<Animator>();
         _slashParticle = GetComponentInChildren<ParticleSystem>();
         _inputReader = InputReader.Instance;
@@ -80,6 +82,8 @@ public class PlayerBladeCollision : MonoBehaviour {
                     // Enemy died
                     _ui.ComboMeter(true);
                     _ui.Points(enemy.Points);
+
+                    _enemyManager.IncreaseKillCount(trigger.gameObject);
                 }
                 else if (!isDead)
                 {

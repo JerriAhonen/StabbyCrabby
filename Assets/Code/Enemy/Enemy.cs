@@ -44,8 +44,7 @@ public class Enemy : MonoBehaviour {
             _isDead = value;
         }
     }
-
-    private UIManager _ui;
+    
 
     private void Awake() {
         _enemyHealth = GetComponent<Health>();

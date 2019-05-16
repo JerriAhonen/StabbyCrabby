@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour {
     public TMP_Text pointsText;
     public TMP_Text tempPointsText;
     public TMP_Text bulletsText;
+
     public TMP_Text killedbyText;
     public TMP_Text yourTimeText;
     public TMP_Text yourPointsText;
@@ -19,9 +20,19 @@ public class UIManager : MonoBehaviour {
     public TMP_Text bulletsUsedText;
     public TMP_Text enemiesKilledText;
 
+    public TMP_Text lastEnemyText;
+    public TMP_Text winTimeText;
+    public TMP_Text winPointsText;
+    public TMP_Text winBestComboText;
+    //public TMP_Text powerStabsText;
+    public TMP_Text winBulletsUsedText;
+    public TMP_Text winEnemiesKilledText;
+
+
     public GameObject gameUI;
     public GameObject endScreenUI;
     public GameObject pauseMenuUI;
+    public GameObject winScreenUI;
     
     public GameObject[] bullets = new GameObject[6];
     public int bulletCount;
@@ -38,8 +49,8 @@ public class UIManager : MonoBehaviour {
     private int points;
     private int tempPoints;
     private float comboResetTime;
-
-    private bool gameOver = false;
+    
+    private bool gameFinished = false;
 
     private void Awake()
     {
@@ -53,12 +64,13 @@ public class UIManager : MonoBehaviour {
         gameUI.SetActive(true);
         endScreenUI.SetActive(false);
         pauseMenuUI.SetActive(false);
+        winScreenUI.SetActive(false);
 
         UpdateBullets();
     }
 	
 	void Update () {
-        if (!gameOver) {
+        if (!gameFinished) {
             Timer();
         }
         
@@ -204,7 +216,7 @@ public class UIManager : MonoBehaviour {
 
     //TEMP QUICK GAMEOVER
     public void GameOver(GameObject killer) {
-        gameOver = true;
+        gameFinished = true;
 
         killedbyText.text = "Killed by:  " + killer.tag;
         yourTimeText.text = timerText.text;
@@ -215,5 +227,21 @@ public class UIManager : MonoBehaviour {
         enemiesKilledText.text = enemiesKilled.ToString();
 
         endScreenUI.SetActive(true);
+    }
+
+    //TEMP QUICK WIN
+    public void Win(GameObject enemyKilled) {
+        gameFinished = true;
+
+        lastEnemyText.text = "Last enemy killed:  " + enemyKilled.tag;
+        winTimeText.text = timerText.text;
+        winTimeText.text = timerText.text;
+        winPointsText.text = pointsText.text;
+        winBestComboText.text = bestCombo.ToString();
+        //winPowerStabsText.text = "";
+        winBulletsUsedText.text = bulletsUsed.ToString();
+        winEnemiesKilledText.text = enemiesKilled.ToString();
+
+        winScreenUI.SetActive(true);
     }
 }
