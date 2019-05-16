@@ -174,7 +174,7 @@ public class PlayerShoot : MonoBehaviour {
                     // Enemy died
                     _ui.ComboMeter(true);
                     _ui.Points(enemy.Points);
-                    _enemyManager.IncreaseKillCount(hit.transform.gameObject);
+                    _enemyManager.IncreaseKillCount(hit.transform.gameObject.tag);
                 }
                 else if (!isDead)
                 {

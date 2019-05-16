@@ -215,10 +215,10 @@ public class UIManager : MonoBehaviour {
     }
 
     //TEMP QUICK GAMEOVER
-    public void GameOver(GameObject killer) {
+    public void GameOver(string killer) {
         gameFinished = true;
 
-        killedbyText.text = "Killed by:  " + killer.tag;
+        killedbyText.text = "Killed by:  " + killer;
         yourTimeText.text = timerText.text;
         yourPointsText.text = pointsText.text;
         bestComboText.text = bestCombo.ToString();
@@ -227,13 +227,15 @@ public class UIManager : MonoBehaviour {
         enemiesKilledText.text = enemiesKilled.ToString();
 
         endScreenUI.SetActive(true);
+
+        //Time.timeScale = 0;
     }
 
     //TEMP QUICK WIN
-    public void Win(GameObject enemyKilled) {
+    public void Win(string enemyKilled) {
         gameFinished = true;
 
-        lastEnemyText.text = "Last enemy killed:  " + enemyKilled.tag;
+        lastEnemyText.text = "Last enemy killed:  " + enemyKilled;
         winTimeText.text = timerText.text;
         winTimeText.text = timerText.text;
         winPointsText.text = pointsText.text;
@@ -243,5 +245,7 @@ public class UIManager : MonoBehaviour {
         winEnemiesKilledText.text = enemiesKilled.ToString();
 
         winScreenUI.SetActive(true);
+
+        //Time.timeScale = 0;
     }
 }

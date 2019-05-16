@@ -29,20 +29,18 @@ public class ToastSpawner : MonoBehaviour {
     [SerializeField, HideInInspector]
     private EnemyManager _enemyManager;
 
-    private void Awake() {
+    private void Start() {
         _enemyManager = EnemyManager.Instance;
 
         _enemyPool = new List<GameObject>(_poolSize);
 
-        for (int wave = 0; wave < _enemyTypes.Length; wave++) {
-            for (int numberOfEnemies = 0; numberOfEnemies < _enemiesInWave[wave]; numberOfEnemies++) {
+        for(int wave = 0; wave < _enemyTypes.Length; wave++) {
+            for(int numberOfEnemies = 0; numberOfEnemies < _enemiesInWave[wave]; numberOfEnemies++) {
                 AddEnemy(_enemyTypes[wave], wave);
                 _enemyManager.gameEnemyCount++;
             }
         }
-    }
 
-    private void Start() {
         _spawnTimer = 0;
 
         _timeToNextWave = 5f;

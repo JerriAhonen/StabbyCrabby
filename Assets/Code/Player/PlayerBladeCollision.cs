@@ -83,7 +83,7 @@ public class PlayerBladeCollision : MonoBehaviour {
                     _ui.ComboMeter(true);
                     _ui.Points(enemy.Points);
 
-                    _enemyManager.IncreaseKillCount(trigger.gameObject);
+                    _enemyManager.IncreaseKillCount(trigger.gameObject.tag);
                 }
                 else if (!isDead)
                 {

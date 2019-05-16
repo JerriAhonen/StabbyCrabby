@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class EnemyCombatCollision : MonoBehaviour {
 
-    private UIManager _ui;
+    private GameManager _gameManager;
     private Enemy _enemy;
 
     // Use this for initialization
     void Awake () {
-        _ui = UIManager.Instance;
+        _gameManager = GameManager.Instance;
         _enemy = GetComponentInParent<Enemy>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     private void OnTriggerEnter(Collider collider) {
         if(collider.gameObject.layer == LayerMask.NameToLayer("Player")) {
@@ -27,7 +22,7 @@ public class EnemyCombatCollision : MonoBehaviour {
                 // GETS SENT INFO ABOUT DEATH, THEN SETS RAGDOLL TO TRUE 
                 // AND TELLS UI IT'S "GAMEOVER, MAN, GAMEOVER!"??
                 if(dead) {
-                    _ui.GameOver(this.gameObject);
+                    _gameManager.End(false, this.gameObject.tag);
 
                     if (collider.gameObject.GetComponent<Ragdoll>() != null)
                         collider.gameObject.GetComponent<Ragdoll>().Temp();

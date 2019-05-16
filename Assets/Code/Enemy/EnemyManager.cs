@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour {
 
     public static EnemyManager Instance { get; private set; }
 
-    private UIManager _ui;
+    private GameManager gameManager;
 
     public int gameEnemyCount = 0;
     public int gameEnemiesKilled = 0;
@@ -19,14 +19,14 @@ public class EnemyManager : MonoBehaviour {
     }
 
     private void Start() {
-        _ui = UIManager.Instance;
+        gameManager = GameManager.Instance;
     }
 
-    public void IncreaseKillCount(GameObject killedEnemy) {
+    public void IncreaseKillCount(string killedEnemy) {
         gameEnemiesKilled++;
 
         if (gameEnemiesKilled >= gameEnemyCount) {
-            _ui.Win(killedEnemy);
+            gameManager.End(true, killedEnemy);
         }
     }
 }

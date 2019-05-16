@@ -59,6 +59,16 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void End(bool win, string enemy) {
+        if (win) {
+            _uiManager.Win(enemy);    
+        } else {
+            _uiManager.GameOver(enemy);
+        }
+
+        MouseLocked(false);
+    }
+
     private void MouseLocked(bool locked)
     {
         if (locked)
